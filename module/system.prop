@@ -1,0 +1,12 @@
+ro.miui.backdrop_sampling_enabled=true
+ro.config.low_ram.middle.threshold_gb=2
+ro.miui.has_real_blur=true
+sf.blurs_are_expensive=1
+vendor.perf.framepacing.enable=false
+persist.sys.background_blur_supported=true
+persist.sys.background_blur_status_default=true
+persist.sys.power.default.powermode=1
+ro.surface_flinger.supports_background_blur=1
+
+# Enable blur on app launch
+ro.launcher.blur.appLaunch=1
