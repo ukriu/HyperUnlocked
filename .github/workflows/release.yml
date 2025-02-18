@@ -65,7 +65,8 @@ jobs:
         if: ${{ inputs.create_release == 'true' }}
         run: |
           echo "Compressing files..."
-          zip -r ${{ env.RELEASE_ZIP }}.zip ${{ env.MODULE_PATH }}**
+          cd ${{ env.MODULE_PATH }}
+          zip -r ${{ env.RELEASE_ZIP }}.zip *
           echo "Created zip file: ${{ env.RELEASE_ZIP }}.zip"
 
       - name: Create release
