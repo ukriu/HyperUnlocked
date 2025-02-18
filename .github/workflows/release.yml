@@ -18,6 +18,16 @@ on:
         options:
           - 'true'
           - 'false'
+      mark_prerelease:
+        description: "Mark as prerelease?"
+        required: true
+        type: boolean
+        default: false
+      mark_draft:
+        description: "Mark release as draft?"
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   release:
@@ -38,11 +48,6 @@ jobs:
           ZIP_NAME=$REPO_NAME-$COMMIT_ID
           RELEASE_ZIP=$REPO_NAME
           MODULE_PATH="$(pwd)/module/"
-          if [ -z "${{ github.event.inputs.create_release }}" ]; then
-            CREATE_RELEASE=false
-          else
-            CREATE_RELEASE=${{ github.event.inputs.create_release }}
-          fi
           
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
           echo "COMMIT_ID=${COMMIT_ID}" >> $GITHUB_ENV
@@ -51,7 +56,6 @@ jobs:
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
           echo "RELEASE_ZIP=${RELEASE_ZIP}" >> $GITHUB_ENV
           echo "MODULE_PATH=$MODULE_PATH" >> $GITHUB_ENV
-          echo "CREATE_RELEASE=${CREATE_RELEASE}" >> $GITHUB_ENV
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -60,14 +64,14 @@ jobs:
           path: ${{ env.MODULE_PATH }}**
 
       - name: Compressing files
-        if: ${{ env.CREATE_RELEASE == 'true' }}
+        if: ${{ inputs.create_release == 'true' }}
         run: |
           echo "Compressing files..."
           zip -r ${{ env.RELEASE_ZIP }}.zip ${{ env.MODULE_PATH }}**
           echo "Created zip file: ${{ env.RELEASE_ZIP }}.zip"
 
       - name: Create release
-        if: ${{ env.CREATE_RELEASE == 'true' }}
+        if: ${{ inputs.create_release == 'true' }}
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -76,5 +80,5 @@ jobs:
           tag_name: "${{ env.VERSION }}"
           name: "Release ${{ env.VERSION }}"
           body_path: "${{ env.CHANGELOG }}"
-          draft: false
-          prerelease: false
+          draft: ${{ inputs.mark_draft }}
+          prerelease: ${{ inputs.mark_prerelease }}
