@@ -4,3 +4,4 @@ version=v1
 versionCode=1
 author=ukriu
 description=One module to rule them all..
+updateJson=https://raw.githubusercontent.com/ukriu/HyperUnlocked/main/update.json
