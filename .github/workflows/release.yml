@@ -68,6 +68,8 @@ jobs:
           cd ${{ env.MODULE_PATH }}
           zip -r ${{ env.RELEASE_ZIP }}.zip *
           echo "Created zip file: ${{ env.RELEASE_ZIP }}.zip"
+          mv *.zip ../
+          echo "Moved file down a dir"
 
       - name: Create release
         if: ${{ inputs.create_release == 'true' }}
