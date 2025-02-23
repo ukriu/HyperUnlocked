@@ -35,7 +35,6 @@ disable_incompatible_modules() {
         echo "- Please uninstall the disabled modules later!"
         sleep 0.3
     fi
-    echo "-"
 }
 
 save_deviceLevelList() {
@@ -55,7 +54,6 @@ save_deviceLevelList() {
         echo "$device_level_list" > "$RESDIR/default_deviceLevelList.txt"
         echo "- The default value of deviceLevelList is: \`$(cat "$RESDIR/default_deviceLevelList.txt")\`"
     fi
-    echo "-"
 }
 
 set_highend() {
@@ -70,7 +68,6 @@ set_highend() {
         echo "- Failed to spoof as a high-end device."
         sleep 0.3
     fi
-    echo "-"
 }
 
 restore_deviceLevelList() {
@@ -97,15 +94,18 @@ restore_deviceLevelList() {
         echo "- No saved deviceLevelList found. Nothing to restore."
         sleep 0.3
     fi
+}
+
+warning() {
     echo "-"
+    echo "- It is recommended to turn on \`Advanced Textures\` to avoid lag!"
+    sleep 0.3
 }
 
 credits() {
     echo "-"
     echo "- HyperUnlocked made by ukriu"
-    sleep 0.3
     echo "- Made specifically for \`gold\` & \`iron\`!"
-    sleep 0.3
     echo "- Check me out at \`https://ukriu.com/\`!"
     sleep 0.3
     echo "—— Ɛ: Thank you for using HyperUnlocked! :3 ——"

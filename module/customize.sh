@@ -12,6 +12,7 @@ set_variables
 disable_incompatible_modules
 save_deviceLevelList
 set_highend
+warning
 credits
 
 # EOF
