@@ -1,7 +1,7 @@
 id=HyperUnlocked
 name=HyperUnlocked
-version=v1.0.1
-versionCode=101
+version=v1.1.0
+versionCode=110
 author=ukriu
 description=One module to rule them all.. maybe..
 updateJson=https://raw.githubusercontent.com/ukriu/HyperUnlocked/main/update.json
