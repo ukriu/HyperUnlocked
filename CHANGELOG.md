@@ -1,6 +1,10 @@
 # HyperUnlocked
 A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices.
 
+# v1.1.1
+\- Add some more features  
+\- Enable video depth effect
+
 # v1.1.0
 \- Sync with `xuanyuan`  
 \- Change some other settings
