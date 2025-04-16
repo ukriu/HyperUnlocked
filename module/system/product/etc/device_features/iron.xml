@@ -134,6 +134,7 @@
     <bool name="support_dolby_version_brighten">true</bool>
     <bool name="support_dual_sd_card">true</bool>
     <bool name="support_dual_sim_card">true</bool>
+    <bool name="support_dynamic_brightness_range">true</bool>
     <bool name="support_eap_sim">true</bool>
     <bool name="support_emulated_storage">true</bool>
     <bool name="support_erase_external_storage">true</bool>
@@ -154,10 +155,12 @@
     <bool name="support_gesture_wakeup">true</bool>
     <bool name="support_hall_sensor">false</bool>
     <bool name="support_hangup_while_screen_off">true</bool>
+    <bool name="support_hd_record_param">true</bool>
     <bool name="support_hdr_enhance">true</bool>
     <bool name="support_hdr_hbm_brighten">true</bool>
     <bool name="support_headset">true</bool>
     <bool name="support_heartbeat_rate">true</bool>
+    <bool name="support_hfr_video_pause">true</bool>
     <bool name="support_hide_discoverable">true</bool>
     <bool name="support_hifi">false</bool>
     <bool name="support_high_resolution">true</bool>
@@ -222,6 +225,7 @@
     <bool name="support_true_color">true</bool>
     <bool name="support_truetone">true</bool>
     <bool name="support_ui_orientation_v2">true</bool>
+    <bool name="support_video_hfr_mode">true</bool>
     <bool name="support_videobox_display_effect">true</bool>
     <bool name="support_voip_record">true</bool>
     <bool name="support_wapi">true</bool>
@@ -257,8 +261,8 @@
     <integer name="type_soter_finger_pay">2</integer>
     <integer-array name="fpsList">
         <item>120</item>
-        <item>90</item>
         <item>60</item>
+        <item>90</item>
     </integer-array>
     <string name="battery_capacity_typ">4520</string>
     <string name="camera_continuous_shot_callback_class">ContinuousShotCallback</string>
