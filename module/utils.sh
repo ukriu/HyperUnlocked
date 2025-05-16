@@ -86,7 +86,7 @@ restore_deviceLevelList() {
 warning() {
     echo "-"
     echo "- It is recommended to turn on \`Advanced Textures\`,"
-    echo "- And to switch to 90Hz refresh rate if you are using gold/iron!"
+    echo "- and to switch to 90Hz or below refresh rate to avoid lag."
 }
 
 credits() {
