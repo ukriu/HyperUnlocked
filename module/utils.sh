@@ -7,7 +7,6 @@ set_variables() {
 disable_incompatible_modules() {
     echo "-"
     echo "- Checking for incompatible modules..."
-    sleep 0.3
     found_incompatible=false
     
     for dir in /data/adb/modules/*; do
@@ -19,7 +18,6 @@ disable_incompatible_modules() {
                 echo "- Incompatible module: \`$module_name\`"
                 if touch "$dir/disable"; then
                     echo "- Disabled: \`$module_name\`"
-                    sleep 0.3
                 else
                     echo "- Failed to disable \`$module_name\`"
                     echo "- Please uninstall the module to prevent issues."
@@ -33,7 +31,6 @@ disable_incompatible_modules() {
         echo "- No incompatible modules found."
     else
         echo "- Please uninstall the disabled modules later!"
-        sleep 0.3
     fi
 }
 
@@ -49,7 +46,6 @@ save_deviceLevelList() {
     if [ -z "$device_level_list" ] || [ "$device_level_list" = "null" ]; then
         echo "- Failed to retrieve deviceLevelList."
         echo "- Continuing without backup value."
-        sleep 0.3
     else
         echo "$device_level_list" > "$RESDIR/default_deviceLevelList.txt"
         echo "- The default value of deviceLevelList is: \`$(cat "$RESDIR/default_deviceLevelList.txt")\`"
@@ -60,13 +56,10 @@ set_highend() {
     echo "-"
     new_value="v:1,c:3,g:3"
     echo "- New deviceLevelList value: \`$new_value\`"
-    sleep 0.3
     if su -c "settings put system deviceLevelList $new_value"; then
         echo "- Successfully spoofed as a high-end device."
-        sleep 0.3
     else
         echo "- Failed to spoof as a high-end device."
-        sleep 0.3
     fi
 }
 
@@ -75,31 +68,25 @@ restore_deviceLevelList() {
     if [ -f "$RESDIR/default_deviceLevelList.txt" ]; then
         saved_value=$(cat "$RESDIR/default_deviceLevelList.txt")
         echo "- Restoring deviceLevelList to: \`$saved_value\`."
-        sleep 0.3
         if su -c "settings put system deviceLevelList $saved_value"; then
             echo "- Successfully restored deviceLevelList to: \`$saved_value\`"
-            sleep 0.3
             if rm -rf "$RESDIR"; then
                 echo "- Successfully deleted saved backups."
-                sleep 0.3
             else
                 echo "- Failed to delete saved backups."
-                sleep 0.3
             fi
         else
             echo "- Failed to restore deviceLevelList."
-            sleep 0.3
         fi
     else
         echo "- No saved deviceLevelList found. Nothing to restore."
-        sleep 0.3
     fi
 }
 
 warning() {
     echo "-"
-    echo "- It is recommended to turn on \`Advanced Textures\` to avoid lag!"
-    sleep 0.3
+    echo "- It is recommended to turn on \`Advanced Textures\`,"
+    echo "- And to switch to 90Hz refresh rate if you are using gold/iron!"
 }
 
 credits() {
@@ -107,10 +94,7 @@ credits() {
     echo "- HyperUnlocked made by ukriu"
     echo "- Made specifically for \`gold\` & \`iron\`!"
     echo "- Check me out at \`https://ukriu.com/\`!"
-    sleep 0.3
     echo "—— Ɛ: Thank you for using HyperUnlocked! :3 ——"
-    echo "-"
-    sleep 2
 }
 
 # EOF
