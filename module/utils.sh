@@ -13,7 +13,7 @@ disable_incompatible_modules() {
         if [ -d "$dir" ]; then
             module_name=$(basename "$dir")
             [ "$module_name" = "HyperUnlocked" ] && continue
-            if [ -f "$dir/system/product/etc/device_features/gold.xml" ] || [ -f "$dir/system/product/etc/device_features/iron.xml" ]; then
+            if [ -f "$dir/system/product/etc/device_features/malachite.xml" ] || [ -f "$dir/system/product/etc/device_features/gold.xml" ] || [ -f "$dir/system/product/etc/device_features/iron.xml" ]; then
                 found_incompatible=true
                 echo "- Incompatible module: \`$module_name\`"
                 if touch "$dir/disable"; then
@@ -86,13 +86,13 @@ restore_deviceLevelList() {
 warning() {
     echo "-"
     echo "- It is recommended to turn on \`Advanced Textures\`,"
-    echo "- and to switch to 90Hz or below refresh rate to avoid lag."
+    echo "- and to switch to 90Hz or below refresh rates if you are experiencing lag."
 }
 
 credits() {
     echo "-"
     echo "- HyperUnlocked made by ukriu"
-    echo "- Made specifically for \`gold\` & \`iron\`!"
+    echo "- Made specifically for \`gold/iron\` & \`malachite\`!"
     echo "- Check me out at \`https://ukriu.com/\`!"
     echo "—— Ɛ: Thank you for using HyperUnlocked! :3 ——"
 }
