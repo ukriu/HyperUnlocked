@@ -44,8 +44,7 @@
     <bool name="is_lower_size_panorama">false</bool>
     <bool name="is_lower_size_panorama">false</bool>
     <bool name="is_mediatek">true</bool>
-    <bool name="is_only_support_keycode_goto">true</bool>
-    <bool name="is_only_support_keycode_goto">true</bool>
+    <bool name="is_only_support_keycode_goto">false</bool>
     <bool name="is_pad">false</bool>
     <bool name="is_read_cpu4_freq">false</bool>
     <bool name="is_redmi">true</bool>
