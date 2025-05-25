@@ -10,6 +10,7 @@
     <bool name="config_antiMistouchDisabled">true</bool>
     <bool name="config_camera_refresh_rate_policy">true</bool>
     <bool name="config_sunlight_mode_available">true</bool>
+    <bool name="config_with_gesture_shortcut_settings">true</bool>
     <bool name="dc_backlight_fps_incompatible">true</bool>
     <bool name="disable_video_stabilization_in_speed_slow_mode">true</bool>
     <bool name="enable_algorithm_in_file_suffix">false</bool>
@@ -18,6 +19,7 @@
     <bool name="enhance_beauty_with_hht">true</bool>
     <bool name="fingerprint_wakeup_device">true</bool>
     <bool name="gallery_support_analytic_face_and_scene">true</bool>
+    <bool name="gallery_support_dolby">true</bool>
     <bool name="gallery_support_media_feature">true</bool>
     <bool name="gallery_support_print">true</bool>
     <bool name="gallery_support_time_burst_video">true</bool>
@@ -46,6 +48,7 @@
     <bool name="is_pad">false</bool>
     <bool name="is_read_cpu4_freq">false</bool>
     <bool name="is_redmi">true</bool>
+    <bool name="is_support_fingerprint_tap">false</bool>
     <bool name="is_support_portrait">true</bool>
     <bool name="is_support_video_tool_box">true</bool>
     <bool name="is_video_screen">true</bool>
@@ -230,6 +233,7 @@
     <bool name="support_true_color">true</bool>
     <bool name="support_truetone">true</bool>
     <bool name="support_ui_orientation_v2">true</bool>
+    <bool name="support_video_dfps">true</bool>
     <bool name="support_video_hfr_mode">true</bool>
     <bool name="support_video_idle_dim">true</bool>
     <bool name="support_videobox_cinema_adapt_ce">true</bool>
@@ -240,18 +244,22 @@
     <bool name="support_wild_boost">true</bool>
     <float name="camera_exposure_compensation_steps_num">12.0</float>
     <float name="camera_front_count_down_margin">0.3177</float>
-    <float name="device_body_sar">0.834</float>
-    <float name="device_head_sar">0.931</float>
+    <float name="device_body_sar">0.731</float>
+    <float name="device_head_sar">0.836</float>
+    <float name="godzillaui_font_scale">1.40</float>
+    <float name="hugeui_font_scale">1.40</float>
+    <float name="largeui_font_scale">1.25</float>
+    <float name="mediumui_font_scale">1.05</float>
     <float name="paper_eyecare_default_value">91.0</float>
     <float name="paper_mode_max_level">255.0</float>
     <float name="paper_mode_min_level">58.0</float>
+    <float name="smallui_font_scale">0.86</float>
     <integer name="burst_shoot_count">100</integer>
     <integer name="camera_reduce_preview_flag">12</integer>
     <integer name="camera_supported_asd">11</integer>
     <integer name="camera_supported_front_asd">10</integer>
     <integer name="cpu_max_freq">250</integer>
     <integer name="defaultFps">90</integer>
-    <integer name="default_display_color_mode">-1</integer>
     <integer name="default_eyecare_mode">2</integer>
     <integer name="expert_RGB_default">255</integer>
     <integer name="expert_RGB_max">255</integer>
@@ -299,6 +307,7 @@
     <string name="battery_capacity_typ">5000</string>
     <string name="camera_continuous_shot_callback_class">ContinuousShotCallback</string>
     <string name="camera_continuous_shot_callback_setter">setContinuousShotCallback</string>
+    <string name="disable_bt_self_turnon">atmos</string>
     <string name="extra_still_beautify_value">i:2</string>
     <string name="finger_alipay_ifaa_model">Xiaomi-viva</string>
     <string name="gallery_cpu_series">mtk</string>
@@ -307,19 +316,20 @@
     <string name="release_time">1470758400000</string>
     <string name="vendor">mediatek</string>
     <string-array name="camera_adjust_picture_size_cmd_list">
-        <item>com.android.camera:0, add, 4624, 3472, 32, true</item>
-        <item>com.antutu:0, ssize, 8192, 6144;1, ssize, 5184, 3888</item>
+        <item>com.android.camera:0, add, 4000, 3000, 32, true</item>
+        <item>com.antutu:0, ssize, 8192, 6144;1, ssize, 4608, 3456</item>
         <item>com.tencent.mobileqq:1, limit, 1920, 1080</item>
     </string-array>
     <string-array name="camera_adjust_picture_size_cmd_list_pro">
-        <item>com.android.camera:0, add, 4624, 3472, 32, true</item>
-        <item>com.antutu:0, ssize, 16320, 12240;1, ssize, 5184, 3888</item>
+        <item>com.android.camera:0, add, 4000, 3000, 32, true</item>
+        <item>com.antutu:0, ssize, 8192, 6144;1, ssize, 5184, 3888</item>
         <item>com.tencent.mobileqq:1, limit, 1920, 1080</item>
     </string-array>
     <string-array name="camera_aux_package_list">
         <item>com.android.camera</item>
         <item>com.android.lightboxtest</item>
         <item>com.lctautotest.camera</item>
+        <item>com.longcheertel.cit</item>
         <item>com.miui.cameratest</item>
         <item>com.miui.cit</item>
         <item>com.xiaomi.cameratools</item>
@@ -330,14 +340,13 @@
         <item>/odm_dlkm</item>
         <item>/product</item>
         <item>/system</item>
-        <item>/system_dlkm</item>
         <item>/system_ext</item>
         <item>/vendor</item>
         <item>/vendor_dlkm</item>
     </string-array>
     <string-array name="fp_nav_event_name_list">
-        <item>uinput-fpc</item>
         <item>uinput-goodix</item>
+        <item>uinput-silead</item>
     </string-array>
     <string-array name="global_uninstallable_system_packagename_list">
         <item>com.android.soundrecorder</item>
@@ -351,7 +360,6 @@
     </string-array>
     <string-array name="log_partition_list">
         <item>expdb</item>
-        <item>oops</item>
         <item>rescue</item>
     </string-array>
     <string-array name="support_face_unlock_region_dom">
