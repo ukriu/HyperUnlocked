@@ -11,13 +11,10 @@ on:
   workflow_dispatch:
     inputs:
       create_release:
-        description: 'Create a new release?'
+        description: 'Force a Release?'
         required: true
-        default: 'false'
-        type: choice
-        options:
-          - 'true'
-          - 'false'
+        type: boolean
+        default: false
       mark_prerelease:
         description: "Mark as prerelease?"
         required: true
@@ -34,26 +31,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Set variables
         id: setup
+        env:
+          CREATE_RELEASE: ${{ inputs.create_release }}
         run: |
-          REPO_NAME=$(echo "${{ github.repository }}" | cut -d '/' -f2)
-          COMMIT_ID=$(git rev-parse --short HEAD)
-          VERSION=$(jq -r .version update.json)
-          CHANGELOG=CHANGELOG.md
-          ZIP_NAME=$REPO_NAME-$COMMIT_ID
-          RELEASE_ZIP=$REPO_NAME
-          MODULE_PATH="$(pwd)/module/"
+          MODULE_NAME="HyperUnlocked"
+          MODULE_DESC="A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices."
+          CHANGELOG_FILE="$(pwd)/CHANGELOG.md"
           
-          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
-          echo "COMMIT_ID=${COMMIT_ID}" >> $GITHUB_ENV
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          echo "CHANGELOG=${CHANGELOG}" >> $GITHUB_ENV
-          echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
-          echo "RELEASE_ZIP=${RELEASE_ZIP}" >> $GITHUB_ENV
-          echo "MODULE_PATH=$MODULE_PATH" >> $GITHUB_ENV
+          CURRENT_VERSION_CODE=$(jq -r .versionCode update.json)
+          PREVIOUS_VERSION_CODE=$(jq -r .versionCode <(git show HEAD~1:update.json))
+          COMMIT_ID=$(git rev-parse --short HEAD)
+          echo "VERSION=$(jq -r .version update.json)" >> $GITHUB_ENV
+          echo "MODULE_PATH=$(pwd)/module/" >> $GITHUB_ENV
+          echo "CHANGELOG_RAW=$(git diff HEAD^ HEAD -- ${CHANGELOG_FILE} | grep '^+[^+]' | sed 's/^+//')" >> $GITHUB_ENV
+          {
+            echo "CHANGELOG<<EOF"
+            echo -e "## ${MODULE_NAME}\n${MODULE_DESC}\n\n---\n\n# Changelog:\n${CHANGELOG_RAW}"
+            echo "EOF"
+          } >> $GITHUB_ENV
+          
+          if [ "$CURRENT_VERSION_CODE" -gt "$PREVIOUS_VERSION_CODE" ] || [ "$CREATE_RELEASE" == "true" ]; then
+            echo "version_changed=true" >> $GITHUB_ENV
+            echo "ZIP_NAME=$MODULE_NAME" >> $GITHUB_ENV
+          else
+            echo "version_changed=false" >> $GITHUB_ENV
+            echo "ZIP_NAME=${MODULE_NAME}_${CURRENT_VERSION_CODE}-${COMMIT_ID}" >> $GITHUB_ENV
+          fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -62,24 +71,23 @@ jobs:
           path: ${{ env.MODULE_PATH }}**
 
       - name: Compressing files
-        if: ${{ inputs.create_release == 'true' }}
+        if: ${{ env.version_changed == 'true' }}
         run: |
           echo "Compressing files..."
           cd ${{ env.MODULE_PATH }}
-          zip -r ${{ env.RELEASE_ZIP }}.zip *
-          echo "Created zip file: ${{ env.RELEASE_ZIP }}.zip"
+          zip -r ${{ env.ZIP_NAME }}.zip *
+          echo "Created zip file: ${{ env.ZIP_NAME }}.zip"
           mv *.zip ../
-          echo "Moved file down a dir"
 
       - name: Create release
-        if: ${{ inputs.create_release == 'true' }}
+        if: ${{ env.version_changed == 'true' }}
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: "${{ env.RELEASE_ZIP }}.zip"
+          files: "${{ env.ZIP_NAME }}.zip"
           tag_name: "${{ env.VERSION }}"
           name: "Release ${{ env.VERSION }}"
-          body_path: "${{ env.CHANGELOG }}"
+          body: "${{ env.CHANGELOG }}"
           draft: ${{ inputs.mark_draft }}
           prerelease: ${{ inputs.mark_prerelease }}
