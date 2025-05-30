@@ -52,7 +52,7 @@ jobs:
           echo "CHANGELOG_RAW=$(git diff HEAD^ HEAD -- ${CHANGELOG_FILE} | grep '^+[^+]' | sed 's/^+//')" >> $GITHUB_ENV
           {
             echo "CHANGELOG<<EOF"
-            echo -e "## ${MODULE_NAME}\n${MODULE_DESC}\n\n---\n\n# Changelog:\n${CHANGELOG_RAW}"
+            echo -e "## ${MODULE_NAME}\n${MODULE_DESC}\n\n---\n\n${CHANGELOG_RAW}"
             echo "EOF"
           } >> $GITHUB_ENV
           
