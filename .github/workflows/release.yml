@@ -49,7 +49,7 @@ jobs:
           COMMIT_ID=$(git rev-parse --short HEAD)
           echo "VERSION=$(jq -r .version update.json)" >> $GITHUB_ENV
           echo "MODULE_PATH=$(pwd)/module/" >> $GITHUB_ENV
-          echo "CHANGELOG_RAW=$(git diff HEAD^ HEAD -- ${CHANGELOG_FILE} | grep '^+[^+]' | sed 's/^+//')"
+          CHANGELOG_RAW=$(git diff HEAD^ HEAD -- ${CHANGELOG_FILE} | grep '^+[^+]' | sed 's/^+//')
           {
             echo "CHANGELOG<<EOF"
             echo -e "## ${MODULE_NAME}\n${MODULE_DESC}\n\n---\n\n${CHANGELOG_RAW}"
