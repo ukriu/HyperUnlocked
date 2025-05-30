@@ -37,6 +37,8 @@ jobs:
 
       - name: Set variables
         id: setup
+        env:
+          CREATE_RELEASE: ${{ inputs.create_release }}
         run: |
           MODULE_NAME="HyperUnlocked"
           MODULE_DESC="A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices."
@@ -54,7 +56,7 @@ jobs:
             echo "EOF"
           } >> $GITHUB_ENV
           
-          if [ "$CURRENT_VERSION_CODE" -gt "$PREVIOUS_VERSION_CODE" ]; then
+          if [ "$CURRENT_VERSION_CODE" -gt "$PREVIOUS_VERSION_CODE" ] || [ "$CREATE_RELEASE" == "true" ]; then
             echo "version_changed=true" >> $GITHUB_ENV
             echo "ZIP_NAME=$MODULE_NAME" >> $GITHUB_ENV
           else
@@ -69,7 +71,7 @@ jobs:
           path: ${{ env.MODULE_PATH }}**
 
       - name: Compressing files
-       if: ${{ inputs.create_release == 'true' || env.version_changed == 'true' }}
+        if: ${{ env.version_changed == 'true' }}
         run: |
           echo "Compressing files..."
           cd ${{ env.MODULE_PATH }}
@@ -78,7 +80,7 @@ jobs:
           mv *.zip ../
 
       - name: Create release
-       if: ${{ inputs.create_release == 'true' || env.version_changed == 'true' }}
+        if: ${{ env.version_changed == 'true' }}
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
