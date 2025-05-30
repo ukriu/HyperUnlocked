@@ -1,6 +1,10 @@
 #  HyperUnlocked
 A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices.
 
+## v1.2.3
+\- Add support for `beryl`/`citrine`.  
+\- Update workflow script.
+
 ##  v1.2.2
 \- Add support for `malachite`.
 
