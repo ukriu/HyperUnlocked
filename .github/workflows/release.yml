@@ -50,11 +50,7 @@ jobs:
           echo "VERSION=$(jq -r .version update.json)" >> $GITHUB_ENV
           echo "MODULE_PATH=$(pwd)/module/" >> $GITHUB_ENV
           echo "CHANGELOG_RAW=$(git diff HEAD^ HEAD -- ${CHANGELOG_FILE} | grep '^+[^+]' | sed 's/^+//')" >> $GITHUB_ENV
-          {
-            echo "CHANGELOG<<EOF"
-            echo -e "## ${MODULE_NAME}\n${MODULE_DESC}\n\n---\n\n${CHANGELOG_RAW}"
-            echo "EOF"
-          } >> $GITHUB_ENV
+          CHANGELOG=$(echo -e "## ${MODULE_NAME}\n${MODULE_DESC}\n\n---\n\n# Changelog\n${CHANGELOG_RAW}")
           
           if [ "$CURRENT_VERSION_CODE" -gt "$PREVIOUS_VERSION_CODE" ] || [ "$CREATE_RELEASE" == "true" ]; then
             echo "version_changed=true" >> $GITHUB_ENV
