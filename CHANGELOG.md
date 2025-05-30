@@ -4,6 +4,9 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 ---
 
 # Changelog:
+### v1.2.3
+- Add supoort for `beryl`.
+- Update workflow script.
 
 ###  v1.2.2
 - Add support for `malachite`.
