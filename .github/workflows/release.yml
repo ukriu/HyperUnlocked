@@ -47,6 +47,8 @@ jobs:
           if [ "$CURRENT_VERSION_CODE" -gt "$PREVIOUS_VERSION_CODE" ]; then
             echo "version_changed=true" >> $GITHUB_ENV
             echo "ZIP_NAME=$MODULE_NAME" >> $GITHUB_ENV
+          elif [ "${{ inputs.force_release }}" == "true" ]; then
+            echo "ZIP_NAME=$MODULE_NAME" >> $GITHUB_ENV
           else
             echo "version_changed=false" >> $GITHUB_ENV
             echo "ZIP_NAME=${MODULE_NAME}_${CURRENT_VERSION_CODE}-${COMMIT_ID}" >> $GITHUB_ENV
