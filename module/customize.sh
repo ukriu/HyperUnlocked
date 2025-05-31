@@ -10,6 +10,14 @@ fi
 
 set_variables
 check_supported
+if [ "$supported" = "true" ]; then
+    for file in "$MODDIR/system/product/etc/device_features/"*.xml; do
+        filename=$(basename "$file")
+        if [ "$filename" != "$DEVICE_CODENAME.xml" ]; then
+            rm -f "$file"
+        fi
+    done
+fi
 disable_incompatible_modules
 save_deviceLevelList
 set_highend

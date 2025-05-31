@@ -10,6 +10,7 @@ check_supported() {
 
     for codename in $codenames; do
         if [ "$DEVICE_CODENAME" = "$codename" ]; then
+            supported=true
             echo "- Supported device!"
             return 0
         fi
