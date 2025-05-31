@@ -2,6 +2,7 @@
 . ./utils.sh
 
 set_variables
+check_supported
 disable_incompatible_modules
 set_highend
 credits

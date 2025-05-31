@@ -4,6 +4,20 @@ set_variables() {
   mkdir -p $RESDIR
 }
 
+check_supported() {
+    DEVICE_CODENAME=$(getprop ro.product.vendor.device)
+    codenames="malachite gold iron beryl citrine"
+
+    for codename in $codenames; do
+        if [ "$DEVICE_CODENAME" = "$codename" ]; then
+            echo "- Supported device!"
+            return 0
+        fi
+    done
+
+    echo "- Your device is not fully supported and might lack some features."
+}
+
 disable_incompatible_modules() {
     echo "-"
     echo "- Checking for incompatible modules..."
@@ -13,7 +27,7 @@ disable_incompatible_modules() {
         if [ -d "$dir" ]; then
             module_name=$(basename "$dir")
             [ "$module_name" = "HyperUnlocked" ] && continue
-            if [ -f "$dir/system/product/etc/device_features/malachite.xml" ] || [ -f "$dir/system/product/etc/device_features/gold.xml" ] || [ -f "$dir/system/product/etc/device_features/iron.xml" ]; then
+            if [ -f "${dir}/system/product/etc/device_features/${DEVICE_CODENAME}.xml" ]; then
                 found_incompatible=true
                 echo "- Incompatible module: \`$module_name\`"
                 if touch "$dir/disable"; then
@@ -85,8 +99,14 @@ restore_deviceLevelList() {
 
 warning() {
     echo "-"
-    echo "- It is recommended to turn on \`Advanced Textures\`,"
-    echo "- and to switch to 90Hz or below refresh rates if you are experiencing lag."
+    if [ "$DEVICE_CODENAME" = "gold" ] || [ "$DEVICE_CODENAME" = "iron" ]; then
+        echo "- It is recommended to turn on \`Advanced Textures\`,"
+        echo "- and to switch to 90Hz or 60Hz refresh rates if you are experiencing lag."
+    elif [ "$DEVICE_CODENAME" = "malachite" ]; then
+        echo "- Make sure to turn OFF \`Advanced Textures\`."
+    elif [ "$DEVICE_CODENAME" = "beryl" ] || [ "$DEVICE_CODENAME" = "citrine" ]; then
+        echo "- Turn OFF \`Advanced Textures\` to help with lag!"
+    fi
 }
 
 credits() {

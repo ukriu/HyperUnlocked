@@ -9,6 +9,7 @@ fi
 . $MODPATH/utils.sh
 
 set_variables
+check_supported
 disable_incompatible_modules
 save_deviceLevelList
 set_highend
