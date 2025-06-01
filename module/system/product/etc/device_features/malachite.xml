@@ -104,7 +104,7 @@
     <bool name="support_camera_manual_function_focus">true</bool>
     <bool name="support_camera_movie_solid">true</bool>
     <bool name="support_camera_new_style_time_water_mark">true</bool>
-    <bool name="support_camera_peaking_mf">trure</bool>
+    <bool name="support_camera_peaking_mf">true</bool>
     <bool name="support_camera_press_down_capture">true</bool>
     <bool name="support_camera_quick_snap">true</bool>
     <bool name="support_camera_record_location">true</bool>

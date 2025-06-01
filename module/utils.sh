@@ -6,7 +6,7 @@ set_variables() {
 
 check_supported() {
     DEVICE_CODENAME=$(getprop ro.product.device)
-    codenames="malachite gold iron beryl citrine"
+    codenames="gold iron malachite beryl citrine sapphire sapphiren"
 
     for codename in $codenames; do
         if [ "$DEVICE_CODENAME" = "$codename" ]; then
