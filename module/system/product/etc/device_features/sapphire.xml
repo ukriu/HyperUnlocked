@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features>
+    <bool name="aod_support_keycode_goto_dismiss">true</bool>
+    <bool name="btdebug_enabled">true</bool>
+    <bool name="camera_adjust_picture_size_enabled">true</bool>
+    <bool name="camera_is_support_portrait_front">true</bool>
+    <bool name="camera_is_support_portrait_switch">true</bool>
+    <bool name="camera_support_ai_lens">true</bool>
+    <bool name="camera_supported_scene">true</bool>
+    <bool name="config_antiMistouchDisabled">true</bool>
+    <bool name="config_camera_refresh_rate_policy">true</bool>
+    <bool name="config_sunlight_mode_available">true</bool>
+    <bool name="config_with_gesture_shortcut_settings">true</bool>
+    <bool name="dc_backlight_fps_incompatible">true</bool>
+    <bool name="enable_flash_global">true</bool>
+    <bool name="enable_miui_lite">false</bool>
+    <bool name="enhance_beauty_with_hht">true</bool>
+    <bool name="front_fingerprint_sensor">false</bool>
+    <bool name="gallery_support_analytic_face_and_scene">true</bool>
+    <bool name="gallery_support_dolby">true</bool>
+    <bool name="gallery_support_media_feature">true</bool>
+    <bool name="gallery_support_print">true</bool>
+    <bool name="gallery_support_time_burst_video">true</bool>
+    <bool name="gallery_support_video_compress">true</bool>
+    <bool name="hide_flicker_backlight">true</bool>
+    <bool name="is_18x9_ratio_screen">false</bool>
+    <bool name="is_aod_need_grayscale">false</bool>
+    <bool name="is_camera_app_water_mark">true</bool>
+    <bool name="is_camera_face_detection_need_orientation">false</bool>
+    <bool name="is_camera_freeze_after_hdr_capture">false</bool>
+    <bool name="is_camera_hold_blur_background">true</bool>
+    <bool name="is_camera_isp_rotated">false</bool>
+    <bool name="is_camera_isp_rotated">false</bool>
+    <bool name="is_camera_lower_qrscan_frequency">true</bool>
+    <bool name="is_camera_preview_with_subthread_looper">true</bool>
+    <bool name="is_camera_replace_higher_cost_effect">false</bool>
+    <bool name="is_camera_use_morpho_lib">true</bool>
+    <bool name="is_compatible_paper_and_screen_effect">true</bool>
+    <bool name="is_default_temporary_style">true</bool>
+    <bool name="is_dual_system">false</bool>
+    <bool name="is_emulated_sdcard">true</bool>
+    <bool name="is_full_size_effect">true</bool>
+    <bool name="is_hongmi">false</bool>
+    <bool name="is_legacy_face_beauty">false</bool>
+    <bool name="is_lower_size_effect">false</bool>
+    <bool name="is_lower_size_panorama">false</bool>
+    <bool name="is_mediatek">false</bool>
+    <bool name="is_only_support_keycode_goto">false</bool>
+    <bool name="is_pad">false</bool>
+    <bool name="is_read_cpu4_freq">false</bool>
+    <bool name="is_support_optical_zoom">true</bool>
+    <bool name="is_support_portrait">true</bool>
+    <bool name="is_support_video_tool_box">true</bool>
+    <bool name="is_video_screen">true</bool>
+    <bool name="is_xiaomi">true</bool>
+    <bool name="is_xiaomi_device">true</bool>
+    <bool name="middle_keycode_is_dpad_center">false</bool>
+    <bool name="need_remove_expert_bright">true</bool>
+    <bool name="sensor_has_latency">true</bool>
+    <bool name="support_12bit_backlight">true</bool>
+    <bool name="support_24bit_record">true</bool>
+    <bool name="support_3d_face_beauty">true</bool>
+    <bool name="support_AI_display">true</bool>
+    <bool name="support_a2dp_latency">true</bool>
+    <bool name="support_adv_audio_bca">true</bool>
+    <bool name="support_adv_audio_bcs">true</bool>
+    <bool name="support_adv_audio_unicast">true</bool>
+    <bool name="support_agps">true</bool>
+    <bool name="support_agps_paras">true</bool>
+    <bool name="support_agps_roaming">false</bool>
+    <bool name="support_ai_task">false</bool>
+    <bool name="support_alpha_optimized">true</bool>
+    <bool name="support_android_flashlight">true</bool>
+    <bool name="support_aod">true</bool>
+    <bool name="support_app_hiding">true</bool>
+    <bool name="support_ar_core">true</bool>
+    <bool name="support_audio_loopback">true</bool>
+    <bool name="support_audio_share">false</bool>
+    <bool name="support_autobrightness_optimize">true</bool>
+    <bool name="support_blackshark_fast_connect">true</bool>
+    <bool name="support_blackshark_right_fast_connect">true</bool>
+    <bool name="support_bluetooth_boost">true</bool>
+    <bool name="support_bluetooth_fast_connect">true</bool>
+    <bool name="support_broadcom_wapi">true</bool>
+    <bool name="support_button_light">false</bool>
+    <bool name="support_ca">true</bool>
+    <bool name="support_camera_4k_quality">true</bool>
+    <bool name="support_camera_age_detection">true</bool>
+    <bool name="support_camera_aohdr">true</bool>
+    <bool name="support_camera_audio_focus">true</bool>
+    <bool name="support_camera_boost_brightness">true</bool>
+    <bool name="support_camera_burst_shoot">true</bool>
+    <bool name="support_camera_burst_shoot_denoise">true</bool>
+    <bool name="support_camera_dynamic_light_spot">true</bool>
+    <bool name="support_camera_face_info_water_mark">true</bool>
+    <bool name="support_camera_gradienter">true</bool>
+    <bool name="support_camera_groupshot">true</bool>
+    <bool name="support_camera_hfr">true</bool>
+    <bool name="support_camera_magic_mirror">true</bool>
+    <bool name="support_camera_manual_function">true</bool>
+    <bool name="support_camera_manual_function_et">true</bool>
+    <bool name="support_camera_manual_function_focus">true</bool>
+    <bool name="support_camera_movie_solid">true</bool>
+    <bool name="support_camera_new_style_time_water_mark">true</bool>
+    <bool name="support_camera_peaking_mf">true</bool>
+    <bool name="support_camera_press_down_capture">true</bool>
+    <bool name="support_camera_quick_snap">true</bool>
+    <bool name="support_camera_record_location">true</bool>
+    <bool name="support_camera_satellite">true</bool>
+    <bool name="support_camera_shader_effect">true</bool>
+    <bool name="support_camera_skin_beauty">true</bool>
+    <bool name="support_camera_square_mode">true</bool>
+    <bool name="support_camera_tilt_shift">true</bool>
+    <bool name="support_camera_torch_capture">true</bool>
+    <bool name="support_camera_video_face_detection">true</bool>
+    <bool name="support_camera_video_pause">true</bool>
+    <bool name="support_camera_water_mark">true</bool>
+    <bool name="support_chroma_flash">false</bool>
+    <bool name="support_cit">true</bool>
+    <bool name="support_cloud_dim">true</bool>
+    <bool name="support_conversation_toolbox_voiprecord">true</bool>
+    <bool name="support_cpu_doze">true</bool>
+    <bool name="support_credentials">true</bool>
+    <bool name="support_dark_mode_notify">true</bool>
+    <bool name="support_dc_backlight_sec">true</bool>
+    <bool name="support_decline_background_color">true</bool>
+    <bool name="support_decrease_brightness_spec_app">true</bool>
+    <bool name="support_device_encrypt">true</bool>
+    <bool name="support_display_expert_mode">true</bool>
+    <bool name="support_displayfeature_gamemode">true</bool>
+    <bool name="support_dolby">false</bool>
+    <bool name="support_dolby_version_brighten">true</bool>
+    <bool name="support_dual_gps">true</bool>
+    <bool name="support_dual_sd_card">true</bool>
+    <bool name="support_dual_sim_card">true</bool>
+    <bool name="support_dynamic_brightness_range">true</bool>
+    <bool name="support_eap_sim">true</bool>
+    <bool name="support_edge_handgrip">false</bool>
+    <bool name="support_edgesuppression_with_sensor">false</bool>
+    <bool name="support_emulated_storage">true</bool>
+    <bool name="support_erase_external_storage">true</bool>
+    <bool name="support_extreme_battery_saver">true</bool>
+    <bool name="support_feedback_level">true</bool>
+    <bool name="support_fm">true</bool>
+    <bool name="support_force_touch">false</bool>
+    <bool name="support_front_beauty_mfnr">true</bool>
+    <bool name="support_front_bokeh">true</bool>
+    <bool name="support_front_flash">true</bool>
+    <bool name="support_front_hdr">true</bool>
+    <bool name="support_front_hht">true</bool>
+    <bool name="support_front_hht_enhance">true</bool>
+    <bool name="support_full_size_panorama">true</bool>
+    <bool name="support_gallery_hdr">true</bool>
+    <bool name="support_game_dim">true</bool>
+    <bool name="support_game_gunsight">true</bool>
+    <bool name="support_game_mi_time">true</bool>
+    <bool name="support_gesture_wakeup">true</bool>
+    <bool name="support_google_rsa_protocol">true</bool>
+    <bool name="support_hall_sensor">false</bool>
+    <bool name="support_hangup_while_screen_off">true</bool>
+    <bool name="support_hd_record_param">true</bool>
+    <bool name="support_hdr_enhance">true</bool>
+    <bool name="support_hdr_hbm_brighten">true</bool>
+    <bool name="support_headset">true</bool>
+    <bool name="support_heartbeat_rate">true</bool>
+    <bool name="support_hfr_video_pause">true</bool>
+    <bool name="support_hide_discoverable">true</bool>
+    <bool name="support_hifi">false</bool>
+    <bool name="support_high_resolution">true</bool>
+    <bool name="support_idle_dim">true</bool>
+    <bool name="support_internal_sdcard">false</bool>
+    <bool name="support_interview_record_param">true</bool>
+    <bool name="support_ir">true</bool>
+    <bool name="support_led_color">true</bool>
+    <bool name="support_led_light">false</bool>
+    <bool name="support_lhdc">true</bool>
+    <bool name="support_lhdc_offload">true</bool>
+    <bool name="support_local_ocr">true</bool>
+    <bool name="support_low_brightness_fod">false</bool>
+    <bool name="support_low_flicker_backlight">true</bool>
+    <bool name="support_low_power_mode_decrease_brightness">true</bool>
+    <bool name="support_main_xiaoai">true</bool>
+    <bool name="support_manual_brightness_boost">true</bool>
+    <bool name="support_manual_dimming">true</bool>
+    <bool name="support_media_feedback">true</bool>
+    <bool name="support_mi_game_macro">true</bool>
+    <bool name="support_miplay_cast_privacy">true</bool>
+    <bool name="support_multi_face_input">true</bool>
+    <bool name="support_multi_face_input_global">true</bool>
+    <bool name="support_my_device">true</bool>
+    <bool name="support_nature_mode">true</bool>
+    <bool name="support_network_rps_mode">true</bool>
+    <bool name="support_new_silentmode">true</bool>
+    <bool name="support_nfc">false</bool>
+    <bool name="support_nfc">true</bool>
+    <bool name="support_nvdia_wifi_display">false</bool>
+    <bool name="support_object_track">true</bool>
+    <bool name="support_oldman_mode">true</bool>
+    <bool name="support_ota_validate">true</bool>
+    <bool name="support_page_layout">true</bool>
+    <bool name="support_paper_eyecare">true</bool>
+    <bool name="support_papermode_animation">true</bool>
+    <bool name="support_parental_control">true</bool>
+    <bool name="support_phone_call_noise_suppression">true</bool>
+    <bool name="support_picture_watermark">true</bool>
+    <bool name="support_power_mode">true</bool>
+    <bool name="support_power_save_new">true</bool>
+    <bool name="support_pre_installed_application">true</bool>
+    <bool name="support_provision_app_permission">true</bool>
+    <bool name="support_psensor_pocket_mode">false</bool>
+    <bool name="support_qcom_sound">true</bool>
+    <bool name="support_realtime_manual_exposure_time">true</bool>
+    <bool name="support_record_param">true</bool>
+    <bool name="support_rotate_calibrate">true</bool>
+    <bool name="support_round_corner">true</bool>
+    <bool name="support_screen_color_persist">true</bool>
+    <bool name="support_screen_effect">true</bool>
+    <bool name="support_screen_enhance_engine">true</bool>
+    <bool name="support_screen_key_swap">false</bool>
+    <bool name="support_screen_light">true</bool>
+    <bool name="support_screen_on_delayed">true</bool>
+    <bool name="support_screen_optimize">false</bool>
+    <bool name="support_screen_paper_mode">true</bool>
+    <bool name="support_se_route">true</bool>
+    <bool name="support_show_basic_items">true</bool>
+    <bool name="support_sign_verify_in_cust">true</bool>
+    <bool name="support_small_win_cover">true</bool>
+    <bool name="support_smart_fps">true</bool>
+    <bool name="support_sound_assist">true</bool>
+    <bool name="support_steps_provider">true</bool>
+    <bool name="support_stereo_record">true</bool>
+    <bool name="support_super_resolution">true</bool>
+    <bool name="support_tap_fingerprint_sensor_to_home">false</bool>
+    <bool name="support_tee_face_unlock">true</bool>
+    <bool name="support_torch">true</bool>
+    <bool name="support_touch_sensitive">false</bool>
+    <bool name="support_touchfeature_gamemode">true</bool>
+    <bool name="support_true_color">true</bool>
+    <bool name="support_truetone">true</bool>
+    <bool name="support_ui_orientation_v2">true</bool>
+    <bool name="support_video_dfps">true</bool>
+    <bool name="support_video_hfr_mode">true</bool>
+    <bool name="support_video_idle_dim">true</bool>
+    <bool name="support_videobox_cinema_adapt_ce">true</bool>
+    <bool name="support_videobox_display_effect">true</bool>
+    <bool name="support_voip_record">true</bool>
+    <bool name="support_wapi">true</bool>
+    <bool name="support_wifi_low_latency_mode">true</bool>
+    <bool name="support_wild_boost">true</bool>
+    <float name="camera_exposure_compensation_steps_num">12.0</float>
+    <float name="camera_front_count_down_margin">-0.5573</float>
+    <float name="device_body_sar">0.862</float>
+    <float name="device_head_sar">0.867</float>
+    <float name="godzillaui_font_scale">1.40</float>
+    <float name="hugeui_font_scale">1.40</float>
+    <float name="largeui_font_scale">1.25</float>
+    <float name="mediumui_font_scale">1.05</float>
+    <float name="paper_eyecare_default_value">91.0</float>
+    <float name="paper_mode_max_level">255.0</float>
+    <float name="paper_mode_min_level">58.0</float>
+    <float name="smallui_font_scale">0.86</float>
+    <integer name="burst_shoot_count">100</integer>
+    <integer name="camera_focus_success_flag">2</integer>
+    <integer name="camera_reduce_preview_flag">14</integer>
+    <integer name="camera_supported_asd">11</integer>
+    <integer name="case_therm">9</integer>
+    <integer name="cpu_combination">44</integer>
+    <integer name="cpu_max_freq">280</integer>
+    <integer name="defaultFps">60</integer>
+    <integer name="default_eyecare_mode">2</integer>
+    <integer name="display_width">3200</integer>
+    <integer name="expert_RGB_default">255</integer>
+    <integer name="expert_RGB_max">255</integer>
+    <integer name="expert_RGB_min">50</integer>
+    <integer name="expert_contrast_default">0</integer>
+    <integer name="expert_contrast_max">100</integer>
+    <integer name="expert_contrast_min">-100</integer>
+    <integer name="expert_gamma_default">220</integer>
+    <integer name="expert_gamma_max">270</integer>
+    <integer name="expert_gamma_min">170</integer>
+    <integer name="expert_gamut_default">0</integer>
+    <integer name="expert_gamut_max">3</integer>
+    <integer name="expert_gamut_min">0</integer>
+    <integer name="expert_hue_default">0</integer>
+    <integer name="expert_hue_max">180</integer>
+    <integer name="expert_hue_min">-180</integer>
+    <integer name="expert_saturation_default">0</integer>
+    <integer name="expert_saturation_max">50</integer>
+    <integer name="expert_saturation_min">-50</integer>
+    <integer name="expert_value_default">0</integer>
+    <integer name="expert_value_max">255</integer>
+    <integer name="expert_value_min">-255</integer>
+    <integer name="extra_min_preview_size">921600</integer>
+    <integer name="fod_solution">3</integer>
+    <integer name="ifaa_2dfa_support">0</integer>
+    <integer name="paper_eyecare_default_texture">0</integer>
+    <integer name="paper_eyecare_max_texture">25</integer>
+    <integer name="paper_eyecare_min_texture">0</integer>
+    <integer name="screen_effect_supported">7</integer>
+    <integer name="screen_standard_mode">1</integer>
+    <integer name="small_win_cover_type">1</integer>
+    <integer name="smart_fps_value">120</integer>
+    <integer name="smartcover_smallwindow_bottom">1920</integer>
+    <integer name="smartcover_smallwindow_left">0</integer>
+    <integer name="smartcover_smallwindow_right">1080</integer>
+    <integer name="smartcover_smallwindow_top">0</integer>
+    <integer name="support_camera_front_hdr_default_value">1</integer>
+    <integer name="support_camera_hdr_default_value">3</integer>
+    <integer name="support_fix_width_device">392</integer>
+    <integer name="support_inner_record">1</integer>
+    <integer name="support_max_fps">120</integer>
+    <integer name="support_widevine_l1">1</integer>
+    <integer name="threashold_sunlight_brightness">1000</integer>
+    <integer name="type_mqs_finger_record">3</integer>
+    <integer name="type_soter_finger_pay">2</integer>
+    <integer name="xo_therm">9</integer>
+    <integer-array name="display_version_18_knock_area">
+        <item>1170</item>
+        <item>267</item>
+        <item>270</item>
+        <item>2933</item>
+    </integer-array>
+    <integer-array name="edge_suppresson_absolute">
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+    </integer-array>
+    <integer-array name="edge_suppresson_condition">
+        <item>100</item>
+        <item>10</item>
+        <item>1</item>
+        <item>3</item>
+        <item>6</item>
+        <item>8</item>
+    </integer-array>
+    <integer-array name="edge_suppresson_corner">
+        <item>150</item>
+        <item>170</item>
+        <item>170</item>
+        <item>300</item>
+    </integer-array>
+    <integer-array name="edge_suppresson_size">
+        <item>12</item>
+        <item>96</item>
+    </integer-array>
+    <integer-array name="fpsList">
+        <item>120</item>
+        <item>60</item>
+        <item>90</item>
+    </integer-array>
+    <string name="battery_capacity_typ">5000</string>
+    <string name="bluetooth_boost_value">0x000011C0</string>
+    <string name="extra_still_beautify_value">i:2</string>
+    <string name="finger_alipay_ifaa_model">Xiaomi-umi</string>
+    <string name="gallery_cpu_series">6225</string>
+    <string name="partition_name_path">/dev/block/by-name/</string>
+    <string name="release_time">1473868800000</string>
+    <string name="vendor">qcom</string>
+    <string-array name="camera_adjust_picture_size_cmd_list">
+        <item>com.antutu:0, ssize, 12000, 9000;1, ssize, 4608, 3456</item>
+    </string-array>
+    <string-array name="camera_aux_package_list">
+        <item>com.android.camera</item>
+        <item>com.android.keyguard</item>
+        <item>com.android.systemui</item>
+        <item>com.blink.academy.protake</item>
+        <item>com.miui.cit</item>
+        <item>com.phonetest.application.test</item>
+        <item>com.phonetest.application</item>
+        <item>com.qualcomm.qti.qmmi</item>
+        <item>com.smile.gifmaker</item>
+        <item>com.snapchat.android</item>
+        <item>com.ss.android.ugc.aweme</item>
+        <item>com.xiaomi.camera.mivi</item>
+        <item>com.xiaomi.camera.sample</item>
+        <item>com.xiaomi.cameratest</item>
+        <item>com.xiaomi.cameratools</item>
+        <item>org.codeaurora.snapcam</item>
+    </string-array>
+    <string-array name="camera_exposable_role_id">
+        <item>21</item>
+        <item>61</item>
+    </string-array>
+    <string-array name="camera_hide_logical_package_list">
+        <item>com.blink.academy.protake</item>
+        <item>com.smile.gifmaker</item>
+        <item>com.snapchat.android</item>
+        <item>com.xiaomi.camera.mivi</item>
+        <item>com.xiaomi.camera.sample</item>
+    </string-array>
+    <string-array name="dynamic_partition_list">
+        <item>/mi_ext</item>
+        <item>/odm</item>
+        <item>/product</item>
+        <item>/system</item>
+        <item>/system_ext</item>
+        <item>/vendor</item>
+        <item>/vendor_dlkm</item>
+    </string-array>
+    <string-array name="fp_nav_event_name_list">
+        <item>uinput-fpc</item>
+        <item>uinput-goodix</item>
+    </string-array>
+    <string-array name="global_uninstallable_system_packagename_list">
+        <item>com.android.soundrecorder</item>
+        <item>com.miui.calculator</item>
+        <item>com.miui.compass</item>
+        <item>com.miui.notes</item>
+        <item>com.miui.screenrecorder</item>
+        <item>com.miui.weather2</item>
+        <item>com.xiaomi.midrop</item>
+        <item>com.xiaomi.scanner</item>
+    </string-array>
+    <string-array name="ignoredAppsForPackages">
+        <item>16,com.xiaomi.drivemode</item>
+    </string-array>
+    <string-array name="knock_support_display_version">
+        <item>18</item>
+    </string-array>
+    <string-array name="log_partition_list">
+        <item>crash_history</item>
+        <item>expdb</item>
+        <item>minidump</item>
+        <item>oops</item>
+        <item>rawdump</item>
+        <item>rescue</item>
+    </string-array>
+    <string-array name="support_face_unlock_region_dom">
+        <item>CN</item>
+    </string-array>
+    <string-array name="support_face_unlock_region_global">
+        <item>ALL</item>
+    </string-array>
+    <string-array name="system_data_packagename_list">
+        <item>com.android.email</item>
+        <item>com.android.midrive</item>
+        <item>com.duokan.reader</item>
+        <item>com.mfashiongallery.emag</item>
+        <item>com.mi.misupport</item>
+        <item>com.miui.calculator</item>
+        <item>com.miui.cleanmaster</item>
+        <item>com.miui.compass</item>
+        <item>com.miui.notes</item>
+        <item>com.miui.personalassistant</item>
+        <item>com.miui.smarttravel</item>
+        <item>com.miui.voip</item>
+        <item>com.miui.weather2</item>
+        <item>com.miui.yellowpage</item>
+        <item>com.xiaomi.drivemode</item>
+        <item>com.xiaomi.gamecenter</item>
+        <item>com.xiaomi.midrop</item>
+        <item>com.xiaomi.pass</item>
+        <item>com.xiaomi.scanner</item>
+    </string-array>
+    <string-array name="system_data_path_list">
+        <item>/system/data-app/Calculator/Calculator.apk</item>
+        <item>/system/data-app/CleanMaster/CleanMaster.apk</item>
+        <item>/system/data-app/Email/Email.apk</item>
+        <item>/system/data-app/GameCenter/GameCenter.apk</item>
+        <item>/system/data-app/MiDrive/MiDrive.apk</item>
+        <item>/system/data-app/MiDrop/MiDrop.apk</item>
+        <item>/system/data-app/MiGalleryLockscreen/MiGalleryLockscreen.apk</item>
+        <item>/system/data-app/MiSupport/MiSupport.apk</item>
+        <item>/system/data-app/MiuiCompass/MiuiCompass.apk</item>
+        <item>/system/data-app/MiuiDriveMode/MiuiDriveMode.apk</item>
+        <item>/system/data-app/MiuiScanner/MiuiScanner.apk</item>
+        <item>/system/data-app/MiuiVoip/MiuiVoip.apk</item>
+        <item>/system/data-app/Notes/Notes.apk</item>
+        <item>/system/data-app/PersonalAssistant/PersonalAssistant.apk</item>
+        <item>/system/data-app/SmartTravel/SmartTravel.apk</item>
+        <item>/system/data-app/Weather/Weather.apk</item>
+        <item>/system/data-app/XMPass/XMPass.apk</item>
+        <item>/system/data-app/YellowPage/YellowPage.apk</item>
+        <item>/system/data-app/com.duokan.reader/com.duokan.reader.apk</item>
+    </string-array>
+</features>
