@@ -347,8 +347,8 @@
     </integer-array>
     <integer-array name="fpsList">
         <item>120</item>
-        <item>60</item>
         <item>90</item>
+        <item>60</item>
     </integer-array>
     <string name="battery_capacity_typ">5000</string>
     <string name="bluetooth_boost_value">0x000011C0</string>

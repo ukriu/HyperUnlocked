@@ -266,7 +266,7 @@
     <integer name="case_therm">9</integer>
     <integer name="cpu_combination">44</integer>
     <integer name="cpu_max_freq">280</integer>
-    <integer name="defaultFps">60</integer>
+    <integer name="defaultFps">90</integer>
     <integer name="default_eyecare_mode">2</integer>
     <integer name="display_width">3200</integer>
     <integer name="expert_RGB_default">255</integer>
@@ -347,8 +347,8 @@
     </integer-array>
     <integer-array name="fpsList">
         <item>120</item>
-        <item>60</item>
         <item>90</item>
+        <item>60</item>
     </integer-array>
     <string name="battery_capacity_typ">5000</string>
     <string name="bluetooth_boost_value">0x000011C0</string>
