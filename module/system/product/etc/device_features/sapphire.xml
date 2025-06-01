@@ -11,6 +11,7 @@
     <bool name="config_camera_refresh_rate_policy">true</bool>
     <bool name="config_sunlight_mode_available">true</bool>
     <bool name="config_with_gesture_shortcut_settings">true</bool>
+    <bool name="dc_backlight_fps_incompatible">true</bool>
     <bool name="enable_flash_global">true</bool>
     <bool name="enable_miui_lite">false</bool>
     <bool name="enhance_beauty_with_hht">true</bool>
@@ -237,6 +238,7 @@
     <bool name="support_true_color">true</bool>
     <bool name="support_truetone">true</bool>
     <bool name="support_ui_orientation_v2">true</bool>
+    <bool name="support_video_dfps">true</bool>
     <bool name="support_video_hfr_mode">true</bool>
     <bool name="support_video_idle_dim">true</bool>
     <bool name="support_videobox_cinema_adapt_ce">true</bool>
@@ -264,7 +266,7 @@
     <integer name="case_therm">9</integer>
     <integer name="cpu_combination">44</integer>
     <integer name="cpu_max_freq">280</integer>
-    <integer name="defaultFps">60</integer>
+    <integer name="defaultFps">90</integer>
     <integer name="default_eyecare_mode">2</integer>
     <integer name="display_width">3200</integer>
     <integer name="expert_RGB_default">255</integer>
@@ -306,6 +308,7 @@
     <integer name="support_camera_hdr_default_value">3</integer>
     <integer name="support_fix_width_device">392</integer>
     <integer name="support_inner_record">1</integer>
+    <integer name="support_max_fps">120</integer>
     <integer name="support_widevine_l1">1</integer>
     <integer name="threashold_sunlight_brightness">1000</integer>
     <integer name="type_mqs_finger_record">3</integer>
