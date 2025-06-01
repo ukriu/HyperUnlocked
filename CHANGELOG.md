@@ -4,6 +4,11 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 ---
 
 # Changelog:
+### v1.3.0
+- Update scripts.
+- Add support for `sapphire`/`sapphiren`.
+- Update README.
+
 ### v1.2.3
 - Add support for `beryl`/`citrine`.
 - Update workflow script.
