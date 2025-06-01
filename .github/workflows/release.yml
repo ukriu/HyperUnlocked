@@ -61,7 +61,7 @@ jobs:
           path: ${{ env.MODULE_PATH }}**
 
       - name: Compressing files
-        if: ${{ env.version_changed == 'true' }}
+        if: ${{ env.version_changed == 'true' || inputs.force_release }}
         run: |
           echo "Compressing files..."
           cd ${{ env.MODULE_PATH }}
@@ -83,7 +83,7 @@ jobs:
           prerelease: false
 
       - name: Force update release file
-        if: ${{ inputs.force_release == 'true' }}
+        if: ${{ inputs.force_release }}
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
