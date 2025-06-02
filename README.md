@@ -7,12 +7,12 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 
 ## Some Features:
 - Advanced Blurs
-- Advanced Textures (laggy on 120Hz)
+- Advanced Textures (might cause lag)
 - Expanded Gallery & Camera options
 - Lockstyle effects (More lockstyles & Depth effect)
 - App Vault homescreen widgets
 - More battery profiles
-- 90Hz Refresh Rate
+- More Refresh Rate Options
 - And many others!
 
 ## Download:
@@ -27,5 +27,5 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 - Show your :heart: by giving a star to the project!
 
 ## Currently supported devices:
-- `gold iron malachite beryl citrine sapphire sapphiren`
+- `gold iron malachite beryl citrine sapphire sapphiren pipa`
 > You can still use the module if your device is not mentioned above!
