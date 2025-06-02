@@ -1,8 +1,9 @@
-# HyperUnlocked
-![GitHub last commit](https://img.shields.io/github/last-commit/ukriu/HyperUnlocked?style=flat-square&color=1F51FE&cacheSeconds=100&link=https%3A%2F%2Fgithub.com%2Fukriu%2FHyperUnlocked%2Fcommits)
-![GitHub Release Date](https://img.shields.io/github/release-date/ukriu/HyperUnlocked?style=flat-square&label=latest%20release&color=1F51FE&cacheSeconds=100&link=https%3A%2F%2Fgithub.com%2Fukriu%2FHyperUnlocked%2Freleases%2Flatest)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/ukriu/HyperUnlocked/total?style=flat-square&label=total%20downloads&color=1F51FE&cacheSeconds=100&link=https%3A%2F%2Fgithub.com%2Fukriu%2FHyperUnlocked%2Freleases%2Flatest)  
+<div align="center">
+<img src="https://raw.githubusercontent.com/ukriu/HyperUnlocked/refs/heads/main/HyperUnlockedBanner.png" alt="HyperUnlocked Banner" width="60%">
+
+<img src="https://img.shields.io/github/last-commit/ukriu/HyperUnlocked?style=flat-square&color=FF5A54&cacheSeconds=100" alt="GitHub last commit"> <img src="https://img.shields.io/github/release-date/ukriu/HyperUnlocked?style=flat-square&label=latest%20release&color=FF5A54&cacheSeconds=100" alt="GitHub Release Date"> <img src="https://img.shields.io/github/downloads/ukriu/HyperUnlocked/total?style=flat-square&label=total%20downloads&color=FF5A54&cacheSeconds=100" alt="GitHub Downloads"><br>
 A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices.
+</div>
 
 ## Some Features:
 - Advanced Blurs
