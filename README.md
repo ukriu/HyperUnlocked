@@ -6,12 +6,13 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 
 ## Some Features:
 - Advanced Blurs
-- Advanced Textures (laggy)
+- Advanced Textures (laggy on 120Hz)
 - Expanded Gallery & Camera options
 - Lockstyle effects (More lockstyles & Depth effect)
 - App Vault homescreen widgets
 - More battery profiles
-- And many other!
+- 90Hz Refresh Rate
+- And many others!
 
 ## Download:
 - [github.com/ukriu/HyperUnlocked/releases/latest](https://github.com/ukriu/HyperUnlocked/releases/latest)
