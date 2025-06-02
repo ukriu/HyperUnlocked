@@ -4,6 +4,10 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 ---
 
 # Changelog:
+### v1.3.1
+- Add support for `pipa`.
+- Add a new banner for HyperUnlocked.
+
 ### v1.3.0
 - Update scripts.
 - Add support for `sapphire`/`sapphiren`.
