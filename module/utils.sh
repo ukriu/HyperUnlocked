@@ -112,8 +112,7 @@ warning() {
 
 credits() {
     echo "-"
-    echo "- HyperUnlocked made by ukriu"
-    echo "- Made specifically for \`gold/iron\` & \`malachite\`!"
+    echo "- HyperUnlocked by ukriu"
     echo "- Check me out at \`https://ukriu.com/\`!"
     echo "—— Ɛ: Thank you for using HyperUnlocked! :3 ——"
 }
