@@ -5,4 +5,4 @@ versionCode=131
 author=ukriu
 description=Unlock high-end xiaomi features on all of your xiaomi devices!
 updateJson=https://raw.githubusercontent.com/ukriu/HyperUnlocked/main/update.json
-banner=https://github.com/ukriu/HyperUnlocked/blob/main/HyperUnlockedBanner.png
+banner=https://raw.githubusercontent.com/ukriu/HyperUnlocked/refs/heads/main/banner/HyperUnlockedBannerDark.png
