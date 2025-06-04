@@ -1,9 +1,9 @@
 #!/bin/sh
 if ! $BOOTMODE; then
     ui_print "*********************************************************"
-    ui_print "Installing from recovery is not supported!"
-    ui_print "Please install from the Magisk / KernelSU / APatch app!"
-    abort    "*********************************************************"
+    ui_print "Installing from recovery is not recommended!"
+    ui_print "The installation will continue, but it is recommened to click the action button in the manager to finish the setup!"
+    ui_print "*********************************************************"
 fi
 
 . $MODPATH/utils.sh
