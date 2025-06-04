@@ -1,5 +1,9 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/ukriu/HyperUnlocked/refs/heads/main/HyperUnlockedBanner.png" alt="HyperUnlocked Banner" width="60%">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ukriu/HyperUnlocked/refs/heads/main/banner/HyperUnlockedBannerDark.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ukriu/HyperUnlocked/refs/heads/main/banner/HyperUnlockedBannerLight.png">
+  <img width="60%" alt="HyperUnlockedBanner" src="https://raw.githubusercontent.com/ukriu/HyperUnlocked/refs/heads/main/banner/HyperUnlockedBannerDark.png">
+</picture>
 
 <img src="https://img.shields.io/github/last-commit/ukriu/HyperUnlocked?style=flat-square&color=FF5A54&cacheSeconds=100" alt="GitHub last commit"> <img src="https://img.shields.io/github/release-date/ukriu/HyperUnlocked?style=flat-square&label=latest%20release&color=FF5A54&cacheSeconds=100" alt="GitHub Release Date"> <img src="https://img.shields.io/github/downloads/ukriu/HyperUnlocked/total?style=flat-square&label=total%20downloads&color=FF5A54&cacheSeconds=100" alt="GitHub Downloads"><br>
 A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices.
