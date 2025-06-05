@@ -65,6 +65,7 @@ jobs:
         run: |
           echo "Compressing files..."
           cd ${{ env.MODULE_PATH }}
+          cp ../LICENSE ./
           zip -r ${{ env.ZIP_NAME }}.zip *
           echo "Created zip file: ${{ env.ZIP_NAME }}.zip"
           mv *.zip ../
