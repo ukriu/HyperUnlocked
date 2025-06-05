@@ -4,7 +4,8 @@
 set_variables
 check_supported
 disable_incompatible_modules
-set_highend
+swichDeviceLevel
+update_desc
 credits
 exit 0
 

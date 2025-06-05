@@ -85,11 +85,6 @@ restore_deviceLevelList() {
         echo "- Restoring deviceLevelList to: \`$saved_value\`."
         if su -c "settings put system deviceLevelList $saved_value"; then
             echo "- Successfully restored deviceLevelList to: \`$saved_value\`"
-            if rm -rf "$RESDIR"; then
-                echo "- Successfully deleted saved backups."
-            else
-                echo "- Failed to delete saved backups."
-            fi
         else
             echo "- Failed to restore deviceLevelList."
         fi
@@ -115,6 +110,49 @@ credits() {
     echo "- HyperUnlocked by ukriu"
     echo "- Check me out at \`https://ukriu.com/\`!"
     echo "—— Ɛ: Thank you for using HyperUnlocked! :3 ——"
+}
+
+swichDeviceLevel() {
+  cur_device_level_list=$(su -c "settings get system deviceLevelList")
+  saved_value=$(cat "$RESDIR/default_deviceLevelList.txt")
+  high_end="v:1,c:3,g:3"
+  if [ "$cur_device_level_list" = "$high_end" ]; then
+    echo "- Device currently marked as high-end."
+    restore_deviceLevelList
+  elif [ "$cur_device_level_list" = "$saved_value"]; then
+    echo "- Device currently not marked as high-end."
+    if su -c "settings put system deviceLevelList $high_end"; then
+      echo "- Successfully spoofed device as high-end."
+    else
+      echo "- Failed to set deviceLevelList"
+    fi
+  else
+    echo "N/A"
+  fi
+}
+
+update_desc() {
+  MODDIR=/data/adb/modules/HyperUnlocked
+  XML_DIR=$MODDIR/product/etc/device_features/
+  DEVICE_CODENAME=$(getprop ro.product.device)
+  DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
+  
+  if [ "find ${XML_DIR} -type f 2>/dev/null)" ]; then
+    xml=" ✅ XML "
+  else
+    xml=" ❌ XML "
+  fi
+  if [ "$cur_device_level_list" = "$high_end" ]; then
+    high=" ✅ High-End "
+  else
+    high=" ❌ High-End "
+  fi
+  NEW_DESC="[${DEVICE_CODENAME}][${xml}][${high}] ${DEFAULT_DESC}"
+  
+  # workaround for bindhosts/bindhosts/issues/108
+  sed "s/^description=.*/${NEW_DESC}/g" $MODDIR/module.prop > $MODDIR/module.prop.tmp
+  cat $MODDIR/module.prop.tmp > $MODDIR/module.prop
+  rm -f $MODDIR/module.prop.tmp
 }
 
 # EOF
