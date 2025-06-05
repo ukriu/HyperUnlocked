@@ -5,7 +5,7 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 
 # Changelog:
 ### v1.3.2
-- Add support for `amethyst` & `river`/`sky`/`XIG03`.
+- Add support for `amethyst` & `garnet`/`XIG05` & `river`/`sky`/`XIG03`.
 - Add support to change from high-end mode when clicking `Action` button.
 - Allow installing from recovery (experimental).
 - Update Banner.
