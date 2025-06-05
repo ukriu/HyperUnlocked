@@ -120,7 +120,7 @@ swichDeviceLevel() {
   if [ "$CUR_DEVICE_LEVEL_LIST" = "$HIGH_END" ]; then
     echo "- Device currently marked as high-end."
     restore_deviceLevelList
-  elif [ "$CUR_DEVICE_LEVEL_LIST" = "$SAV_DEVICE_LEVEL_LIST"]; then
+  elif [ "$CUR_DEVICE_LEVEL_LIST" = "$SAV_DEVICE_LEVEL_LIST" ]; then
     echo "- Device currently not marked as high-end."
     if su -c "settings put system deviceLevelList $HIGH_END"; then
       echo "- Successfully spoofed device as high-end."
@@ -140,15 +140,15 @@ update_desc() {
   else
     xml=" ❌ XML "
   fi
-  if [ "$CUR_DEVICE_LEVEL_LIST" = "$HIGH_END" ]; then
-    high=" ✅ High-End "
+  if [ "$(settings get system deviceLevelList)" = "$HIGH_END" ]; then
+    high=" ✅ High-End Mode "
   else
-    high=" ❌ High-End "
+    high=" ❌ High-End Mode "
   fi
   NEW_DESC="[${DEVICE_CODENAME}][${xml}][${high}] ${DEFAULT_DESC}"
   
   # workaround for bindhosts/bindhosts/issues/108
-  sed "s/^description=.*/${NEW_DESC}/g" $MODDIR/module.prop > $MODDIR/module.prop.tmp
+  sed "s/^description=.*/description=${NEW_DESC}/g" $MODDIR/module.prop > $MODDIR/module.prop.tmp
   cat $MODDIR/module.prop.tmp > $MODDIR/module.prop
   rm -f $MODDIR/module.prop.tmp
 }
