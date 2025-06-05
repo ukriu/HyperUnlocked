@@ -12,7 +12,7 @@ set_variables() {
 }
 
 check_supported() {
-    codenames="gold iron malachite beryl citrine sapphire sapphiren pipa"
+    codenames="gold iron malachite beryl citrine sapphire sapphiren pipa amethyst river sky XIG03"
 
     for codename in $codenames; do
         if [ "$DEVICE_CODENAME" = "$codename" ]; then

@@ -31,5 +31,5 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 - Show your :heart: by giving a star to the project!
 
 ## Currently supported devices:
-- `gold iron malachite beryl citrine sapphire sapphiren pipa`
+- `gold iron malachite beryl citrine sapphire sapphiren pipa amethyst river sky XIG03`
 > You can still use the module if your device is not mentioned above!
