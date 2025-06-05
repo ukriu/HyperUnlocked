@@ -2,10 +2,16 @@
 set_variables() {
   RESDIR=/data/adb/HyperUnlocked
   mkdir -p $RESDIR
+  DEVICE_CODENAME=$(getprop ro.product.device)
+  CUR_DEVICE_LEVEL_LIST=$(su -c "settings get system deviceLevelList")
+  SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
+  HIGH_END="v:1,c:3,g:3"
+  MODDIR=/data/adb/modules/HyperUnlocked
+  XML_DIR=$MODDIR/product/etc/device_features/
+  DEVICE_CODENAME=$(getprop ro.product.device)
 }
 
 check_supported() {
-    DEVICE_CODENAME=$(getprop ro.product.device)
     codenames="gold iron malachite beryl citrine sapphire sapphiren pipa"
 
     for codename in $codenames; do
@@ -57,21 +63,19 @@ save_deviceLevelList() {
         return
     fi
     
-    device_level_list=$(su -c "settings get system deviceLevelList")
-    if [ -z "$device_level_list" ] || [ "$device_level_list" = "null" ]; then
+    if [ -z "$CUR_DEVICE_LEVEL_LIST" ] || [ "$CUR_DEVICE_LEVEL_LIST" = "null" ]; then
         echo "- Failed to retrieve deviceLevelList."
         echo "- Continuing without backup value."
     else
-        echo "$device_level_list" > "$RESDIR/default_deviceLevelList.txt"
+        echo "$CUR_DEVICE_LEVEL_LIST" > "$RESDIR/default_deviceLevelList.txt"
         echo "- The default value of deviceLevelList is: \`$(cat "$RESDIR/default_deviceLevelList.txt")\`"
     fi
 }
 
 set_highend() {
     echo "-"
-    new_value="v:1,c:3,g:3"
-    echo "- New deviceLevelList value: \`$new_value\`"
-    if su -c "settings put system deviceLevelList $new_value"; then
+    echo "- New deviceLevelList value: \`$HIGH_END\`"
+    if su -c "settings put system deviceLevelList $HIGH_END"; then
         echo "- Successfully spoofed as a high-end device."
     else
         echo "- Failed to spoof as a high-end device."
@@ -81,10 +85,9 @@ set_highend() {
 restore_deviceLevelList() {
     echo "-"
     if [ -f "$RESDIR/default_deviceLevelList.txt" ]; then
-        saved_value=$(cat "$RESDIR/default_deviceLevelList.txt")
-        echo "- Restoring deviceLevelList to: \`$saved_value\`."
-        if su -c "settings put system deviceLevelList $saved_value"; then
-            echo "- Successfully restored deviceLevelList to: \`$saved_value\`"
+        echo "- Restoring deviceLevelList to: \`$SAV_DEVICE_LEVEL_LIST\`."
+        if su -c "settings put system deviceLevelList $SAV_DEVICE_LEVEL_LIST"; then
+            echo "- Successfully restored deviceLevelList to: \`$SAV_DEVICE_LEVEL_LIST\`"
         else
             echo "- Failed to restore deviceLevelList."
         fi
@@ -113,15 +116,13 @@ credits() {
 }
 
 swichDeviceLevel() {
-  cur_device_level_list=$(su -c "settings get system deviceLevelList")
-  saved_value=$(cat "$RESDIR/default_deviceLevelList.txt")
-  high_end="v:1,c:3,g:3"
-  if [ "$cur_device_level_list" = "$high_end" ]; then
+  echo "-"
+  if [ "$CUR_DEVICE_LEVEL_LIST" = "$HIGH_END" ]; then
     echo "- Device currently marked as high-end."
     restore_deviceLevelList
-  elif [ "$cur_device_level_list" = "$saved_value"]; then
+  elif [ "$CUR_DEVICE_LEVEL_LIST" = "$SAV_DEVICE_LEVEL_LIST"]; then
     echo "- Device currently not marked as high-end."
-    if su -c "settings put system deviceLevelList $high_end"; then
+    if su -c "settings put system deviceLevelList $HIGH_END"; then
       echo "- Successfully spoofed device as high-end."
     else
       echo "- Failed to set deviceLevelList"
@@ -132,17 +133,14 @@ swichDeviceLevel() {
 }
 
 update_desc() {
-  MODDIR=/data/adb/modules/HyperUnlocked
-  XML_DIR=$MODDIR/product/etc/device_features/
-  DEVICE_CODENAME=$(getprop ro.product.device)
+  echo "-"
   DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
-  
   if [ "find ${XML_DIR} -type f 2>/dev/null)" ]; then
     xml=" ✅ XML "
   else
     xml=" ❌ XML "
   fi
-  if [ "$cur_device_level_list" = "$high_end" ]; then
+  if [ "$CUR_DEVICE_LEVEL_LIST" = "$HIGH_END" ]; then
     high=" ✅ High-End "
   else
     high=" ❌ High-End "
