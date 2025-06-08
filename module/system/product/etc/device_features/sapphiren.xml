@@ -231,7 +231,6 @@
     <bool name="support_stereo_record">true</bool>
     <bool name="support_super_resolution">true</bool>
     <bool name="support_tap_fingerprint_sensor_to_home">false</bool>
-    <bool name="support_tee_face_unlock">true</bool>
     <bool name="support_torch">true</bool>
     <bool name="support_touch_sensitive">false</bool>
     <bool name="support_touchfeature_gamemode">true</bool>
