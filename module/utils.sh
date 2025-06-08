@@ -98,14 +98,22 @@ restore_deviceLevelList() {
 
 warning() {
     echo "-"
-    if [ "$DEVICE_CODENAME" = "gold" ] || [ "$DEVICE_CODENAME" = "iron" ]; then
-        echo "- It is recommended to turn on \`Advanced Textures\`,"
-        echo "- and to switch to 90Hz or 60Hz refresh rates if you are experiencing lag."
-    elif [ "$DEVICE_CODENAME" = "malachite" ]; then
-        echo "- Make sure to turn OFF \`Advanced Textures\`."
-    elif [ "$DEVICE_CODENAME" = "beryl" ] || [ "$DEVICE_CODENAME" = "citrine" ]; then
+    lagadv="gold iron beryl citrine amethyst"
+    noadv="malachite garnet sapphire sapphiren"
+    
+    for $lagad in $lagadv do
+      if [ "$DEVICE_CODENAME" = "$lagad" ]; then 
         echo "- Turn OFF \`Advanced Textures\` to help with lag!"
-    fi
+        return 0
+      fi
+    done
+    for $noad in $noadv do
+    if [ "$DEVICE_CODENAME" = "$noad" ]; then
+        echo "- Turn OFF \`Advanced Textures\` to avoid visual glitches!"
+        settings put secure background_blur_enable 0
+        return 0
+      fi
+    done
 }
 
 credits() {
