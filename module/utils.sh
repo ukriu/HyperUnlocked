@@ -100,19 +100,20 @@ warning() {
     echo "-"
     lagadv="gold iron beryl citrine amethyst"
     noadv="malachite garnet sapphire sapphiren"
-    
-    for $lagad in $lagadv do
-      if [ "$DEVICE_CODENAME" = "$lagad" ]; then 
-        echo "- Turn OFF \`Advanced Textures\` to help with lag!"
-        return 0
-      fi
+
+    for lagad in $lagadv; do
+        if [ "$DEVICE_CODENAME" = "$lagad" ]; then 
+            echo "- Turn OFF \`Advanced Textures\` to help with lag!"
+            return 0
+        fi
     done
-    for $noad in $noadv do
-    if [ "$DEVICE_CODENAME" = "$noad" ]; then
-        echo "- Turn OFF \`Advanced Textures\` to avoid visual glitches!"
-        settings put secure background_blur_enable 0
-        return 0
-      fi
+
+    for noad in $noadv; do
+        if [ "$DEVICE_CODENAME" = "$noad" ]; then
+            echo "- Turn OFF \`Advanced Textures\` to avoid visual glitches!"
+            settings put secure background_blur_enable 0
+            return 0
+        fi
     done
 }
 
