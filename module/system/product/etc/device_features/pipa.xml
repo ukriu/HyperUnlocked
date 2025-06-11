@@ -14,7 +14,6 @@
     <bool name="dc_backlight_fps_incompatible">true</bool>
     <bool name="enable_flash_global">true</bool>
     <bool name="enable_miui_lite">false</bool>
-    <bool name="enhance_beauty_with_hht">true</bool>
     <bool name="front_fingerprint_sensor">false</bool>
     <bool name="gallery_support_analytic_face_and_scene">true</bool>
     <bool name="gallery_support_dolby">true</bool>
@@ -72,7 +71,7 @@
     <bool name="support_agps">true</bool>
     <bool name="support_agps_paras">true</bool>
     <bool name="support_agps_roaming">false</bool>
-    <bool name="support_ai_task">false</bool>
+    <bool name="support_ai_task">true</bool>
     <bool name="support_alpha_optimized">true</bool>
     <bool name="support_android_flashlight">true</bool>
     <bool name="support_aod">true</bool>
@@ -133,7 +132,7 @@
     <bool name="support_device_encrypt">true</bool>
     <bool name="support_display_expert_mode">true</bool>
     <bool name="support_displayfeature_gamemode">true</bool>
-    <bool name="support_dolby">false</bool>
+    <bool name="support_dolby">true</bool>
     <bool name="support_dolby_version_brighten">true</bool>
     <bool name="support_dual_gps">true</bool>
     <bool name="support_dual_sd_card">true</bool>
@@ -152,8 +151,6 @@
     <bool name="support_front_bokeh">true</bool>
     <bool name="support_front_flash">true</bool>
     <bool name="support_front_hdr">true</bool>
-    <bool name="support_front_hht">true</bool>
-    <bool name="support_front_hht_enhance">true</bool>
     <bool name="support_full_size_panorama">true</bool>
     <bool name="support_gallery_hdr">true</bool>
     <bool name="support_game_dim">true</bool>
@@ -197,7 +194,6 @@
     <bool name="support_nature_mode">true</bool>
     <bool name="support_network_rps_mode">true</bool>
     <bool name="support_new_silentmode">true</bool>
-    <bool name="support_nfc">false</bool>
     <bool name="support_nfc">true</bool>
     <bool name="support_nvdia_wifi_display">false</bool>
     <bool name="support_object_track">true</bool>
@@ -274,7 +270,7 @@
     <integer name="case_therm">9</integer>
     <integer name="cpu_combination">44</integer>
     <integer name="cpu_max_freq">320</integer>
-    <integer name="defaultFps">60</integer>
+    <integer name="defaultFps">120</integer>
     <integer name="default_display_color_mode">3</integer>
     <integer name="expert_RGB_default">255</integer>
     <integer name="expert_RGB_max">255</integer>
