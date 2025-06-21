@@ -19,6 +19,9 @@ done
 disable_incompatible_modules
 save_deviceLevelList
 set_highend
+MODDIR=$MODPATH
+XML_DIR=$MODPATH/product/etc/device_features/
+update_desc
 warning
 credits
 

@@ -156,7 +156,6 @@ update_desc() {
   fi
   NEW_DESC="[${DEVICE_CODENAME}][${xml}][${high}] ${DEFAULT_DESC}"
   
-  # workaround for bindhosts/bindhosts/issues/108
   sed "s/^description=.*/description=${NEW_DESC}/g" $MODDIR/module.prop > $MODDIR/module.prop.tmp
   cat $MODDIR/module.prop.tmp > $MODDIR/module.prop
   rm -f $MODDIR/module.prop.tmp
