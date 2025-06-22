@@ -1,27 +1,29 @@
+persist.sys.advanced_visual_release=3
+persist.sys.power.default.powermode=1
+persist.sys.textureview_optimization.enable=true
+ro.config.low_ram.middle.threshold_gb=0
+ro.miui.has_handy_mode_sf=1
+vendor.perf.framepacing.enable=true
+persist.sys.sf_charge_anim_supported=true
+
+# blurs
+persist.sys.mi_shadow_supported=true
+persist.sys.support_view_smoothcorner=true
+persist.sys.support_window_smoothcorner=true
+ro.miui.backdrop_sampling_enabled=true
 enable_blurs_on_windows=1
 persist.sys.add_blurnoise_supported=true
-persist.sys.advanced_visual_release=3
 persist.sys.background_blur_status_default=true
 persist.sys.background_blur_supported=true
 persist.sys.background_blur_version=2
-persist.sys.mi_shadow_supported=true
-persist.sys.power.default.powermode=1
 persist.sys.sf.disable_blurs=false
-persist.sys.sf_charge_anim_supported=true
-persist.sys.support_view_smoothcorner=true
-persist.sys.support_window_smoothcorner=true
-persist.sys.textureview_optimization.enable=true
-ro.config.low_ram.middle.threshold_gb=0
 ro.launcher.blur.appLaunch=1
-ro.miui.backdrop_sampling_enabled=true
 ro.miui.has_blur=1
-ro.miui.has_handy_mode_sf=1
 ro.miui.has_real_blur=1
 ro.sf.blurs_are_caro=0
 sf.blurs_are_expensive=1
 ro.sf.blurs_are_expensive=1
 ro.surface_flinger.supports_background_blur=1
-vendor.perf.framepacing.enable=true
 
 # experimental
 persist.sys.usap_pool_enabled=true
