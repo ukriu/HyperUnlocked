@@ -18,8 +18,9 @@ for file in "$MODPATH/system/product/etc/device_features/"*.xml; do
 done
 disable_incompatible_modules
 save_deviceLevelList
-set_highend
 MODDIR=$MODPATH
+blur_choice
+highend_choice
 XML_DIR=$MODPATH/product/etc/device_features/
 update_desc
 warning
