@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features>
-    <bool name="aod_support_keycode_goto_dismiss">true</bool>
+    <bool name="aod_support_keycode_goto_dismiss">false</bool>
     <bool name="btdebug_enabled">true</bool>
     <bool name="camera_adjust_picture_size_enabled">true</bool>
     <bool name="camera_is_support_portrait_front">true</bool>
@@ -25,7 +25,7 @@
     <bool name="is_18x9_ratio_screen">false</bool>
     <bool name="is_aod_need_grayscale">false</bool>
     <bool name="is_camera_app_water_mark">true</bool>
-    <bool name="is_camera_face_detection_need_orientation">false</bool>
+    <bool name="is_camera_face_detection_need_orientation">true</bool>
     <bool name="is_camera_freeze_after_hdr_capture">false</bool>
     <bool name="is_camera_hold_blur_background">true</bool>
     <bool name="is_camera_isp_rotated">false</bool>
