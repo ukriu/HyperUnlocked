@@ -11,6 +11,11 @@ set_variables() {
     DEVICE_CODENAME=$(getprop ro.product.device)
 }
 
+initalise() {
+    mv "${MODDIR}/system.prop.noblur" "${RESDIR}"
+    mv "${MODDIR}/system.prop.blur" "${RESDIR}"
+}
+
 check_supported() {
     codenames="gold iron malachite beryl citrine sapphire sapphiren pipa amethyst river sky XIG03 garnet XIG05 tanzanite"
 
@@ -126,11 +131,11 @@ blur_choice() {
     if detect_key_press; then
       echo "[-] Blurs selected."
       rm "${MODDIR}/system.prop"
-      cp "${MODDIR}/system.prop.blur" "${MODDIR}/system.prop"
+      cp "${RESDIR}/system.prop.blur" "${MODDIR}/system.prop"
     else
       echo "[-] Blurs removed."
       rm "${MODDIR}/system.prop"
-      cp "${MODDIR}/system.prop.noblur" "${MODDIR}/system.prop"
+      cp "${RESDIR}/system.prop.noblur" "${MODDIR}/system.prop"
     fi
 }
 
@@ -175,10 +180,10 @@ update_desc() {
       high=" ❌ high-end mode "
     fi
     
-    if cmp -s "${MODDIR}/system.prop.blur" "${MODDIR}/system.prop"; then
+    if cmp -s "${RESDIR}/system.prop.blur" "${MODDIR}/system.prop"; then
       blur=" ✅ blurs "
       blurs_en=1
-    elif cmp -s "${MODDIR}/system.prop.noblur" "${MODDIR}/system.prop"; then
+    elif cmp -s "${RESDIR}/system.prop.noblur" "${MODDIR}/system.prop"; then
       blur=" ❌ blurs "
     else
       blur=" ◻️ blurs "
