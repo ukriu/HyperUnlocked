@@ -4,7 +4,7 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 ---
 
 # Changelog:
-###v1.3.3
+### v1.3.3
 - Add support for `tanzanite`.
 - Fix face unlock for `sapphire`/`sapphiren` & `river`/`sky`/`XIG03`.
 - Fix NFC for `pipa`.
