@@ -9,6 +9,7 @@ fi
 . $MODPATH/utils.sh
 
 set_variables
+MODDIR=$MODPATH
 initalise
 check_supported
 for file in "$MODPATH/system/product/etc/device_features/"*.xml; do
@@ -19,7 +20,6 @@ for file in "$MODPATH/system/product/etc/device_features/"*.xml; do
 done
 disable_incompatible_modules
 save_deviceLevelList
-MODDIR=$MODPATH
 blur_choice
 highend_choice
 XML_DIR=$MODPATH/product/etc/device_features/

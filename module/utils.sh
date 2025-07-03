@@ -130,11 +130,9 @@ blur_choice() {
     echo "[¡¡¡]"
     if detect_key_press; then
       echo "[-] Blurs selected."
-      rm "${MODDIR}/system.prop"
       cp "${RESDIR}/system.prop.blur" "${MODDIR}/system.prop"
     else
       echo "[-] Blurs removed."
-      rm "${MODDIR}/system.prop"
       cp "${RESDIR}/system.prop.noblur" "${MODDIR}/system.prop"
     fi
 }
