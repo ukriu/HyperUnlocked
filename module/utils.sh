@@ -17,7 +17,7 @@ initalise() {
 }
 
 check_supported() {
-    codenames="gold iron malachite beryl citrine sapphire sapphiren pipa amethyst river sky XIG03 garnet XIG05 tanzanite"
+    codenames="gold iron malachite beryl citrine sapphire sapphiren pipa amethyst river sky XIG03 garnet XIG05 tanzanite gale gust"
 
     for codename in $codenames; do
         if [ "$DEVICE_CODENAME" = "$codename" ]; then
