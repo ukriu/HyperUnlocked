@@ -9,6 +9,7 @@ fi
 . $MODPATH/utils.sh
 
 set_variables
+initalise
 check_supported
 for file in "$MODPATH/system/product/etc/device_features/"*.xml; do
     filename=$(basename "$file")
