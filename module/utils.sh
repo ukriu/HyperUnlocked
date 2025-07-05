@@ -327,5 +327,6 @@ EOF
 }
 
 cleanup() {
+  echo "[-] Cleaning up..."
 }
 # EOF
