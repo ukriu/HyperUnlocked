@@ -326,4 +326,6 @@ EOF
     echo "[-] Patched XML saved to $FINAL_XML_FILE"
 }
 
+cleanup() {
+}
 # EOF
