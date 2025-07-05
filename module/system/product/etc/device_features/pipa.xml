@@ -351,7 +351,6 @@
         <item>48</item>
         <item>30</item>
     </integer-array>
-    </integer-array>
     <string name="battery_capacity_typ">8840</string>
     <string name="bluetooth_boost_value">0x000011C0</string>
     <string name="extra_still_beautify_value">i:2</string>
