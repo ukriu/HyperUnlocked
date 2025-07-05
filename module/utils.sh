@@ -242,21 +242,21 @@ xml_patch() {
     cp "$XML_FILE" "$TMP_XML"
 
     # Process time!
-    jq -c '.[] | {feature: (.feature // .name), type, value}' "$JSON_FILE" | while read -r entry; do
+    $MODDIR/bin/jq -c '.[] | {feature: (.feature // .name), type, value}' "$JSON_FILE" | while read -r entry; do
         local NAME TYPE
-        NAME="$(echo "$entry" | jq -r '.feature')"
-        TYPE="$(echo "$entry" | jq -r '.type')"
+        NAME="$(echo "$entry" | $MODDIR/bin/jq -r '.feature')"
+        TYPE="$(echo "$entry" | $MODDIR/bin/jq -r '.type')"
 
         # Remove or update existing element.
-        if [ "$(xmlstarlet sel -t -v "count(/features/${TYPE}[@name='${NAME}'])" "$TMP_XML")" -gt 0 ]; then
+        if [ "$($MODDIR/bin/xmlstarlet sel -t -v "count(/features/${TYPE}[@name='${NAME}'])" "$TMP_XML")" -gt 0 ]; then
             if [ "$TYPE" = "bool" ] || [ "$TYPE" = "integer" ] || \
                [ "$TYPE" = "float" ] || [ "$TYPE" = "string" ]; then
                 local VAL
-                VAL="$(echo "$entry" | jq -r '.value')"
-                xmlstarlet ed -P -L -u "/features/${TYPE}[@name='${NAME}']" -v "$VAL" "$TMP_XML"
+                VAL="$(echo "$entry" | $MODDIR/bin/jq -r '.value')"
+                $MODDIR/bin/xmlstarlet ed -P -L -u "/features/${TYPE}[@name='${NAME}']" -v "$VAL" "$TMP_XML"
                 continue
             else
-                xmlstarlet ed -P -L -d "/features/${TYPE}[@name='${NAME}']" "$TMP_XML"
+                $MODDIR/bin/xmlstarlet ed -P -L -d "/features/${TYPE}[@name='${NAME}']" "$TMP_XML"
             fi
         fi
 
@@ -265,19 +265,19 @@ xml_patch() {
           bool|boolean|integer|float|string)
             local VAL
             VAL="$(echo "$entry" | jq -r '.value')"
-            xmlstarlet ed -P -L \
+            $MODDIR/bin/xmlstarlet ed -P -L \
               -s /features -t elem -n "$TYPE" -v "$VAL" \
               -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
               "$TMP_XML"
             ;;
           "string-array"|"integer-array")
-            xmlstarlet ed -P -L \
+            $MODDIR/bin/xmlstarlet ed -P -L \
               -s /features -t elem -n "$TYPE" -v "" \
               -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
               "$TMP_XML"
 
             echo "$entry" | jq -r '.value[]' | while read -r ITEM; do
-                xmlstarlet ed -P -L \
+                $MODDIR/bin/xmlstarlet ed -P -L \
                   -s "/features/${TYPE}[@name='${NAME}']" -t elem -n item -v "$ITEM" \
                   "$TMP_XML"
             done
@@ -289,7 +289,7 @@ xml_patch() {
     done
 
     # Remove XML comments for cleaner :)
-    xmlstarlet ed -P -L -d "//comment()" "$TMP_XML"
+    $MODDIR/bin/xmlstarlet ed -P -L -d "//comment()" "$TMP_XML"
 
     # Sort elements by node name then @name.
     local SORT_XSLT
@@ -318,7 +318,7 @@ xml_patch() {
 </xsl:stylesheet>
 EOF
 
-    xmlstarlet tr "$SORT_XSLT" "$TMP_XML" > "${TMP_XML}.sorted" && mv "${TMP_XML}.sorted" "$TMP_XML"
+    $MODDIR/bin/xmlstarlet tr "$SORT_XSLT" "$TMP_XML" > "${TMP_XML}.sorted" && mv "${TMP_XML}.sorted" "$TMP_XML"
     rm -f "$SORT_XSLT"
 
     # Replace original XML with patched version.
