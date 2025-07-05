@@ -1,0 +1,12 @@
+[
+    {
+        "name": "name_of_feature",
+        "type": "boolean",
+        "value": true
+    },
+    {
+        "name": "name_of_feature",
+        "type": "integer",
+        "value": 100
+    }
+]
