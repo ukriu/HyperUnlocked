@@ -7,7 +7,8 @@ set_variables() {
     SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
     HIGH_END="v:1,c:3,g:3"
     MODDIR=/data/adb/modules/HyperUnlocked
-    XML_DIR=$MODDIR/product/etc/device_features/
+    XML_MODDIR=$MODDIR/product/etc/device_features/
+    XML_DIR=/product/etc/device_features/
     DEVICE_CODENAME=$(getprop ro.product.device)
 }
 
@@ -26,8 +27,13 @@ check_supported() {
             return 0
         fi
     done
-
-    echo "[-] Your device is not fully supported and might lack some features."
+    # handle the case where the device is not in the list
+    if [ -z $DEVICE_CODENAME ]; then
+        echo "[-] Your device is not fully supported and might lack some features."
+    else
+        partial=true
+        echo "[-] Your device is partially supported."
+    fi
 }
 
 disable_incompatible_modules() {
@@ -166,7 +172,7 @@ credits() {
 update_desc() {
     echo "-"
     DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
-    if [ "find ${XML_DIR} -type f -quit 2>/dev/null)" ]; then
+    if [ "find ${XML_MODDIR} -type f -quit 2>/dev/null)" ]; then
       xml=" ✅ XML "
     else
       xml=" ❌ XML "
@@ -216,6 +222,108 @@ warning() {
             return 0
         fi
     done
+}
+
+xml_patch() {
+    # Usage: xml_patch <device_name>
+    # Applies JSON-defined feature patches to the corresponding XML file.
+
+    local DEV_JSON="$1"
+    local DEV_NAME="$2"
+    [ -z "$DEV_NAME" ] && { echo "Usage: xml_patch <device_name>"; return 1; }
+
+    local JSON_FILE="$MODPATH/devices/${DEV_JSON}.json"
+    local XML_FILE="$XML_DIR/${DEV_NAME}.xml"
+    local FINAL_XML_FILE="$XML_MODDIR/${DEV_NAME}.xml"
+
+    # Work on a temporary copy of the XML file to avoid partial writes.
+    local TMP_XML
+    TMP_XML="$(mktemp)"
+    cp "$XML_FILE" "$TMP_XML"
+
+    # Process time!
+    jq -c '.[] | {feature: (.feature // .name), type, value}' "$JSON_FILE" | while read -r entry; do
+        local NAME TYPE
+        NAME="$(echo "$entry" | jq -r '.feature')"
+        TYPE="$(echo "$entry" | jq -r '.type')"
+
+        # Remove or update existing element.
+        if [ "$(xmlstarlet sel -t -v "count(/features/${TYPE}[@name='${NAME}'])" "$TMP_XML")" -gt 0 ]; then
+            if [ "$TYPE" = "bool" ] || [ "$TYPE" = "integer" ] || \
+               [ "$TYPE" = "float" ] || [ "$TYPE" = "string" ]; then
+                local VAL
+                VAL="$(echo "$entry" | jq -r '.value')"
+                xmlstarlet ed -P -L -u "/features/${TYPE}[@name='${NAME}']" -v "$VAL" "$TMP_XML"
+                continue
+            else
+                xmlstarlet ed -P -L -d "/features/${TYPE}[@name='${NAME}']" "$TMP_XML"
+            fi
+        fi
+
+        # Insert new element (depends)
+        case "$TYPE" in
+          bool|boolean|integer|float|string)
+            local VAL
+            VAL="$(echo "$entry" | jq -r '.value')"
+            xmlstarlet ed -P -L \
+              -s /features -t elem -n "$TYPE" -v "$VAL" \
+              -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
+              "$TMP_XML"
+            ;;
+          "string-array"|"integer-array")
+            xmlstarlet ed -P -L \
+              -s /features -t elem -n "$TYPE" -v "" \
+              -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
+              "$TMP_XML"
+
+            echo "$entry" | jq -r '.value[]' | while read -r ITEM; do
+                xmlstarlet ed -P -L \
+                  -s "/features/${TYPE}[@name='${NAME}']" -t elem -n item -v "$ITEM" \
+                  "$TMP_XML"
+            done
+            ;;
+          *)
+            echo "[-] Unsupported type \"$TYPE\" for feature \"$NAME\"."
+            ;;
+        esac
+    done
+
+    # Remove XML comments for cleaner :)
+    xmlstarlet ed -P -L -d "//comment()" "$TMP_XML"
+
+    # Sort elements by node name then @name.
+    local SORT_XSLT
+    SORT_XSLT="$(mktemp)"
+    cat > "$SORT_XSLT" <<'EOF'
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes"/>
+  <xsl:strip-space elements="*"/>
+
+  <xsl:template match="@*|node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="features">
+    <features>
+      <xsl:apply-templates select="*">
+        <xsl:sort select="name()" data-type="text"/>
+        <xsl:sort select="@name" data-type="text"/>
+      </xsl:apply-templates>
+    </features>
+  </xsl:template>
+
+  <xsl:template match="comment()"/>
+</xsl:stylesheet>
+EOF
+
+    xmlstarlet tr "$SORT_XSLT" "$TMP_XML" > "${TMP_XML}.sorted" && mv "${TMP_XML}.sorted" "$TMP_XML"
+    rm -f "$SORT_XSLT"
+
+    # Replace original XML with patched version.
+    mv "$TMP_XML" "$FINAL_XML_FILE"
+    echo "[-] Patched XML saved to $FINAL_XML_FILE"
 }
 
 # EOF
