@@ -11,6 +11,7 @@ import json
 import os
 import xml.etree.ElementTree as ET
 from typing import Any, List, Dict
+import sys
 
 # return to a python value for a given xml element based on its tag.
 def _parse_value(tag: str, element: ET.Element) -> Any:
@@ -74,6 +75,9 @@ def main() -> None:
         action="store_true",
         help="Include arrays (not recommended)",
     )
+    if len(sys.argv) == 1:
+        parser.print_help()
+        return
     args = parser.parse_args()
     src_dir = os.path.abspath(args.src)
     dst_dir = os.path.abspath(args.dst)
