@@ -7,8 +7,8 @@ set_variables() {
     SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
     HIGH_END="v:1,c:3,g:3"
     MODDIR=/data/adb/modules/HyperUnlocked
-    XML_MODDIR=$MODDIR/product/etc/device_features/
-    XML_DIR=/product/etc/device_features/
+    XML_MODDIR=$MODDIR/product/etc/device_features
+    XML_DIR=/product/etc/device_features
     DEVICE_CODENAME=$(getprop ro.product.device)
 }
 
@@ -175,6 +175,8 @@ update_desc() {
     DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
     if [ "find ${XML_MODDIR} -type f -quit 2>/dev/null)" ]; then
       xml=" ✅ XML "
+    elif [ -n "$partial" ]; then
+      xml=" ⚠️ Generic XML "
     else
       xml=" ❌ XML "
     fi
@@ -238,8 +240,10 @@ xml_patch() {
     local FINAL_XML_FILE="$XML_MODDIR/${DEV_NAME}.xml"
 
     # Work on a temporary copy of the XML file to avoid partial writes.
-    local TMP_XML
-    TMP_XML="$(mktemp)"
+    local TMP_XML="$RESDIR/${DEV_NAME}_tmp.xml"
+    echo "[-] Backing up stock XML..."
+    cp "$XML_FILE" "$RESDIR/${DEV_NAME}.backup.xml"
+    echo "[-] Patching XML..."
     cp "$XML_FILE" "$TMP_XML"
 
     # Process time!
@@ -293,8 +297,7 @@ xml_patch() {
     $MODDIR/bin/xmlstarlet ed -P -L -d "//comment()" "$TMP_XML"
 
     # Sort elements by node name then @name.
-    local SORT_XSLT
-    SORT_XSLT="$(mktemp)"
+    local SORT_XSLT="$RESDIR/sort_${DEV_NAME}.xslt"
     cat > "$SORT_XSLT" <<'EOF'
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="xml" indent="yes"/>
@@ -329,5 +332,7 @@ EOF
 
 cleanup() {
   echo "[-] Cleaning up..."
+  rm -rf $MODDIR/devices
+  rm -rf $MODDIR/biN
 }
 # EOF
