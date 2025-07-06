@@ -13,6 +13,7 @@ set_variables() {
 }
 
 initalise() {
+    chmod 0755 $MODDIR/bin/*
     mv "${MODDIR}/system.prop.noblur" "${RESDIR}"
     mv "${MODDIR}/system.prop.blur" "${RESDIR}"
 }
@@ -232,7 +233,7 @@ xml_patch() {
     local DEV_NAME="$2"
     [ -z "$DEV_NAME" ] && { echo "Usage: xml_patch <device_name>"; return 1; }
 
-    local JSON_FILE="$MODPATH/devices/${DEV_JSON}.json"
+    local JSON_FILE="$MODDIR/devices/${DEV_JSON}.json"
     local XML_FILE="$XML_DIR/${DEV_NAME}.xml"
     local FINAL_XML_FILE="$XML_MODDIR/${DEV_NAME}.xml"
 
@@ -264,7 +265,7 @@ xml_patch() {
         case "$TYPE" in
           bool|boolean|integer|float|string)
             local VAL
-            VAL="$(echo "$entry" | jq -r '.value')"
+            VAL="$(echo "$entry" | $MODDIR/bin/jq -r '.value')"
             $MODDIR/bin/xmlstarlet ed -P -L \
               -s /features -t elem -n "$TYPE" -v "$VAL" \
               -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
@@ -276,7 +277,7 @@ xml_patch() {
               -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
               "$TMP_XML"
 
-            echo "$entry" | jq -r '.value[]' | while read -r ITEM; do
+            echo "$entry" | $MODDIR/bin/jq -r '.value[]' | while read -r ITEM; do
                 $MODDIR/bin/xmlstarlet ed -P -L \
                   -s "/features/${TYPE}[@name='${NAME}']" -t elem -n item -v "$ITEM" \
                   "$TMP_XML"
