@@ -9,7 +9,6 @@ fi
 . $MODPATH/utils.sh
 
 set_variables
-MODDIR=$MODPATH
 initalise
 check_supported
 if [ -n "$supported" ]; then
@@ -21,7 +20,6 @@ disable_incompatible_modules
 save_deviceLevelList
 blur_choice
 highend_choice
-XML_MODDIR=$MODPATH/product/etc/device_features/
 update_desc
 warning
 credits

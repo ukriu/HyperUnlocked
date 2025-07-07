@@ -6,7 +6,7 @@ set_variables() {
     CUR_DEVICE_LEVEL_LIST=$(su -c "settings get system deviceLevelList")
     SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
     HIGH_END="v:1,c:3,g:3"
-    MODDIR=/data/adb/modules/HyperUnlocked
+    MODDIR=$MODPATH
     XML_MODDIR=$MODDIR/product/etc/device_features
     XML_DIR=/product/etc/device_features
     DEVICE_CODENAME=$(getprop ro.product.device)
