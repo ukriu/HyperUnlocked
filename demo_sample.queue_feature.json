@@ -1,7 +1,7 @@
 [
     {
         "name": "name_of_feature",
-        "type": "boolean",
+        "type": "bool",
         "value": true
     },
     {
