@@ -10,10 +10,11 @@ set_variables() {
     XML_MODDIR=$MODDIR/product/etc/device_features
     XML_DIR=/product/etc/device_features
     DEVICE_CODENAME=$(getprop ro.product.device)
+    ADDONS_BIN=$MODDIR/addons
 }
 
 initalise() {
-    chmod 0755 $MODDIR/bin/*
+    chmod 0755 $ADDONS_BIN/*
     mkdir -p "$XML_MODDIR"
     mv "${MODDIR}/system.prop.noblur" "${RESDIR}"
     mv "${MODDIR}/system.prop.blur" "${RESDIR}"
@@ -248,21 +249,21 @@ xml_patch() {
     cp "$XML_FILE" "$TMP_XML"
 
     # Process time!
-    $MODDIR/bin/jq -c '.[] | {feature: (.feature // .name), type, value}' "$JSON_FILE" | while read -r entry; do
+    $ADDONS_BIN/jq -c '.[] | {feature: (.feature // .name), type, value}' "$JSON_FILE" | while read -r entry; do
         local NAME TYPE
-        NAME="$(echo "$entry" | $MODDIR/bin/jq -r '.feature')"
-        TYPE="$(echo "$entry" | $MODDIR/bin/jq -r '.type')"
+        NAME="$(echo "$entry" | $ADDONS_BIN/jq -r '.feature')"
+        TYPE="$(echo "$entry" | $ADDONS_BIN/jq -r '.type')"
 
         # Remove or update existing element.
-        if [ "$($MODDIR/bin/xmlstarlet sel -t -v "count(/features/${TYPE}[@name='${NAME}'])" "$TMP_XML")" -gt 0 ]; then
+        if [ "$($ADDONS_BIN/xmlstarlet sel -t -v "count(/features/${TYPE}[@name='${NAME}'])" "$TMP_XML")" -gt 0 ]; then
             if [ "$TYPE" = "bool" ] || [ "$TYPE" = "integer" ] || \
                [ "$TYPE" = "float" ] || [ "$TYPE" = "string" ]; then
                 local VAL
-                VAL="$(echo "$entry" | $MODDIR/bin/jq -r '.value')"
-                $MODDIR/bin/xmlstarlet ed -P -L -u "/features/${TYPE}[@name='${NAME}']" -v "$VAL" "$TMP_XML"
+                VAL="$(echo "$entry" | $ADDONS_BIN/jq -r '.value')"
+                $ADDONS_BIN/xmlstarlet ed -P -L -u "/features/${TYPE}[@name='${NAME}']" -v "$VAL" "$TMP_XML"
                 continue
             else
-                $MODDIR/bin/xmlstarlet ed -P -L -d "/features/${TYPE}[@name='${NAME}']" "$TMP_XML"
+                $ADDONS_BIN/xmlstarlet ed -P -L -d "/features/${TYPE}[@name='${NAME}']" "$TMP_XML"
             fi
         fi
 
@@ -270,20 +271,20 @@ xml_patch() {
         case "$TYPE" in
           bool|boolean|integer|float|string)
             local VAL
-            VAL="$(echo "$entry" | $MODDIR/bin/jq -r '.value')"
-            $MODDIR/bin/xmlstarlet ed -P -L \
+            VAL="$(echo "$entry" | $ADDONS_BIN/jq -r '.value')"
+            $ADDONS_BIN/xmlstarlet ed -P -L \
               -s /features -t elem -n "$TYPE" -v "$VAL" \
               -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
               "$TMP_XML"
             ;;
           "string-array"|"integer-array")
-            $MODDIR/bin/xmlstarlet ed -P -L \
+            $ADDONS_BIN/xmlstarlet ed -P -L \
               -s /features -t elem -n "$TYPE" -v "" \
               -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
               "$TMP_XML"
 
-            echo "$entry" | $MODDIR/bin/jq -r '.value[]' | while read -r ITEM; do
-                $MODDIR/bin/xmlstarlet ed -P -L \
+            echo "$entry" | $ADDONS_BIN/jq -r '.value[]' | while read -r ITEM; do
+                $ADDONS_BIN/xmlstarlet ed -P -L \
                   -s "/features/${TYPE}[@name='${NAME}']" -t elem -n item -v "$ITEM" \
                   "$TMP_XML"
             done
@@ -295,7 +296,7 @@ xml_patch() {
     done
 
     # Remove XML comments for cleaner :)
-    $MODDIR/bin/xmlstarlet ed -P -L -d "//comment()" "$TMP_XML"
+    $ADDONS_BIN/xmlstarlet ed -P -L -d "//comment()" "$TMP_XML"
 
     # Sort elements by node name then @name.
     local SORT_XSLT="$RESDIR/sort_${DEV_NAME}.xslt"
@@ -323,7 +324,7 @@ xml_patch() {
 </xsl:stylesheet>
 EOF
 
-    $MODDIR/bin/xmlstarlet tr "$SORT_XSLT" "$TMP_XML" > "${TMP_XML}.sorted" && mv "${TMP_XML}.sorted" "$TMP_XML"
+    $ADDONS_BIN/xmlstarlet tr "$SORT_XSLT" "$TMP_XML" > "${TMP_XML}.sorted" && mv "${TMP_XML}.sorted" "$TMP_XML"
     rm -f "$SORT_XSLT"
 
     # Replace original XML with patched version.
@@ -334,6 +335,6 @@ EOF
 cleanup() {
   echo "[-] Cleaning up..."
   rm -rf $MODDIR/devices
-  rm -rf $MODDIR/biN
+  rm -rf $ADDONS_BIN
 }
 # EOF

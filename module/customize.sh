@@ -25,5 +25,5 @@ XML_MODDIR=$MODPATH/product/etc/device_features/
 update_desc
 warning
 credits
-
+cleanup
 # EOF
