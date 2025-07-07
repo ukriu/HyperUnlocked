@@ -7,7 +7,7 @@ set_variables() {
     SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
     HIGH_END="v:1,c:3,g:3"
     MODDIR=$MODPATH
-    XML_MODDIR=$MODDIR/product/etc/device_features
+    XML_MODDIR=$MODDIR/system/product/etc/device_features
     XML_DIR=/product/etc/device_features
     DEVICE_CODENAME=$(getprop ro.product.device)
     ADDONS_BIN=$MODDIR/addons
