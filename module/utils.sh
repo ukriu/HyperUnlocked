@@ -14,6 +14,7 @@ set_variables() {
 
 initalise() {
     chmod 0755 $MODDIR/bin/*
+    mkdir -p "$XML_MODDIR"
     mv "${MODDIR}/system.prop.noblur" "${RESDIR}"
     mv "${MODDIR}/system.prop.blur" "${RESDIR}"
 }
@@ -173,7 +174,7 @@ credits() {
 update_desc() {
     echo "-"
     DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
-    if [ "find ${XML_MODDIR} -type f -quit 2>/dev/null)" ]; then
+    if [ -n "$supported" ]; then
       xml=" ✅ XML "
     elif [ -n "$partial" ]; then
       xml=" ⚠️ Generic XML "
