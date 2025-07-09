@@ -239,12 +239,20 @@ xml_patch() {
 
     local JSON_FILE="$MODDIR/devices/${DEV_JSON}.json"
     local XML_FILE="$XML_DIR/${DEV_NAME}.xml"
+    # Use backup instead
+    if [ -f "$RESDIR/${DEV_NAME}.backup.xml" ]; then
+        echo "[-] Found backup XML for ${DEV_NAME}. Using it as source."
+        XML_FILE="$RESDIR/${DEV_NAME}.backup.xml"
+    fi
     local FINAL_XML_FILE="$XML_MODDIR/${DEV_NAME}.xml"
 
     # Work on a temporary copy of the XML file to avoid partial writes.
     local TMP_XML="$RESDIR/${DEV_NAME}_tmp.xml"
-    echo "[-] Backing up stock XML..."
-    cp "$XML_FILE" "$RESDIR/${DEV_NAME}.backup.xml"
+    # Backup the stock XML
+    if [ "$XML_FILE" != "$RESDIR/${DEV_NAME}.backup.xml" ]; then
+        echo "[-] Backing up stock XML..."
+        cp "$XML_FILE" "$RESDIR/${DEV_NAME}.backup.xml"
+    fi
     echo "[-] Patching XML..."
     cp "$XML_FILE" "$TMP_XML"
 
@@ -296,13 +304,13 @@ xml_patch() {
     done
 
     # Remove XML comments for cleaner :)
-    $ADDONS_BIN/xmlstarlet ed -P -L -d "//comment()" "$TMP_XML"
+    $ADDONS_BIN/xmlstarlet ed -P -L -d "//comment()[not(contains(.,'MIUIBuildFrame'))]" "$TMP_XML"
 
     # Sort elements by node name then @name.
     local SORT_XSLT="$RESDIR/sort_${DEV_NAME}.xslt"
     cat > "$SORT_XSLT" <<'EOF'
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="xml" indent="yes"/>
+  <xsl:output method="xml" indent="yes" indent-amount="4"/>
   <xsl:strip-space elements="*"/>
 
   <xsl:template match="@*|node()">
@@ -319,8 +327,6 @@ xml_patch() {
       </xsl:apply-templates>
     </features>
   </xsl:template>
-
-  <xsl:template match="comment()"/>
 </xsl:stylesheet>
 EOF
 
