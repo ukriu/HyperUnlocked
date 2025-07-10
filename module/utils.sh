@@ -304,13 +304,13 @@ xml_patch() {
     done
 
     # Remove XML comments for cleaner :)
-    $ADDONS_BIN/xmlstarlet ed -P -L -d "//comment()[not(contains(.,'MIUIBuildFrame'))]" "$TMP_XML"
+    $ADDONS_BIN/xmlstarlet ed -P -L -d "//comment()" "$TMP_XML"
 
     # Sort elements by node name then @name.
     local SORT_XSLT="$RESDIR/sort_${DEV_NAME}.xslt"
     cat > "$SORT_XSLT" <<'EOF'
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="xml" indent="yes" indent-amount="4"/>
+  <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
   <xsl:strip-space elements="*"/>
 
   <xsl:template match="@*|node()">
@@ -327,12 +327,18 @@ xml_patch() {
       </xsl:apply-templates>
     </features>
   </xsl:template>
+  <xsl:template match="comment()"/>
 </xsl:stylesheet>
 EOF
 
     $ADDONS_BIN/xmlstarlet tr "$SORT_XSLT" "$TMP_XML" > "${TMP_XML}.sorted" && mv "${TMP_XML}.sorted" "$TMP_XML"
     rm -f "$SORT_XSLT"
 
+    # Format XML w/ 4 indentations.
+    if $ADDONS_BIN/xmlstarlet fo -s 4 -e UTF-8 "$TMP_XML" > "${TMP_XML}.pretty" 2>/dev/null; then
+        # In case it fails, will just leave it as is
+        mv "${TMP_XML}.pretty" "$TMP_XML"
+    fi
     # Replace original XML with patched version.
     mv "$TMP_XML" "$FINAL_XML_FILE"
     echo "[-] Patched XML saved to $FINAL_XML_FILE"
