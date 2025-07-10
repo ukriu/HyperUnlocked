@@ -5,6 +5,8 @@ ro.config.low_ram.middle.threshold_gb=0
 ro.miui.has_handy_mode_sf=1
 vendor.perf.framepacing.enable=true
 persist.sys.sf_charge_anim_supported=true
+ro.config.low_ram=false
+ro.config.low_ram.threshold_gb=2
 
 # blurs
 persist.sys.mi_shadow_supported=true
