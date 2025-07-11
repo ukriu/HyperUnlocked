@@ -1,10 +1,10 @@
 #!/bin/sh
+MODDIR="${0%/*}"
 . ./utils.sh
 
 set_variables
 check_supported
 disable_incompatible_modules
-MODDIR="${0%/*}"
 blur_choice
 highend_choice
 update_desc

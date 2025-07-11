@@ -1,4 +1,5 @@
 #!/bin/sh
+MODDIR=$MODPATH
 if ! $BOOTMODE; then
     ui_print "*********************************************************"
     ui_print "Installing from recovery is not recommended!"
