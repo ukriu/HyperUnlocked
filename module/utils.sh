@@ -6,12 +6,15 @@ set_variables() {
     CUR_DEVICE_LEVEL_LIST=$(su -c "settings get system deviceLevelList")
     SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
     HIGH_END="v:1,c:3,g:3"
-    MODDIR=/data/adb/modules/HyperUnlocked
-    XML_DIR=$MODDIR/product/etc/device_features/
+    XML_MODDIR=$MODDIR/system/product/etc/device_features
+    XML_DIR=/product/etc/device_features
     DEVICE_CODENAME=$(getprop ro.product.device)
+    ADDONS_BIN=$MODDIR/addons
 }
 
 initalise() {
+    chmod 0755 $ADDONS_BIN/*
+    mkdir -p "$XML_MODDIR"
     mv "${MODDIR}/system.prop.noblur" "${RESDIR}"
     mv "${MODDIR}/system.prop.blur" "${RESDIR}"
 }
@@ -26,8 +29,13 @@ check_supported() {
             return 0
         fi
     done
-
-    echo "[-] Your device is not fully supported and might lack some features."
+    # handle the case where the device is not in the list
+    if [ -z $DEVICE_CODENAME ]; then
+        echo "[-] Your device is not fully supported and might lack some features."
+    else
+        partial=true
+        echo "[-] Your device is partially supported."
+    fi
 }
 
 disable_incompatible_modules() {
@@ -166,8 +174,10 @@ credits() {
 update_desc() {
     echo "-"
     DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
-    if [ "find ${XML_DIR} -type f -quit 2>/dev/null)" ]; then
+    if [ -n "$supported" ]; then
       xml=" ✅ XML "
+    elif [ -n "$partial" ]; then
+      xml=" ⚠️ Generic XML "
     else
       xml=" ❌ XML "
     fi
@@ -218,4 +228,124 @@ warning() {
     done
 }
 
+xml_patch() {
+    # Usage: xml_patch <device_name>
+    # Applies JSON-defined feature patches to the corresponding XML file.
+
+    local DEV_JSON="$1"
+    local DEV_NAME="$2"
+    [ -z "$DEV_NAME" ] && { echo "Usage: xml_patch <device_name>"; return 1; }
+
+    local JSON_FILE="$MODDIR/devices/${DEV_JSON}.json"
+    local XML_FILE="$XML_DIR/${DEV_NAME}.xml"
+    # Use backup instead
+    if [ -f "$RESDIR/${DEV_NAME}.backup.xml" ]; then
+        echo "[-] Found backup XML for ${DEV_NAME}. Using it as source."
+        XML_FILE="$RESDIR/${DEV_NAME}.backup.xml"
+    fi
+    local FINAL_XML_FILE="$XML_MODDIR/${DEV_NAME}.xml"
+
+    # Work on a temporary copy of the XML file to avoid partial writes.
+    local TMP_XML="$RESDIR/${DEV_NAME}_tmp.xml"
+    # Backup the stock XML
+    if [ "$XML_FILE" != "$RESDIR/${DEV_NAME}.backup.xml" ]; then
+        echo "[-] Backing up stock XML..."
+        cp "$XML_FILE" "$RESDIR/${DEV_NAME}.backup.xml"
+    fi
+    echo "[-] Patching XML..."
+    cp "$XML_FILE" "$TMP_XML"
+
+    # Process time!
+    $ADDONS_BIN/jq -c '.[] | {feature: (.feature // .name), type, value}' "$JSON_FILE" | while read -r entry; do
+        local NAME TYPE
+        NAME="$(echo "$entry" | $ADDONS_BIN/jq -r '.feature')"
+        TYPE="$(echo "$entry" | $ADDONS_BIN/jq -r '.type')"
+
+        # Remove or update existing element.
+        if [ "$($ADDONS_BIN/xmlstarlet sel -t -v "count(/features/${TYPE}[@name='${NAME}'])" "$TMP_XML")" -gt 0 ]; then
+            if [ "$TYPE" = "bool" ] || [ "$TYPE" = "integer" ] || \
+               [ "$TYPE" = "float" ] || [ "$TYPE" = "string" ]; then
+                local VAL
+                VAL="$(echo "$entry" | $ADDONS_BIN/jq -r '.value')"
+                $ADDONS_BIN/xmlstarlet ed -P -L -u "/features/${TYPE}[@name='${NAME}']" -v "$VAL" "$TMP_XML"
+                continue
+            else
+                $ADDONS_BIN/xmlstarlet ed -P -L -d "/features/${TYPE}[@name='${NAME}']" "$TMP_XML"
+            fi
+        fi
+
+        # Insert new element (depends)
+        case "$TYPE" in
+          bool|boolean|integer|float|string)
+            local VAL
+            VAL="$(echo "$entry" | $ADDONS_BIN/jq -r '.value')"
+            $ADDONS_BIN/xmlstarlet ed -P -L \
+              -s /features -t elem -n "$TYPE" -v "$VAL" \
+              -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
+              "$TMP_XML"
+            ;;
+          "string-array"|"integer-array")
+            $ADDONS_BIN/xmlstarlet ed -P -L \
+              -s /features -t elem -n "$TYPE" -v "" \
+              -i "/features/${TYPE}[not(@name)][last()]" -t attr -n name -v "$NAME" \
+              "$TMP_XML"
+
+            echo "$entry" | $ADDONS_BIN/jq -r '.value[]' | while read -r ITEM; do
+                $ADDONS_BIN/xmlstarlet ed -P -L \
+                  -s "/features/${TYPE}[@name='${NAME}']" -t elem -n item -v "$ITEM" \
+                  "$TMP_XML"
+            done
+            ;;
+          *)
+            echo "[-] Unsupported type \"$TYPE\" for feature \"$NAME\"."
+            ;;
+        esac
+    done
+
+    # Remove XML comments for cleaner :)
+    $ADDONS_BIN/xmlstarlet ed -P -L -d "//comment()" "$TMP_XML"
+
+    # Sort elements by node name then @name.
+    local SORT_XSLT="$RESDIR/sort_${DEV_NAME}.xslt"
+    cat > "$SORT_XSLT" <<'EOF'
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+  <xsl:strip-space elements="*"/>
+
+  <xsl:template match="@*|node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="features">
+    <features>
+      <xsl:apply-templates select="*">
+        <xsl:sort select="name()" data-type="text"/>
+        <xsl:sort select="@name" data-type="text"/>
+      </xsl:apply-templates>
+    </features>
+  </xsl:template>
+  <xsl:template match="comment()"/>
+</xsl:stylesheet>
+EOF
+
+    $ADDONS_BIN/xmlstarlet tr "$SORT_XSLT" "$TMP_XML" > "${TMP_XML}.sorted" && mv "${TMP_XML}.sorted" "$TMP_XML"
+    rm -f "$SORT_XSLT"
+
+    # Format XML w/ 4 indentations.
+    if $ADDONS_BIN/xmlstarlet fo -s 4 -e UTF-8 "$TMP_XML" > "${TMP_XML}.pretty" 2>/dev/null; then
+        # In case it fails, will just leave it as is
+        mv "${TMP_XML}.pretty" "$TMP_XML"
+    fi
+    # Replace original XML with patched version.
+    mv "$TMP_XML" "$FINAL_XML_FILE"
+    echo "[-] Patched XML saved to $FINAL_XML_FILE"
+}
+
+cleanup() {
+  echo "[-] Cleaning up..."
+  rm -rf $MODDIR/devices
+  rm -rf $ADDONS_BIN
+}
 # EOF

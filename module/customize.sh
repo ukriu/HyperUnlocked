@@ -1,4 +1,5 @@
 #!/bin/sh
+MODDIR=$MODPATH
 if ! $BOOTMODE; then
     ui_print "*********************************************************"
     ui_print "Installing from recovery is not recommended!"
@@ -9,22 +10,19 @@ fi
 . $MODPATH/utils.sh
 
 set_variables
-MODDIR=$MODPATH
 initalise
 check_supported
-for file in "$MODPATH/system/product/etc/device_features/"*.xml; do
-    filename=$(basename "$file")
-    if [ "$filename" != "$DEVICE_CODENAME.xml" ]; then
-        rm -f "$file"
-    fi
-done
+if [ -n "$supported" ]; then
+    xml_patch $DEVICE_CODENAME $DEVICE_CODENAME
+elif [ -n "$partial" ]; then
+    xml_patch generic $DEVICE_CODENAME
+fi
 disable_incompatible_modules
 save_deviceLevelList
 blur_choice
 highend_choice
-XML_DIR=$MODPATH/product/etc/device_features/
 update_desc
 warning
 credits
-
+cleanup
 # EOF

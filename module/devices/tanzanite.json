@@ -1,0 +1,1407 @@
+[
+  {
+    "name": "aod_support_keycode_goto_dismiss",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "battery_capacity_typ",
+    "type": "string",
+    "value": "4520"
+  },
+  {
+    "name": "btdebug_enabled",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "burst_shoot_count",
+    "type": "integer",
+    "value": 100
+  },
+  {
+    "name": "camera_adjust_picture_size_enabled",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "camera_continuous_shot_callback_class",
+    "type": "string",
+    "value": "ContinuousShotCallback"
+  },
+  {
+    "name": "camera_continuous_shot_callback_setter",
+    "type": "string",
+    "value": "setContinuousShotCallback"
+  },
+  {
+    "name": "camera_exposure_compensation_steps_num",
+    "type": "float",
+    "value": 12.0
+  },
+  {
+    "name": "camera_front_count_down_margin",
+    "type": "float",
+    "value": 0.3177
+  },
+  {
+    "name": "camera_is_support_portrait_front",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "camera_is_support_portrait_switch",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "camera_reduce_preview_flag",
+    "type": "integer",
+    "value": 12
+  },
+  {
+    "name": "camera_support_ai_lens",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "camera_supported_asd",
+    "type": "integer",
+    "value": 11
+  },
+  {
+    "name": "camera_supported_front_asd",
+    "type": "integer",
+    "value": 10
+  },
+  {
+    "name": "camera_supported_scene",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "config_antiMistouchDisabled",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "config_camera_refresh_rate_policy",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "config_sunlight_mode_available",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "config_with_gesture_shortcut_settings",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "cpu_max_freq",
+    "type": "integer",
+    "value": 305
+  },
+  {
+    "name": "dc_backlight_fps_incompatible",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "defaultFps",
+    "type": "integer",
+    "value": 60
+  },
+  {
+    "name": "default_eyecare_mode",
+    "type": "integer",
+    "value": 2
+  },
+  {
+    "name": "default_notification_led_on",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "default_schedule_led_on",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "device_body_sar",
+    "type": "float",
+    "value": 0.634
+  },
+  {
+    "name": "device_head_sar",
+    "type": "float",
+    "value": 1.13
+  },
+  {
+    "name": "disable_video_stabilization_in_speed_slow_mode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "enable_algorithm_in_file_suffix",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "enable_flash_global",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "enable_miui_lite",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "enhance_beauty_with_hht",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "extra_still_beautify_value",
+    "type": "string",
+    "value": "i:2"
+  },
+  {
+    "name": "finger_alipay_ifaa_model",
+    "type": "string",
+    "value": "Xiaomi-viva"
+  },
+  {
+    "name": "fingerprint_wakeup_device",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "fod_solution",
+    "type": "integer",
+    "value": 3
+  },
+  {
+    "name": "gallery_cpu_series",
+    "type": "string",
+    "value": "mtk"
+  },
+  {
+    "name": "gallery_support_analytic_face_and_scene",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "gallery_support_dolby",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "gallery_support_media_feature",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "gallery_support_print",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "gallery_support_time_burst_video",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "gallery_support_video_compress",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "game_enhance_feature_name",
+    "type": "string",
+    "value": "game_enhance_fisr"
+  },
+  {
+    "name": "ifaa_2dfa_support",
+    "type": "integer",
+    "value": 0
+  },
+  {
+    "name": "is_18x9_ratio_screen",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_aod_need_grayscale",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_camera_app_water_mark",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_camera_face_detection_need_orientation",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_camera_freeze_after_hdr_capture",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_camera_hold_blur_background",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_camera_isp_rotated",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_camera_lower_qrscan_frequency",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_camera_preview_with_subthread_looper",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_camera_replace_higher_cost_effect",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_camera_use_morpho_lib",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_compatible_paper_and_screen_effect",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_default_temporary_style",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_dual_system",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_full_size_effect",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_hongmi",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_legacy_face_beauty",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_lower_size_effect",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_lower_size_panorama",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_mediatek",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_only_support_keycode_goto",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_pad",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_read_cpu4_freq",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_redmi",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_support_fingerprint_tap",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_support_portrait",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_support_video_tool_box",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_video_screen",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "is_xiaomi",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "is_xiaomi_device",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "need_remove_expert_bright",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "need_video_stabilization_crop",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "paper_eyecare_default_texture",
+    "type": "integer",
+    "value": 0
+  },
+  {
+    "name": "paper_eyecare_default_value",
+    "type": "float",
+    "value": 91.0
+  },
+  {
+    "name": "paper_eyecare_max_texture",
+    "type": "integer",
+    "value": 35
+  },
+  {
+    "name": "paper_eyecare_min_texture",
+    "type": "integer",
+    "value": 0
+  },
+  {
+    "name": "paper_mode_max_level",
+    "type": "float",
+    "value": 255.0
+  },
+  {
+    "name": "paper_mode_min_level",
+    "type": "float",
+    "value": 58.0
+  },
+  {
+    "name": "partition_name_path",
+    "type": "string",
+    "value": "/dev/block/by-name/"
+  },
+  {
+    "name": "release_time",
+    "type": "string",
+    "value": "1470758400000"
+  },
+  {
+    "name": "remove_vgpaper",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "screen_effect_supported",
+    "type": "integer",
+    "value": 7
+  },
+  {
+    "name": "screen_standard_mode",
+    "type": "integer",
+    "value": 2
+  },
+  {
+    "name": "sensor_has_latency",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "smart_fps_value",
+    "type": "integer",
+    "value": 120
+  },
+  {
+    "name": "smart_fps_value",
+    "type": "integer",
+    "value": 120
+  },
+  {
+    "name": "stop_luxb_when_colorled_open",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_24bit_record",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_3d_face_beauty",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_a2dp_inner_record",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_a2dp_latency",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_adaptive_sampler",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_agps",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_agps_paras",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_agps_roaming",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_ai_task",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_alpha_optimized",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_android_flashlight",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_aod",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_aod_aon",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_aod_fullscreen",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_app_hiding",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_app_hiding",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_ar_core",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_audio_loopback",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_audio_loopback",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_audio_share",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_auto_mirror",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_autobrightness_by_application_category",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_autobrightness_optimize",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_bluetooth_cloud_data",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_broadcom_wapi",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_button_light",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_ca",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_cabc",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_4k_quality",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_age_detection",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_aohdr",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_audio_focus",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_boost_brightness",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_burst_shoot",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_burst_shoot_denoise",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_dynamic_light_spot",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_face_info_water_mark",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_front_hdr_default_value",
+    "type": "integer",
+    "value": 1
+  },
+  {
+    "name": "support_camera_gradienter",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_groupshot",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_hdr_default_value",
+    "type": "integer",
+    "value": 3
+  },
+  {
+    "name": "support_camera_hfr",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_magic_mirror",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_manual_function",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_manual_function_et",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_manual_function_focus",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_movie_solid",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_new_style_time_water_mark",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_peaking_mf",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_press_down_capture",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_quick_snap",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_record_location",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_satellite",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_shader_effect",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_skin_beauty",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_square_mode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_tilt_shift",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_torch_capture",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_video_face_detection",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_video_pause",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_camera_water_mark",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_chroma_flash",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_cit",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_cloud_dim",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_conversation_toolbox_voiprecord",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_cpu_doze",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_credentials",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_credentials",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_dark_mode_notify",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_dc_backlight",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_decline_background_color",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_decrease_brightness_spec_app",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_device_encrypt",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_display_expert_mode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_displayfeature_gamemode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_dolby",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_dual_sd_card",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_dual_sim_card",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_dynamic_brightness_range",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_eap_sim",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_emulated_storage",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_erase_external_storage",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_extreme_battery_saver",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_feedback_level",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_fm",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_front_beauty_mfnr",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_front_bokeh",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_front_flash",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_front_hdr",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_front_hht",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_front_hht_enhance",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_full_size_panorama",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_gallery_hdr",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_game_dim",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_game_gunsight",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_game_mi_time",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_gesture_wakeup",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_hall_sensor",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_hangup_while_screen_off",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_hd_record_param",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_hdr_enhance",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_headset",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_heartbeat_rate",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_hfr_video_pause",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_hide_discoverable",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_hifi",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_high_resolution",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_idle_dim",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_inner_record",
+    "type": "integer",
+    "value": 1
+  },
+  {
+    "name": "support_internal_sdcard",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_interview_record_param",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_ir",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_led_color",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_led_light",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_lhdc",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_lhdc_offload",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_local_ocr",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_low_brightness_fod",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_low_power_mode_decrease_brightness",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_main_xiaoai",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_manual_brightness_boost",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_manual_dimming",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_max_fps",
+    "type": "integer",
+    "value": 120
+  },
+  {
+    "name": "support_media_feedback",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_mi_game_macro",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_miplay_cast_privacy",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_multi_face_input",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_multi_face_input_global",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_my_device",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_nature_mode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_new_silentmode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_nfc",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_nvdia_wifi_display",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_object_track",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_oldman_mode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_ota_validate",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_page_layout",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_paper_eyecare",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_papermode_animation",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_parental_control",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_phone_call_noise_suppression",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_picture_watermark",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_power_mode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_power_save_new",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_pre_installed_application",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_provision_app_permission",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_realtime_manual_exposure_time",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_record_param",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_rotate_calibrate",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_round_corner",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_screen_color_persist",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_screen_effect",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_screen_enhance_engine",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_screen_light",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_screen_optimize",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_screen_paper_mode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_se_route",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_show_basic_items",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_sign_verify_in_cust",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_simple_launcher",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_small_win_cover",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_smart_fps",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_sound_assist",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_steps_provider",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_stereo_record",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_super_resolution",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_tap_fingerprint_sensor_to_home",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_tee_face_unlock",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_torch",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_touch_sensitive",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "support_touchfeature_gamemode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_true_color",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_truetone",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_ui_orientation_v2",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_video_dfps",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_video_hfr_mode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_video_idle_dim",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_videobox_cinema_adapt_ce",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_videobox_display_effect",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_voip_record",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_wapi",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_widevine_l1",
+    "type": "integer",
+    "value": 1
+  },
+  {
+    "name": "support_wifi_low_latency_mode",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "support_wild_boost",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "threashold_sunlight_brightness",
+    "type": "integer",
+    "value": 1000
+  },
+  {
+    "name": "type_mqs_finger_record",
+    "type": "integer",
+    "value": 3
+  },
+  {
+    "name": "type_soter_finger_pay",
+    "type": "integer",
+    "value": 2
+  },
+  {
+    "name": "vendor",
+    "type": "string",
+    "value": "mediatek"
+  }
+]

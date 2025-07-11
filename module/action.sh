@@ -1,4 +1,5 @@
 #!/bin/sh
+MODDIR="${0%/*}"
 . ./utils.sh
 
 set_variables
