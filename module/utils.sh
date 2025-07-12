@@ -31,7 +31,6 @@ check_supported() {
 }
 
 disable_incompatible_modules() {
-    echo "-"
     echo "[-] Checking for incompatible modules..."
     found_incompatible=false
     
@@ -61,10 +60,8 @@ disable_incompatible_modules() {
 }
 
 save_deviceLevelList() {
-    echo "-"
     if [ -s "$RESDIR/default_deviceLevelList.txt" ]; then
-        echo "[-] The deviceLevelList backup file already exists and is not empty."
-        echo "[-] Skipping creating backup."
+        echo "[-] The deviceLevelList backup already exists. ($(cat $RESDIR/default_deviceLevelList.txt))"
         return
     fi
     
@@ -73,13 +70,12 @@ save_deviceLevelList() {
         echo "[-] Continuing without backup value."
     else
         echo "$CUR_DEVICE_LEVEL_LIST" > "$RESDIR/default_deviceLevelList.txt"
-        echo "[-] The default value of deviceLevelList is: \`$(cat "$RESDIR/default_deviceLevelList.txt")\`"
+        echo "[-] Default deviceLevelList: $(cat "$RESDIR/default_deviceLevelList.txt")"
     fi
 }
 
 set_highend() {
-    echo "-"
-    echo "[-] New deviceLevelList value: \`$HIGH_END\`"
+    echo "[-] New deviceLevelList value: $HIGH_END"
     if su -c "settings put system deviceLevelList $HIGH_END"; then
         echo "[-] Successfully spoofed as a high-end device."
     else
@@ -88,19 +84,17 @@ set_highend() {
 }
 
 restore_deviceLevelList() {
-    echo "-"
     if [ -f "$RESDIR/default_deviceLevelList.txt" ]; then
-        echo "[-] Restoring deviceLevelList to: \`$SAV_DEVICE_LEVEL_LIST\`."
+        echo "[-] Restoring deviceLevelList"
         if su -c "settings put system deviceLevelList $SAV_DEVICE_LEVEL_LIST"; then
-            echo "[-] Successfully restored deviceLevelList to: \`$SAV_DEVICE_LEVEL_LIST\`"
+            echo "[-] Restored deviceLevelList: $SAV_DEVICE_LEVEL_LIST"
         else
             echo "[-] Failed to restore deviceLevelList."
         fi
     else
-        echo "[-] No saved deviceLevelList found. Nothing to restore."
+        echo "[-] No deviceLevelList backup found. Nothing to restore."
     fi
 }
-
 
 detect_key_press() {
     timeout_seconds=10
@@ -119,15 +113,13 @@ detect_key_press() {
 }
 
 blur_choice() {
-    echo "[!!!]"
     echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
-    
+    echo
     echo "[?] Do you want to blurs across the system?"
     echo "[.] Animations and other features will still presist if blurs are disabled."
-    echo "-"
     echo "[-] VOL UP [+]: YES (default)"
     echo "[-] VOL DN [-]: NO"
-    echo "[¡¡¡]"
+    echo
     if detect_key_press; then
       echo "[-] Blurs selected."
       cp "${RESDIR}/system.prop.blur" "${MODDIR}/system.prop"
@@ -138,15 +130,13 @@ blur_choice() {
 }
 
 highend_choice() {
-    echo "[!!!]"
     echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
-    
+    echo
     echo "[?] Do you want enable high-end mode?"
     echo "[.] Animations and other resource intensive features will be affected."
-    echo "-"
     echo "[-] VOL UP [+]: YES (default)"
     echo "[-] VOL DN [-]: NO"
-    echo "[¡¡¡]"
+    echo
     if detect_key_press; then
       echo "[-] High-End mode selected."
       set_highend
@@ -157,14 +147,12 @@ highend_choice() {
 }
 
 credits() {
-    echo "-"
     echo "[-] HyperUnlocked by ukriu"
     echo "[-] Check me out at \`ukriu.com\`!"
-    echo "- Ɛ: Thank you for using HyperUnlocked! :3"
+    echo "[-] Ɛ: Thank you for using HyperUnlocked! :3"
 }
 
 update_desc() {
-    echo "-"
     DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
     if [ "find ${XML_DIR} -type f -quit 2>/dev/null)" ]; then
       xml=" ✅ XML "
@@ -194,7 +182,6 @@ update_desc() {
 }
 
 warning() {
-    echo "-"
     lagadv="gold iron beryl citrine amethyst"
     noadv="malachite garnet sapphire sapphiren"
 
