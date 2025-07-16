@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
+# Read LICENSE_NOTICE.txt for further info.
 set_variables() {
     RESDIR=/data/adb/HyperUnlocked
     mkdir -p $RESDIR

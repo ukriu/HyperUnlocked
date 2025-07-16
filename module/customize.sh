@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
+# Read LICENSE_NOTICE.txt for further info.
 if ! $BOOTMODE; then
     ui_print "*********************************************************"
     ui_print "Installing from recovery is not recommended!"
