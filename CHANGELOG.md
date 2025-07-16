@@ -4,6 +4,11 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 ---
 
 # Changelog:
+### v1.4.0
+- Add support for `gale`/`gust`.
+- Add options while installation to choose the feature you want.
+- Fix some features on low end devices (unlock new control center on all low ends).
+
 ### v1.3.3
 - Add support for `tanzanite`.
 - Fix face unlock for `sapphire`/`sapphiren` & `river`/`sky`/`XIG03`.
