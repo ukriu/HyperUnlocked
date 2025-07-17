@@ -31,6 +31,7 @@ jobs:
           MODULE_NAME="HyperUnlocked"
           MODULE_DESC="A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices."
           CHANGELOG_FILE="$(pwd)/CHANGELOG.md"
+          MODULE_PATH=$(pwd)/module/
           
           CURRENT_VERSION_CODE="$(jq -r .versionCode update.json)" >> $GITHUB_ENV
           echo "CURRENT_VERSION_CODE=$(jq -r .versionCode update.json)" >> $GITHUB_ENV
@@ -38,7 +39,7 @@ jobs:
           COMMIT_ID="$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "COMMIT_ID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "VERSION=$(jq -r .version update.json)" >> $GITHUB_ENV
-          echo "MODULE_PATH=$(pwd)/module/" >> $GITHUB_ENV
+          echo "MODULE_PATH=${MODULE_PATH}" >> $GITHUB_ENV
           CHANGELOG_RAW=$(git diff HEAD^ HEAD -- ${CHANGELOG_FILE} | grep '^+[^+]' | sed 's/^+//')
           {
             echo "CHANGELOG<<EOF"
@@ -55,6 +56,8 @@ jobs:
             echo "version_changed=false" >> $GITHUB_ENV
             echo "ZIP_NAME=${MODULE_NAME}_${CURRENT_VERSION_CODE}-${COMMIT_ID}" >> $GITHUB_ENV
           fi
+          cp ./LICENSE ${MODULE_PATH}
+          cp ./LICENSE_NOTICE.txt ${MODULE_PATH}
 
       - name: Setting up test release
         run: |
@@ -62,7 +65,6 @@ jobs:
           sed -i "s/^\(version=\)\(.*\)/\1\2_${{ env.CURRENT_VERSION_CODE }}-${{ env.COMMIT_ID }}/" ./debug_module/module.prop
           echo "Compressing files..."
           cd ./debug_module
-          cp ../LICENSE ./
           zip -r ${{ env.ZIP_NAME }}.zip *
           echo "Created zip file: ${{ env.ZIP_NAME }}.zip"
           mv *.zip ../
@@ -78,7 +80,6 @@ jobs:
         run: |
           echo "Compressing files..."
           cd ${{ env.MODULE_PATH }}
-          cp ../LICENSE ./
           zip -r ${{ env.ZIP_NAME }}.zip *
           echo "Created zip file: ${{ env.ZIP_NAME }}.zip"
           mv *.zip ../

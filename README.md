@@ -17,6 +17,7 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 - App Vault homescreen widgets
 - More battery profiles
 - More Refresh Rate Options
+- Updated control center on low ends
 - And many others!
 
 ## Download:
@@ -31,5 +32,23 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 - Show your :heart: by giving a star to the project!
 
 ## Currently supported devices:
-- `gold iron malachite beryl citrine sapphire sapphiren pipa amethyst river sky XIG03 garnet XIG05`
+- `gold iron malachite beryl citrine sapphire sapphiren pipa amethyst river sky XIG03 garnet XIG05 tanzanite gale gust`
 > You can still use the module if your device is not mentioned above!
+
+## License
+```
+    HyperUnlocked is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    
+    Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
+```
