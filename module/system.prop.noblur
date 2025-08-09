@@ -4,6 +4,7 @@ persist.sys.textureview_optimization.enable=true
 ro.config.low_ram.middle.threshold_gb=0
 ro.config.low_ram.threshold_gb=0
 ro.miui.has_handy_mode_sf=1
+is.hyper.unlck=1
 vendor.perf.framepacing.enable=true
 persist.sys.sf_charge_anim_supported=true
 

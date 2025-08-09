@@ -2,14 +2,18 @@
 # Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
 # Read LICENSE_NOTICE.txt for further info.
 set_variables() {
+    PATH=/data/adb/ap/bin:/data/adb/ksu/bin:/data/adb/magisk:$PATH
     RESDIR=/data/adb/HyperUnlocked
     mkdir -p $RESDIR
+    XML_SPACE="$RESDIR/xml"
+    mkdir -p $XML_SPACE
+    DEFAULT_XMLDIR=/system/product/etc/device_features
     DEVICE_CODENAME=$(getprop ro.product.device)
     CUR_DEVICE_LEVEL_LIST=$(su -c "settings get system deviceLevelList")
     SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
     HIGH_END="v:1,c:3,g:3"
     MODDIR=/data/adb/modules/HyperUnlocked
-    XML_DIR=$MODDIR/product/etc/device_features/
+    XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
     DEVICE_CODENAME=$(getprop ro.product.device)
 }
 
@@ -19,17 +23,11 @@ initalise() {
 }
 
 check_supported() {
-    codenames="gold iron malachite beryl citrine sapphire sapphiren pipa amethyst river sky XIG03 garnet XIG05 tanzanite gale gust"
-
-    for codename in $codenames; do
-        if [ "$DEVICE_CODENAME" = "$codename" ]; then
-            supported=true
-            echo "[-] Supported device!"
-            return 0
-        fi
-    done
-
-    echo "[-] Your device is not fully supported and might lack some features."
+    if getprop | grep -q "sys.miui"; then
+        echo "[-] Your device is supported."
+    else
+        echo "[-] Your device is not fully supported and might lack some features."
+    fi
 }
 
 disable_incompatible_modules() {
@@ -79,7 +77,7 @@ save_deviceLevelList() {
 set_highend() {
     echo "[-] New deviceLevelList value: $HIGH_END"
     if su -c "settings put system deviceLevelList $HIGH_END"; then
-        echo "[-] Successfully spoofed as a high-end device."
+        echo "[-] Spoofed as high-end device."
     else
         echo "[-] Failed to spoof as a high-end device."
     fi
@@ -87,14 +85,13 @@ set_highend() {
 
 restore_deviceLevelList() {
     if [ -f "$RESDIR/default_deviceLevelList.txt" ]; then
-        echo "[-] Restoring deviceLevelList"
         if su -c "settings put system deviceLevelList $SAV_DEVICE_LEVEL_LIST"; then
             echo "[-] Restored deviceLevelList: $SAV_DEVICE_LEVEL_LIST"
         else
             echo "[-] Failed to restore deviceLevelList."
         fi
     else
-        echo "[-] No deviceLevelList backup found. Nothing to restore."
+        echo "[-] No deviceLevelList backup found."
     fi
 }
 
@@ -103,14 +100,14 @@ detect_key_press() {
     line=$(timeout $timeout_seconds getevent -ql 2>/dev/null | head -n 1)
     
     if [ $? -eq 124 ]; then
-      echo "[-] No key pressed within $timeout_seconds seconds. Choosing default.."
-      return 0  # default = YES
+        echo "[-] No key pressed within $timeout_seconds seconds. Choosing default.."
+        return 0  # default = YES
     fi
   
     if echo "$line" | grep -q "KEY_VOLUMEDOWN"; then
-      return 1  # NO
+        return 1  # NO
     else
-      return 0  # YES
+        return 0  # YES
     fi
 }
 
@@ -123,11 +120,11 @@ blur_choice() {
     echo "[-] VOL DN [-]: NO"
     echo
     if detect_key_press; then
-      echo "[-] Blurs selected."
-      cp "${RESDIR}/system.prop.blur" "${MODDIR}/system.prop"
+        echo "[-] Blurs selected."
+        cp "${RESDIR}/system.prop.blur" "${MODDIR}/system.prop"
     else
-      echo "[-] Blurs removed."
-      cp "${RESDIR}/system.prop.noblur" "${MODDIR}/system.prop"
+        echo "[-] Blurs removed."
+        cp "${RESDIR}/system.prop.noblur" "${MODDIR}/system.prop"
     fi
 }
 
@@ -140,11 +137,11 @@ highend_choice() {
     echo "[-] VOL DN [-]: NO"
     echo
     if detect_key_press; then
-      echo "[-] High-End mode selected."
-      set_highend
+        echo "[-] High-End mode selected."
+        set_highend
     else
-      echo "[-] High-End mode removed."
-      restore_deviceLevelList
+        echo "[-] High-End mode removed."
+        restore_deviceLevelList
     fi
 }
 
@@ -157,24 +154,24 @@ credits() {
 update_desc() {
     DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
     if [ "find ${XML_DIR} -type f -quit 2>/dev/null)" ]; then
-      xml=" ✅ XML "
+        xml=" ✅ XML "
     else
-      xml=" ❌ XML "
+        xml=" ❌ XML "
     fi
   
     if [ "$(settings get system deviceLevelList)" = "$HIGH_END" ]; then
-      high=" ✅ high-end mode "
+        high=" ✅ high-end mode "
     else
-      high=" ❌ high-end mode "
+        high=" ❌ high-end mode "
     fi
     
     if cmp -s "${RESDIR}/system.prop.blur" "${MODDIR}/system.prop"; then
-      blur=" ✅ blurs "
-      blurs_en=1
+        blur=" ✅ blurs "
+        blurs_en=1
     elif cmp -s "${RESDIR}/system.prop.noblur" "${MODDIR}/system.prop"; then
-      blur=" ❌ blurs "
+        blur=" ❌ blurs "
     else
-      blur=" ◻️ blurs "
+        blur=" ◻️ blurs "
     fi
     
     NEW_DESC="[${DEVICE_CODENAME}][${xml}][${high}][${blur}] ${DEFAULT_DESC}"
@@ -186,25 +183,140 @@ update_desc() {
 warning() {
     lagadv="gold iron beryl citrine amethyst"
     noadv="malachite garnet sapphire sapphiren"
-
+    
     for lagad in $lagadv; do
         if [ "$DEVICE_CODENAME" = "$lagad" ]; then
             if [ "$blurs_en" = "1" ]; then
-              echo "[-] Turn OFF \`Advanced Textures\` to help with lag!"
+                echo "[-] Turn OFF \`Advanced Textures\` to help with lag!"
             fi
             return 0
         fi
     done
-
+    
     for noad in $noadv; do
         if [ "$DEVICE_CODENAME" = "$noad" ]; then
             if [ "$blurs_en" = "1" ]; then
-              echo "[-] Turn OFF \`Advanced Textures\` to avoid visual glitches!"
+                echo "[-] Turn OFF \`Advanced Textures\` to avoid visual glitches!"
             fi
             settings put secure background_blur_enable 0
             return 0
         fi
     done
 }
+
+xml_init() {
+    if ! cmp -s "${MODDIR}/xml.sh" "${XML_SPACE}/xml.sh"; then
+        echo "[-] Creating custom XML"
+        # not running this in a su subshell fails for some reason
+        su -c "cp -r ${DEFAULT_XMLDIR}/* $XML_SPACE"
+        cp "${MODDIR}/xml.sh" "$XML_SPACE"
+        . "$XML_SPACE/xml.sh"
+        
+        find "$XML_SPACE" -type f -name "*.xml" | while read -r xml_file; do
+            # remove comments and empty lines
+            busybox sed -i -e '/\$<!--/d' -e '/-->\$/d' -e '/<!--.*-->/d' -e '/^[[:space:]]*$/d' $xml_file
+            update_file "$xml_file"
+        done
+        
+        XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
+        mkdir -p $XML_DIR/
+        su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
+        rm -f "${XML_DIR}/xml.sh"
+    else
+        echo "[-] Skipping XML creation"
+    fi
+}
+
+update_file() {
+    xml_file="$1"
+    echo "[-] DEBUG: editing: $xml_file"
+    touch $RESDIR/tmpsed.txt
+    tmp_sed="$RESDIR/tmpsed.txt"
+    changes=0
+    
+    # get default indent for adding new props
+    default_indent=$(busybox grep -E "^[[:space:]]*<bool[[:space:]]" "$xml_file" | busybox sed -E 's/^([[:space:]]*).*/\1/' | head -n 1)
+    [ -z "$default_indent" ] && default_indent="    "
+    # escape for sed insert
+    default_indent=$(printf '%s' "$default_indent" | busybox sed 's/ /\\ /g; s/\t/\\t/g')
+    
+    process_prop_list "$xml_file" "$tmp_sed" "true"  "$bools_true"  "$default_indent" "bool"
+    process_prop_list "$xml_file" "$tmp_sed" "true" "$aod_bools_true" "$default_indent" "bool"
+    process_prop_list "$xml_file" "$tmp_sed" "true" "$cam_bools_true" "$default_indent" "bool"
+    process_prop_list "$xml_file" "$tmp_sed" "true" "$gal_bools_true" "$default_indent" "bool"
+    process_prop_list "$xml_file" "$tmp_sed" "false" "$bools_false" "$default_indent" "bool"
+    process_prop_list "$xml_file" "$tmp_sed" "false" "$aod_bools_false" "$default_indent" "bool"
+    process_prop_list "$xml_file" "$tmp_sed" "false" "$cam_bools_false" "$default_indent" "bool"
+    process_prop_list "$xml_file" "$tmp_sed" "100" "$integer_100" "$default_indent" "integer"
+    process_prop_list "$xml_file" "$tmp_sed" "1" "$integer_1" "$default_indent" "integer"
+    process_prop_list "$xml_file" "$tmp_sed" "game_enhance_fisr" "$string_game_enhance_fisr" "$default_indent" "string"
+    set_fps "$xml_file" "$tmp_sed" "$supported_fps" "$default_indent"
+    
+    if [ "$changes" -gt 0 ]; then
+        busybox sed -i -f "$tmp_sed" "$xml_file"
+        echo "[-] $changes changes applied."
+    else
+        echo "[-] no XML changes needed."
+    fi
+    
+    rm -f "$tmp_sed"
+}
+
+process_prop_list() {
+    xml_file="$1"
+    tmp_sed="$2"
+    value="$3"
+    props="$4"
+    default_indent="$5"
+    value_type="$6"
+    
+    for prop in $props; do
+        if busybox grep -Eq "^[[:space:]]*<$value_type[[:space:]]+name=['\"]$prop['\"][^>]*>" "$xml_file"; then
+            current_val=$(busybox grep -E "^[[:space:]]*<$value_type[[:space:]]+name=['\"]$prop['\"][^>]*>" "$xml_file" | busybox sed -E 's/.*>([[:space:]]*[a-zA-Z]+[[:space:]]*)<\/$value_type>.*/\1/' | busybox tr -d '[:space:]')
+            
+            if [ "$current_val" != "$value" ]; then
+                echo "s|^[[:space:]]*<$value_type[[:space:]]\{1,\}name=['\"]$prop['\"][^>]*>.*</$value_type>|${default_indent}<$value_type name=\"$prop\">$value</$value_type>|" >> "$tmp_sed"
+                changes=$((changes+1))
+                echo "[-] DEBUG: set $prop to $value"
+            else
+                echo "[-] DEBUG: $prop already $value"
+            fi
+        else
+            # add missing prop before features
+            echo "/<\/features>/i $default_indent<$value_type name=\"$prop\">$value</$value_type>" >> "$tmp_sed"
+            changes=$((changes+1))
+            echo "[-] DEBUG: added $prop as $value"
+        fi
+    done
+}
+
+set_fps() {
+    xml_file="$1"
+    tmp_sed="$2"
+    fps_list="$3"
+    default_indent="$4"
+    
+    # remove fpsList block
+    start_line=$(busybox grep -n "<integer-array name=\"fpsList\">" "$xml_file" | busybox cut -d: -f1 | busybox head -n 1)
+    if [ -n "$start_line" ]; then
+        end_line=$(busybox grep -n "</integer-array>" "$xml_file" | busybox cut -d: -f1 | busybox awk -v s="$start_line" '$1 > s {print; exit}')
+        if [ -n "$end_line" ]; then
+            echo "${start_line},${end_line}d" >> "$tmp_sed"
+            echo "[-] DEBUG: removed old fpsList"
+            changes=$((changes+1))
+        fi
+    fi
+    
+    # make new fpsList block before features end
+    echo "/<\/features>/i ${default_indent}<integer-array name=\"fpsList\">" >> "$tmp_sed"
+    for fps in $fps_list; do
+        echo "/<\/features>/i ${default_indent}${default_indent}<item>$fps</item>" >> "$tmp_sed"
+    done
+    echo "/<\/features>/i ${default_indent}</integer-array>" >> "$tmp_sed"
+    echo "[-] DEBUG: added new fpsList: $fps_list"
+    changes=$((changes+1))
+}
+# passing default_indent to every func is a bit excessive so it might be better to not do that, will do later
+
 
 # EOF

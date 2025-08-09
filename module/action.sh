@@ -8,6 +8,7 @@ check_supported
 disable_incompatible_modules
 blur_choice
 highend_choice
+xml_init
 update_desc
 warning
 credits

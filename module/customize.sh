@@ -14,17 +14,12 @@ set_variables
 MODDIR=$MODPATH
 initalise
 check_supported
-for file in "$MODPATH/system/product/etc/device_features/"*.xml; do
-    filename=$(basename "$file")
-    if [ "$filename" != "$DEVICE_CODENAME.xml" ]; then
-        rm -f "$file"
-    fi
-done
 disable_incompatible_modules
 save_deviceLevelList
 blur_choice
 highend_choice
 XML_DIR=$MODPATH/product/etc/device_features/
+xml_init
 update_desc
 warning
 credits
