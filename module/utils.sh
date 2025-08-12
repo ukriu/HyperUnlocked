@@ -23,7 +23,7 @@ initalise() {
 }
 
 check_supported() {
-    if getprop | grep -q "sys.miui"; then
+    if find -L "$DEFAULT_XMLDIR" -type f -name "*.xml" -quit; then
         echo "[-] Your device is supported."
     else
         echo "[-] Your device is not fully supported and might lack some features."
