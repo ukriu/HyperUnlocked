@@ -272,7 +272,7 @@ process_prop_list() {
     
     for prop in $props; do
         if busybox grep -Eq "^[[:space:]]*<$value_type[[:space:]]+name=['\"]$prop['\"][^>]*>" "$xml_file"; then
-            current_val=$(busybox grep -E "^[[:space:]]*<$value_type[[:space:]]+name=['\"]$prop['\"][^>]*>" "$xml_file" | busybox sed -E 's/.*>([[:space:]]*[a-zA-Z]+[[:space:]]*)<\/$value_type>.*/\1/' | busybox tr -d '[:space:]')
+            current_val=$(busybox grep -E "^[[:space:]]*<$value_type[[:space:]]+name=['\"]$prop['\"][^>]*>" "$xml_file" | busybox sed -E "s/.*>([[:space:]]*[a-zA-Z0-9_]+[[:space:]]*)<\/[[:space:]]*$value_type>.*/\1/" | busybox tr -d '[:space:]')
             
             if [ "$current_val" != "$value" ]; then
                 echo "s|^[[:space:]]*<$value_type[[:space:]]\{1,\}name=['\"]$prop['\"][^>]*>.*</$value_type>|${default_indent}<$value_type name=\"$prop\">$value</$value_type>|" >> "$tmp_sed"
