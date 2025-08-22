@@ -63,11 +63,6 @@ jobs:
         run: |
           cp -r ${{ env.MODULE_PATH }} ./debug_module/
           sed -i "s/^\(version=\)\(.*\)/\1\2_${{ env.CURRENT_VERSION_CODE }}-${{ env.COMMIT_ID }}/" ./debug_module/module.prop
-          echo "Compressing files..."
-          cd ./debug_module
-          zip -r ${{ env.ZIP_NAME }}.zip *
-          echo "Created zip file: ${{ env.ZIP_NAME }}.zip"
-          mv *.zip ../
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
