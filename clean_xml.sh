@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # This script takes in any revalent xml file and displays values not accounted for by HyperUnlocked
+# This script was made using AI as this is not important enough to matter
 # Requires: xmlstarlet
 # Usage: ./clean_xml.sh ORIGINAL_XML.xml module/xml.sh output.xml
 
