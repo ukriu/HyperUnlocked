@@ -229,7 +229,7 @@ xml_init() {
 
 update_file() {
     xml_file="$1"
-    echo "[-] DEBUG: editing: $xml_file"
+    echo "[-] editing: $xml_file"
     touch $RESDIR/tmpsed.txt
     tmp_sed="$RESDIR/tmpsed.txt"
     changes=0
@@ -277,15 +277,15 @@ process_prop_list() {
             if [ "$current_val" != "$value" ]; then
                 echo "s|^[[:space:]]*<$value_type[[:space:]]\{1,\}name=['\"]$prop['\"][^>]*>.*</$value_type>|${default_indent}<$value_type name=\"$prop\">$value</$value_type>|" >> "$tmp_sed"
                 changes=$((changes+1))
-                echo "[-] DEBUG: set $prop to $value"
-            else
-                echo "[-] DEBUG: $prop already $value"
+            #    echo "[-] DEBUG: set $prop to $value"
+            #else
+            #    echo "[-] DEBUG: $prop already $value"
             fi
         else
             # add missing prop before features
             echo "/<\/features>/i $default_indent<$value_type name=\"$prop\">$value</$value_type>" >> "$tmp_sed"
             changes=$((changes+1))
-            echo "[-] DEBUG: added $prop as $value"
+            #echo "[-] DEBUG: added $prop as $value"
         fi
     done
 }
@@ -302,7 +302,7 @@ set_fps() {
         end_line=$(busybox grep -n "</integer-array>" "$xml_file" | busybox cut -d: -f1 | busybox awk -v s="$start_line" '$1 > s {print; exit}')
         if [ -n "$end_line" ]; then
             echo "${start_line},${end_line}d" >> "$tmp_sed"
-            echo "[-] DEBUG: removed old fpsList"
+            #echo "[-] DEBUG: removed old fpsList"
             changes=$((changes+1))
         fi
     fi
@@ -313,7 +313,7 @@ set_fps() {
         echo "/<\/features>/i ${default_indent}${default_indent}<item>$fps</item>" >> "$tmp_sed"
     done
     echo "/<\/features>/i ${default_indent}</integer-array>" >> "$tmp_sed"
-    echo "[-] DEBUG: added new fpsList: $fps_list"
+    #echo "[-] DEBUG: added new fpsList: $fps_list"
     changes=$((changes+1))
 }
 # passing default_indent to every func is a bit excessive so it might be better to not do that, will do later
