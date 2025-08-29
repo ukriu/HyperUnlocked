@@ -97,18 +97,20 @@ restore_deviceLevelList() {
 
 detect_key_press() {
     timeout_seconds=10
-    line=$(timeout $timeout_seconds getevent -ql 2>/dev/null | head -n 1)
+    # get the first line mentioning VOLUMEUP or VOLUMEDOWN within the timeout
+    line="$(timeout "$timeout_seconds" sh -c 'getevent -ql 2>/dev/null | grep -m1 -E "KEY_VOLUME(UP|DOWN)"')"
     
-    if [ $? -eq 124 ]; then
+    # if we timed out and got nothing choose default
+    if [ $? -eq 124 ] || [ -z "$line" ]; then
         echo "[-] No key pressed within $timeout_seconds seconds. Choosing default.."
-        return 0  # default = YES
-    fi
-  
-    if echo "$line" | grep -q "KEY_VOLUMEDOWN"; then
-        return 1  # NO
-    else
         return 0  # YES
     fi
+    
+    echo "$line" | grep -q "KEY_VOLUMEUP"   && return 0  # YES
+    echo "$line" | grep -q "KEY_VOLUMEDOWN" && return 1  # NO
+    
+    # fallback (shouldnt hit)
+    return 0
 }
 
 blur_choice() {
