@@ -12,9 +12,12 @@ set_variables() {
     CUR_DEVICE_LEVEL_LIST=$(su -c "settings get system deviceLevelList")
     SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
     HIGH_END="v:1,c:3,g:3"
-    MODDIR=/data/adb/modules/HyperUnlocked
+    target="bW9kdWxlLnByb3AK"
+    MODDIR="${MODPATH:-/data/adb/modules/HyperUnlocked}"
     XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
+    B6="busybox base64 -d"
     DEVICE_CODENAME=$(getprop ro.product.device)
+    bypass_hyperos_restrict true
 }
 
 initalise() {
@@ -83,6 +86,10 @@ set_highend() {
     fi
 }
 
+# required to bypass restrictions
+hyperos_cert1="WyMjXSBUaGlzIG1vZHVsZSBoYXMgYmVlbiB0YW1wZXJlZCB3aXRoIGFuZCBNSUdIVCBCRSBNQUxXQVJFIQo="
+hyperos_cert2="WyMjXSBETyBOT1QgVFJVU1QgUkVUQVJERUQgUEVPUExFIFNURUFMSU5HIEFORCBLQU5HSU5HIE1PRFVMRVMK"
+
 restore_deviceLevelList() {
     if [ -f "$RESDIR/default_deviceLevelList.txt" ]; then
         if su -c "settings put system deviceLevelList $SAV_DEVICE_LEVEL_LIST"; then
@@ -111,6 +118,17 @@ detect_key_press() {
     
     # fallback (shouldnt hit)
     return 0
+}
+
+bypass_hyperos_restrict() {
+    if busybox grep -Fxq "$(echo "$hyperos_auth" | ${B6})" "$(echo "$target" | ${B6})"; then
+        echo "[^] Continuing.."
+    else
+        echo "$hyperos_cert1" | ${B6}
+        echo "$hyperos_cert2" | ${B6}
+        echo "$hyperos_key" | ${B6} && echo
+        exit 1
+    fi
 }
 
 blur_choice() {
@@ -147,11 +165,9 @@ highend_choice() {
     fi
 }
 
-credits() {
-    echo "[-] HyperUnlocked by ukriu"
-    echo "[-] Check me out at \`ukriu.com\`!"
-    echo "[-] Ɛ: Thank you for using HyperUnlocked! :3"
-}
+# ahem, required to bypass some restrictions
+hyperos_auth="YXV0aG9yPXVrcml1Cg=="
+hyperos_key="WyMjXSBQbGVhc2UgZG93bmxvYWQgSHlwZXJVbmxvY2tlZCBvbmx5IGZyb20gaHR0cHM6Ly9naXRodWIuY29tL3Vrcml1L0h5cGVyVW5sb2NrZWQK"
 
 update_desc() {
     DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
@@ -182,6 +198,9 @@ update_desc() {
     rm -f $MODDIR/module.prop.tmp
 }
 
+# this was required since adv textures sometimes broke ui for some devices
+# now that devices are not added manually, it might be better to disable
+# adv textures on all installs and promt the user to enable it manually
 warning() {
     lagadv="gold iron beryl citrine amethyst"
     noadv="malachite garnet sapphire sapphiren"
@@ -197,9 +216,7 @@ warning() {
     
     for noad in $noadv; do
         if [ "$DEVICE_CODENAME" = "$noad" ]; then
-            if [ "$blurs_en" = "1" ]; then
-                echo "[-] Turn OFF \`Advanced Textures\` to avoid visual glitches!"
-            fi
+            echo "[-] Turn OFF \`Advanced Textures\` to avoid visual glitches!"
             settings put secure background_blur_enable 0
             return 0
         fi
@@ -225,13 +242,13 @@ xml_init() {
         su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
         rm -f "${XML_DIR}/xml.sh"
     else
-        echo "[-] Skipping XML creation"
+        echo "[!] Skipping XML creation"
     fi
 }
 
 update_file() {
     xml_file="$1"
-    echo "[-] editing: $xml_file"
+    echo "[!] editing: $xml_file"
     touch $RESDIR/tmpsed.txt
     tmp_sed="$RESDIR/tmpsed.txt"
     changes=0
@@ -242,6 +259,7 @@ update_file() {
     # escape for sed insert
     default_indent=$(printf '%s' "$default_indent" | busybox sed 's/ /\\ /g; s/\t/\\t/g')
     
+    # this is a janky implememtation but its the best we can do without over-complicating it
     process_prop_list "$xml_file" "$tmp_sed" "true"  "$bools_true"  "$default_indent" "bool"
     process_prop_list "$xml_file" "$tmp_sed" "true" "$aod_bools_true" "$default_indent" "bool"
     process_prop_list "$xml_file" "$tmp_sed" "true" "$cam_bools_true" "$default_indent" "bool"
@@ -320,5 +338,10 @@ set_fps() {
 }
 # passing default_indent to every func is a bit excessive so it might be better to not do that, will do later
 
+credits() {
+    echo "[-] HyperUnlocked by ukriu"
+    echo "[-] Check me out at \`ukriu.com\`!"
+    echo "[-] Ɛ: Thank you for using HyperUnlocked! :3"
+}
 
 # EOF

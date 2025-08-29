@@ -4,6 +4,12 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 ---
 
 # Changelog:
+### v2.0.0
+- Add support for ALL Xiaomi/Redmi/POCO devices running MIUI/HyperOS
+- Add support for a few more features for a few devices
+- Fix existing face unlock issues for a few devices
+- **NOTE**: For face unlock issues to be fixed, you need to uninstall the previous HyperUnlocked version and install v2.0.0 or higher again!
+
 ### v1.4.0
 - Add support for `gale`/`gust`.
 - Add options while installation to choose the feature you want.

@@ -32,8 +32,7 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 - Show your :heart: by giving a star to the project!
 
 ## Currently supported devices:
-- `gold iron malachite beryl citrine sapphire sapphiren pipa amethyst river sky XIG03 garnet XIG05 tanzanite gale gust`
-> You can still use the module if your device is not mentioned above!
+- As of `v2.0.0`, ALL Xiaomi/REDMI/POCO devices running MIUI/HyperOS are supported.
 
 ## License
 ```

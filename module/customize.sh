@@ -8,17 +8,16 @@ if ! $BOOTMODE; then
     ui_print "*********************************************************"
 fi
 
+export MODPATH
 . $MODPATH/utils.sh
 
 set_variables
-MODDIR=$MODPATH
 initalise
 check_supported
 disable_incompatible_modules
 save_deviceLevelList
 blur_choice
 highend_choice
-XML_DIR=$MODPATH/product/etc/device_features/
 xml_init
 update_desc
 warning

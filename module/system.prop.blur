@@ -1,3 +1,6 @@
+# Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
+# Read LICENSE_NOTICE.txt for further info.
+
 persist.sys.advanced_visual_release=3
 persist.sys.power.default.powermode=1
 persist.sys.textureview_optimization.enable=true
@@ -29,4 +32,5 @@ ro.surface_flinger.supports_background_blur=1
 
 # experimental
 persist.sys.usap_pool_enabled=true
+is.hyper.ukriu.supported=1
 persist.device_config.runtime_native.usap_pool_enabled=true
