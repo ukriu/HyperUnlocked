@@ -5,6 +5,7 @@
 
 set_variables
 restore_deviceLevelList
+rm -r /data/adb/HyperUnlocked/xml
 exit 0
 
 # EOF
