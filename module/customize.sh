@@ -18,6 +18,7 @@ disable_incompatible_modules
 save_deviceLevelList
 blur_choice
 highend_choice
+define_props
 xml_init
 update_desc
 warning

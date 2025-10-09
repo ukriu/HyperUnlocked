@@ -125,6 +125,17 @@ bypass_hyperos_restrict() {
     fi
 }
 
+write_props() {
+    local prop_file="$1"
+    local group="$2"
+    local source_file="all.props"
+    
+    # extract lines between start and stop markers
+    awk "/#\\\$start_${group}/,/#\\\$stop_${group}/" "$source_file" | grep -vE "^#\\$" >> "$prop_file"
+    
+    echo "[-] Written props '$group' to '$prop_file'"
+}
+
 blur_choice() {
     echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
     echo
@@ -135,10 +146,10 @@ blur_choice() {
     echo
     if detect_key_press; then
         echo "[-] Blurs selected."
-        cp "${RESDIR}/system.prop.blur" "${MODDIR}/system.prop"
+        CHOICE_BLUR=true
     else
         echo "[-] Blurs removed."
-        cp "${RESDIR}/system.prop.noblur" "${MODDIR}/system.prop"
+        CHOICE_BLUR=false
     fi
 }
 
@@ -152,11 +163,31 @@ highend_choice() {
     echo
     if detect_key_press; then
         echo "[-] High-End mode selected."
+        CHOICE_HE=true
         set_highend
     else
         echo "[-] High-End mode removed."
+        CHOICE_HE=false
         restore_deviceLevelList
     fi
+}
+
+define_props() {
+  if [ ! -f "all.props" ]; then
+    echo $hyperos_key | $B6
+    exit 1
+  fi
+  head -n 3 ${MODDIR}/all.props > ${MODDIR}/system.prop
+  write_props ${MODDIR}/system.prop "basic"
+  write_props ${MODDIR}/system.prop "experimental"
+  if [ "$CHOICE_HE" = true ]; then
+    write_props ${MODDIR}/system.prop "highend"
+  fi
+  if [ "$CHOICE_BLUR" = true ]; then
+    write_props ${MODDIR}/system.prop "bluron"
+  else
+    write_props ${MODDIR}/system.prop "bluroff"
+  fi
 }
 
 # ahem, required to bypass some restrictions
