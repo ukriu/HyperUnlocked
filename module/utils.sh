@@ -237,6 +237,8 @@ xml_init() {
         rm -f "${XML_DIR}/xml.sh"
     else
         echo "[!] Skipping XML creation"
+        su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
+        rm -f "${XML_DIR}/xml.sh"
     fi
 }
 
