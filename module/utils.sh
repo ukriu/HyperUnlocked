@@ -128,7 +128,7 @@ bypass_hyperos_restrict() {
 write_props() {
     local prop_file="$1"
     local group="$2"
-    local source_file="all.props"
+    local source_file="${MODDIR}/all.props"
     
     # extract lines between start and stop markers
     awk "/#\\\$start_${group}/,/#\\\$stop_${group}/" "$source_file" | grep -vE "^#\\$" >> "$prop_file"
@@ -173,20 +173,20 @@ highend_choice() {
 }
 
 define_props() {
-  if [ ! -f "all.props" ]; then
+  if [ ! -f "${MODDIR}/all.props" ]; then
     echo $hyperos_key | $B6
     exit 1
   fi
   head -n 3 ${MODDIR}/all.props > ${MODDIR}/system.prop
-  write_props ${MODDIR}/system.prop "basic"
-  write_props ${MODDIR}/system.prop "experimental"
+  write_props "${MODDIR}/system.prop" "basic"
+  write_props "${MODDIR}/system.prop" "experimental"
   if [ "$CHOICE_HE" = true ]; then
-    write_props ${MODDIR}/system.prop "highend"
+    write_props "${MODDIR}/system.prop" "highend"
   fi
   if [ "$CHOICE_BLUR" = true ]; then
-    write_props ${MODDIR}/system.prop "bluron"
+    write_props "${MODDIR}/system.prop" "bluron"
   else
-    write_props ${MODDIR}/system.prop "bluroff"
+    write_props "${MODDIR}/system.prop" "bluroff"
   fi
 }
 
