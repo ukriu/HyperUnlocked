@@ -131,7 +131,7 @@ write_props() {
     local source_file="${MODDIR}/all.props"
     
     # extract lines between start and stop markers
-    awk "/#\\\$start_${group}/,/#\\\$stop_${group}/" "$source_file" | grep -vE "^#\\$" >> "$prop_file"
+    awk "/#\\\$start_${group}/,/#\\\$end_${group}/" "$source_file" | grep -vE "^#\\$" >> "$prop_file"
     
     echo "[-] Written props '$group' to '$prop_file'"
 }
