@@ -252,7 +252,8 @@ xml_init() {
     rm -rf $XML_SPACE
     echo "[-] Creating custom XML"
     # not running this in a su subshell fails for some reason
-    su -c "cp -r ${DEFAULT_XMLDIR}/* $XML_SPACE"
+    mkdir -p $XML_SPACE
+    su -c "cp -r ${DEFAULT_XMLDIR}/* $XML_SPACE/"
     . "$MODDIR/xml.sh"
     
     find "$XML_SPACE" -type f -name "*.xml" | while read -r xml_file; do
@@ -261,7 +262,6 @@ xml_init() {
         update_file "$xml_file"
     done
     
-    XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
     mkdir -p $XML_DIR/
     su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
 }
