@@ -132,7 +132,6 @@ write_props() {
     
     # extract lines between start and stop markers
     awk "/#\\\$start_${group}/,/#\\\$end_${group}/" "$source_file" | grep -vE "^#\\$" >> "$prop_file"
-    
     echo "[-] Written props '$group' to '$prop_file'"
 }
 
@@ -173,21 +172,21 @@ highend_choice() {
 }
 
 define_props() {
-  if [ ! -f "${MODDIR}/all.props" ]; then
-    echo $hyperos_key | $B6
-    exit 1
-  fi
-  head -n 3 ${MODDIR}/all.props > ${MODDIR}/system.prop
-  write_props "${MODDIR}/system.prop" "basic"
-  write_props "${MODDIR}/system.prop" "experimental"
-  if [ "$CHOICE_HE" = true ]; then
-    write_props "${MODDIR}/system.prop" "highend"
-  fi
-  if [ "$CHOICE_BLUR" = true ]; then
-    write_props "${MODDIR}/system.prop" "bluron"
-  else
-    write_props "${MODDIR}/system.prop" "bluroff"
-  fi
+    if [ ! -f "${MODDIR}/all.props" ]; then
+        echo $hyperos_key | $B6
+        exit 1
+    fi
+    head -n 3 ${MODDIR}/all.props > ${MODDIR}/system.prop
+    write_props "${MODDIR}/system.prop" "basic"
+    write_props "${MODDIR}/system.prop" "experimental"
+    if [ "$CHOICE_HE" = true ]; then
+        write_props "${MODDIR}/system.prop" "highend"
+    fi
+    if [ "$CHOICE_BLUR" = true ]; then
+        write_props "${MODDIR}/system.prop" "bluron"
+    else
+        write_props "${MODDIR}/system.prop" "bluroff"
+    fi
 }
 
 # ahem, required to bypass some restrictions
@@ -249,28 +248,22 @@ warning() {
 }
 
 xml_init() {
-    if ! cmp -s "${MODDIR}/xml.sh" "${XML_SPACE}/xml.sh"; then
-        echo "[-] Creating custom XML"
-        # not running this in a su subshell fails for some reason
-        su -c "cp -r ${DEFAULT_XMLDIR}/* $XML_SPACE"
-        cp "${MODDIR}/xml.sh" "$XML_SPACE"
-        . "$XML_SPACE/xml.sh"
-        
-        find "$XML_SPACE" -type f -name "*.xml" | while read -r xml_file; do
-            # remove comments and empty lines
-            busybox sed -i -e '/\$<!--/d' -e '/-->\$/d' -e '/<!--.*-->/d' -e '/^[[:space:]]*$/d' $xml_file
-            update_file "$xml_file"
-        done
-        
-        XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
-        mkdir -p $XML_DIR/
-        su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
-        rm -f "${XML_DIR}/xml.sh"
-    else
-        echo "[!] Skipping XML creation"
-        su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
-        rm -f "${XML_DIR}/xml.sh"
-    fi
+    # remove old xmls
+    rm -rf $XML_SPACE
+    echo "[-] Creating custom XML"
+    # not running this in a su subshell fails for some reason
+    su -c "cp -r ${DEFAULT_XMLDIR}/* $XML_SPACE"
+    . "$MODDIR/xml.sh"
+    
+    find "$XML_SPACE" -type f -name "*.xml" | while read -r xml_file; do
+        # remove comments and empty lines
+        busybox sed -i -e '/\$<!--/d' -e '/-->\$/d' -e '/<!--.*-->/d' -e '/^[[:space:]]*$/d' $xml_file
+        update_file "$xml_file"
+    done
+    
+    XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
+    mkdir -p $XML_DIR/
+    su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
 }
 
 update_file() {
