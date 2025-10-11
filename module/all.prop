@@ -2,9 +2,9 @@
 # Read LICENSE_NOTICE.txt for further info.
 
 #$start_basic
-#persist.sys.advanced_visual_release=3
+persist.sys.advanced_visual_release=3
 persist.sys.power.default.powermode=1
-persist.sys.textureview_optimization.enable=true
+#persist.sys.textureview_optimization.enable=true
 ro.config.low_ram.middle.threshold_gb=0
 ro.config.low_ram.threshold_gb=0
 ro.miui.has_handy_mode_sf=1
@@ -22,7 +22,7 @@ enable_blurs_on_windows=1
 persist.sys.add_blurnoise_supported=true
 persist.sys.background_blur_status_default=true
 persist.sys.background_blur_supported=true
-persist.sys.background_blur_version=2
+#persist.sys.background_blur_version=2
 persist.sys.sf.disable_blurs=false
 ro.launcher.blur.appLaunch=1
 ro.miui.has_blur=1
@@ -47,7 +47,7 @@ enable_blurs_on_windows=0
 persist.sys.add_blurnoise_supported=false
 persist.sys.background_blur_status_default=false
 persist.sys.background_blur_supported=false
-persist.sys.background_blur_version=2
+#persist.sys.background_blur_version=2
 persist.sys.sf.disable_blurs=true
 ro.launcher.blur.appLaunch=0
 ro.miui.has_blur=0
