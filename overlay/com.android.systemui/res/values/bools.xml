@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="force_shade_low_end_anim">false</bool>
+    <bool name="shade_screenshot_blur">false</bool>
+    <bool name="support_aod_linkage_anim">true</bool>
+    <bool name="flag_charging_ripple">true</bool>
+    <bool name="shade_header_gradient_blur">true</bool>
+    <bool name="support_hyperos_device_controls_feature">true</bool>
+</resources>

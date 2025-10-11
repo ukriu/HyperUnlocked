@@ -8,6 +8,7 @@ on:
       - '.github/workflows/release.yml'
       - 'module/**'
       - 'update.json'
+      - 'overlay/**'
   workflow_dispatch:
     inputs:
       force_release:
@@ -58,6 +59,21 @@ jobs:
           fi
           cp ./LICENSE ${MODULE_PATH}
           cp ./LICENSE_NOTICE.txt ${MODULE_PATH}
+
+      - name: Build Overlays
+        run: |
+          cd ./overlay
+          export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+          for folder in ./*; do
+              [ -d "$folder" ] || continue
+              FOLDER_NAME=$(basename "$folder")
+              ./aapt package -f -F "HyperUnlocked-${FOLDER_NAME}-unalign.apk" -M "${folder}/AndroidManifest.xml" -S "${folder}/res" -I ./android.jar
+              ./zipalign -f -p -v 4 "HyperUnlocked-${FOLDER_NAME}-unalign.apk" "HyperUnlocked-${FOLDER_NAME}.apk"
+          done
+          rm -f HyperUnlocked-*-unalign.apk
+          mkdir -p ${{ env.MODULE_PATH }}/system/product/overlay
+          mv HyperUnlocked-*.apk ${{ env.MODULE_PATH }}/system/product/overlay
+          cd ..
 
       - name: Setting up test release
         run: |

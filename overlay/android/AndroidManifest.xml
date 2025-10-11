@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" 
+          package="com.ukriu.hyperunlocked.systemui.overlay">
+    <overlay 
+        android:isStatic="true" 
+        android:priority="9999" 
+        android:targetPackage="android"/>
+    <application 
+        android:extractNativeLibs="false" 
+        android:hasCode="false" 
+        android:label="ukriu!HyperUnlocked Android Overlay"/>
+</manifest>

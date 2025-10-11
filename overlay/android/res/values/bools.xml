@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="config_adaptive_sleep_available">true</bool>
+    <bool name="config_batterySaverTurnedOffNotificationEnabled">true</bool>
+    <bool name="config_dozeSupportsAodWallpaper">true</bool>
+    <bool name="config_showSysuiShutdown">true</bool>
+</resources>
