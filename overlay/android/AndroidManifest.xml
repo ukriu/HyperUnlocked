@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" 
-          package="com.ukriu.hyperunlocked.systemui.overlay">
+          package="com.ukriu.hyperunlocked.android.overlay">
     <overlay 
         android:isStatic="true" 
         android:priority="9999" 
