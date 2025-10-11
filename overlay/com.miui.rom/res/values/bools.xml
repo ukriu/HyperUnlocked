@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="config_aon_anti_burn_available">true</bool>
+    <!-- <bool name="config_aon_anti_burn_available">true</bool>
     <bool name="config_aon_scanner_available">true</bool>
-    <bool name="config_hbm_support_dimming">true</bool>
+    <bool name="config_hbm_support_dimming">true</bool> -->
     <bool name="config_nightLightAdjSupported">false</bool>
-    <bool name="config_opr_brt_control_available">true</bool>
+    <!-- <bool name="config_opr_brt_control_available">true</bool>
     <bool name="config_opr_hdr_brt_control_available">true</bool>
     <bool name="config_smd_effect">true</bool>
-    <bool name="config_support_hbm">true</bool>
+    <bool name="config_support_hbm">true</bool> -->
     <bool name="support_video_hdr_mode">true</bool>
 </resources>
