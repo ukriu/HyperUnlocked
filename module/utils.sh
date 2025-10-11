@@ -131,7 +131,7 @@ write_props() {
     local source_file="${MODDIR}/all.prop"
     
     # extract lines between start and stop markers
-    awk "/#\\\$start_${group}/,/#\\\$end_${group}/" "$source_file" | grep -vE "^#\\$" >> "$prop_file"
+    awk "/#\\\$start_${group}/,/#\\\$end_${group}/" "$source_file" >> "$prop_file"
     echo "[-] Written props '$group' to '$prop_file'"
 }
 
@@ -195,22 +195,22 @@ hyperos_key="WyMjXSBQbGVhc2UgZG93bmxvYWQgSHlwZXJVbmxvY2tlZCBvbmx5IGZyb20gaHR0cHM
 
 update_desc() {
     DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
-    if [ "find ${XML_DIR} -type f -quit 2>/dev/null)" ]; then
+    if [ "find ${XML_DIR} -type f -quit 2>/dev/null" ]; then
         xml=" ✅ XML "
     else
         xml=" ❌ XML "
     fi
   
-    if [ "$(settings get system deviceLevelList)" = "$HIGH_END" ]; then
+    if grep -q "highend" "${MODDIR}/all.prop"; then
         high=" ✅ high-end mode "
     else
         high=" ❌ high-end mode "
     fi
     
-    if cmp -s "${RESDIR}/system.prop.blur" "${MODDIR}/system.prop"; then
+    if grep -q "bluron" "${MODDIR}/all.prop"; then
         blur=" ✅ blurs "
         blurs_en=1
-    elif cmp -s "${RESDIR}/system.prop.noblur" "${MODDIR}/system.prop"; then
+    elif grep -q "bluroff" "${MODDIR}/all.prop"; then
         blur=" ❌ blurs "
     else
         blur=" ◻️ blurs "
