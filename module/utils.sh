@@ -195,22 +195,22 @@ hyperos_key="WyMjXSBQbGVhc2UgZG93bmxvYWQgSHlwZXJVbmxvY2tlZCBvbmx5IGZyb20gaHR0cHM
 
 update_desc() {
     DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
-    if [ "find ${XML_DIR} -type f -quit 2>/dev/null" ]; then
+    if ls "${XML_DIR}"/*.xml &> /dev/null; then
         xml=" ✅ XML "
     else
         xml=" ❌ XML "
     fi
   
-    if grep -q "highend" "${MODDIR}/all.prop"; then
+    if grep -q "highend" "${MODDIR}/system.prop"; then
         high=" ✅ high-end mode "
     else
         high=" ❌ high-end mode "
     fi
     
-    if grep -q "bluron" "${MODDIR}/all.prop"; then
+    if grep -q "bluron" "${MODDIR}/system.prop"; then
         blur=" ✅ blurs "
         blurs_en=1
-    elif grep -q "bluroff" "${MODDIR}/all.prop"; then
+    elif grep -q "bluroff" "${MODDIR}/system.prop"; then
         blur=" ❌ blurs "
     else
         blur=" ◻️ blurs "
