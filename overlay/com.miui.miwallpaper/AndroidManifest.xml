@@ -3,7 +3,7 @@
     <overlay 
         android:isStatic="true" 
         android:priority="9999" 
-        android:targetPackage="com.miui.wallpaper"/>
+        android:targetPackage="com.miui.miwallpaper"/>
     <application 
         android:extractNativeLibs="false" 
         android:hasCode="false" 
