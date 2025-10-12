@@ -9,6 +9,7 @@ on:
       - 'module/**'
       - 'update.json'
       - 'overlay/**'
+      - 'tools/**'
   workflow_dispatch:
     inputs:
       force_release:
@@ -63,14 +64,16 @@ jobs:
       - name: Build Overlays
         run: |
           cd ./overlay
-          export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+          export LD_LIBRARY_PATH=../tools:$LD_LIBRARY_PATH
+          export PATH=../tools:$PATH
           for folder in ./*; do
               [ -d "$folder" ] || continue
               FOLDER_NAME=$(basename "$folder")
-              ./aapt package -f -F "HyperUnlocked-${FOLDER_NAME}-unalign.apk" -M "${folder}/AndroidManifest.xml" -S "${folder}/res" -I ./android.jar
-              ./zipalign -f -p -v 4 "HyperUnlocked-${FOLDER_NAME}-unalign.apk" "HyperUnlocked-${FOLDER_NAME}.apk"
+              aapt package -f -F "HyperUnlocked-${FOLDER_NAME}-unalign.apk" -M "${folder}/AndroidManifest.xml" -S "${folder}/res" -I ../tools/android.jar
+              zipalign -f -p -v 4 "HyperUnlocked-${FOLDER_NAME}-unalign.apk" "HyperUnlocked-${FOLDER_NAME}-unsigned.apk"
+              java -jar ../tools/signapk.jar ../tools/keys/platform.x509.pem ../tools/keys/platform.pk8 "HyperUnlocked-${FOLDER_NAME}-unsigned.apk" "HyperUnlocked-${FOLDER_NAME}.apk"
           done
-          rm -f HyperUnlocked-*-unalign.apk
+          rm -f HyperUnlocked-*-unalign.apk HyperUnlocked-*-unsigned.apk
           mkdir -p ${{ env.MODULE_PATH }}/system/product/overlay
           mv HyperUnlocked-*.apk ${{ env.MODULE_PATH }}/system/product/overlay
           cd ..
