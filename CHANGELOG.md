@@ -4,6 +4,14 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 ---
 
 # Changelog:
+### v2.1.0
+- Fix Control Center flow animation.
+- Fix Always on Display to Lockscreen Linkage animation.
+- Fix some crashes when opening folders.
+- Don't use screenshot blur effect (will always be live blur).
+- Use ripple charging animation (if available).
+- Unlock Super Wallpapers.
+
 ### v2.0.0
 - Add support for ALL Xiaomi/Redmi/POCO devices running MIUI/HyperOS
 - Add support for a few more features for a few devices

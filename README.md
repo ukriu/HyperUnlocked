@@ -18,6 +18,7 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 - More battery profiles
 - More Refresh Rate Options
 - Updated control center on low ends
+- Super Wallpapers
 - And many others!
 
 ## Download:

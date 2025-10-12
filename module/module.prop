@@ -1,7 +1,7 @@
 id=HyperUnlocked
 name=HyperUnlocked
-version=v2.0.0
-versionCode=200
+version=v2.1.0
+versionCode=210
 author=ukriu
 description=Unlock high-end xiaomi features on all of your xiaomi devices!
 updateJson=https://raw.githubusercontent.com/ukriu/HyperUnlocked/main/update.json
