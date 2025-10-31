@@ -248,19 +248,25 @@ warning() {
 }
 
 qs_tiles() {
-    REQ="reduce_brightness,mictoggle,cameratoggle"
+    REQ="reduce_brightness,mictoggle,cameratoggle,custom(com.miui.securitycenter/com.miui.permcenter.settings.InvisibleModeTileService)"
     CURRENT="$(settings get secure sysui_qs_tiles)"
     UPDATED="$CURRENT"
+    MISSING=""
     for T in ${REQ//,/ }; do
-        echo "$CURRENT" | grep -q "$T" || UPDATED="$UPDATED,$T"
+        echo "$CURRENT" | grep -q "$T" || MISSING="$MISSING,$T"
     done
-    UPDATED="$(echo "$UPDATED" | sed 's/^,//')"
-    if [ "$UPDATED" != "$CURRENT" ]; then
-        settings put secure sysui_qs_tiles "$UPDATED"
-        echo "[-] Added unavailable QS tiles."
-    else
+    [ -z "$MISSING" ] && {
         echo "[-] Extra QS tiles already present."
+        return
+    }
+    MISSING="${MISSING#,}"
+    if echo "$CURRENT" | grep -q ",edit"; then
+        UPDATED="$(echo "$CURRENT" | sed "s|,edit|,$MISSING,edit|")"
+    else
+        UPDATED="$CURRENT,$MISSING"
     fi
+    settings put secure sysui_qs_tiles "$UPDATED"
+    echo "[-] Added unavailable QS tiles."
 }
 
 xml_init() {
