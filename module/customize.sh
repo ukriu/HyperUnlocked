@@ -19,6 +19,7 @@ save_deviceLevelList
 blur_choice
 highend_choice
 define_props
+qs_tiles
 xml_init
 update_desc
 warning

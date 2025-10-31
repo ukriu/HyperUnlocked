@@ -247,6 +247,22 @@ warning() {
     done
 }
 
+qs_tiles() {
+    REQ="reduce_brightness,mictoggle,cameratoggle"
+    CURRENT="$(settings get secure sysui_qs_tiles)"
+    UPDATED="$CURRENT"
+    for T in ${REQ//,/ }; do
+        echo "$CURRENT" | grep -q "$T" || UPDATED="$UPDATED,$T"
+    done
+    UPDATED="$(echo "$UPDATED" | sed 's/^,//')"
+    if [ "$UPDATED" != "$CURRENT" ]; then
+        settings put secure sysui_qs_tiles "$UPDATED"
+        echo "[-] Added unavailable QS tiles."
+    else
+        echo "[-] Extra QS tiles already present."
+    fi
+}
+
 xml_init() {
     # remove old xmls
     rm -rf $XML_SPACE
