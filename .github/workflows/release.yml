@@ -2,8 +2,6 @@ name: Release
 
 on:
   push:
-    branches:
-      - main
     paths:
       - '.github/workflows/release.yml'
       - 'module/**'
