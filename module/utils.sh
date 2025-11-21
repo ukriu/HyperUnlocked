@@ -1,29 +1,23 @@
 #!/bin/sh
 # Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
 # Read LICENSE_NOTICE.txt for further info.
-set_variables() {
-    PATH=/data/adb/ap/bin:/data/adb/ksu/bin:/data/adb/magisk:$PATH
-    RESDIR=/data/adb/HyperUnlocked
-    mkdir -p $RESDIR
-    XML_SPACE="$RESDIR/xml"
-    mkdir -p $XML_SPACE
-    DEFAULT_XMLDIR=/system/product/etc/device_features
-    DEVICE_CODENAME=$(getprop ro.product.device)
-    CUR_DEVICE_LEVEL_LIST=$(su -c "settings get system deviceLevelList")
-    SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
-    HIGH_END="v:1,c:3,g:3"
-    target="bW9kdWxlLnByb3AK"
-    MODDIR="${MODPATH:-/data/adb/modules/HyperUnlocked}"
-    XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
-    B6="busybox base64 -d"
-    DEVICE_CODENAME=$(getprop ro.product.device)
-    bypass_hyperos_restrict true
-}
 
-initalise() {
-    mv "${MODDIR}/system.prop.noblur" "${RESDIR}"
-    mv "${MODDIR}/system.prop.blur" "${RESDIR}"
-}
+PATH=/data/adb/ap/bin:/data/adb/ksu/bin:/data/adb/magisk:$PATH
+RESDIR=/data/adb/HyperUnlocked
+mkdir -p $RESDIR
+XML_SPACE="$RESDIR/xml"
+mkdir -p $XML_SPACE
+DEFAULT_XMLDIR=/system/product/etc/device_features
+DEVICE_CODENAME=$(getprop ro.product.device)
+CUR_DEVICE_LEVEL_LIST=$(su -c "settings get system deviceLevelList")
+SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
+HIGH_END="v:1,c:3,g:3"
+target="bW9kdWxlLnByb3AK"
+MODDIR="${MODPATH:-/data/adb/modules/HyperUnlocked}"
+XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
+B6="busybox base64 -d"
+DEVICE_CODENAME=$(getprop ro.product.device)
+bypass_hyperos_restrict true
 
 check_supported() {
     if find -L "$DEFAULT_XMLDIR" -type f -name "*.xml" -quit; then
@@ -77,16 +71,7 @@ save_deviceLevelList() {
     fi
 }
 
-set_highend() {
-    echo "[-] New deviceLevelList value: $HIGH_END"
-    if su -c "settings put system deviceLevelList $HIGH_END"; then
-        echo "[-] Spoofed as high-end device."
-    else
-        echo "[-] Failed to spoof as a high-end device."
-    fi
-}
-
-# required to bypass restrictions
+# required to bypass restrictions, frfr
 hyperos_cert1="WyMjXSBUaGlzIG1vZHVsZSBoYXMgYmVlbiB0YW1wZXJlZCB3aXRoIGFuZCBNSUdIVCBCRSBNQUxXQVJFIQo="
 hyperos_cert2="WyMjXSBETyBOT1QgVFJVU1QgUkVUQVJERUQgUEVPUExFIFNURUFMSU5HIEFORCBLQU5HSU5HIE1PRFVMRVMK"
 
@@ -125,14 +110,35 @@ bypass_hyperos_restrict() {
     fi
 }
 
-write_props() {
-    local prop_file="$1"
-    local group="$2"
-    local source_file="${MODDIR}/all.prop"
-    
-    # extract lines between start and stop markers
-    awk "/#\\\$start_${group}/,/#\\\$end_${group}/" "$source_file" >> "$prop_file"
-    echo "[-] Written props '$group' to '$prop_file'"
+set_highend() {
+    echo "[-] New deviceLevelList value: $HIGH_END"
+    if su -c "settings put system deviceLevelList $HIGH_END"; then
+        echo "[-] Spoofed as high-end device."
+    else
+        echo "[-] Failed to spoof as a high-end device."
+    fi
+}
+
+add_qs_tiles() {
+    REQ="reduce_brightness,dark,saver,taplus_tile,custom_GMS,mictoggle,cameratoggle,custom(com.miui.securitycenter/com.miui.permcenter.settings.InvisibleModeTileService)"
+    CURRENT="$(settings get secure sysui_qs_tiles)"
+    UPDATED="$CURRENT"
+    MISSING=""
+    for T in ${REQ//,/ }; do
+        echo "$CURRENT" | grep -q "$T" || MISSING="$MISSING,$T"
+    done
+    [ -z "$MISSING" ] && {
+        echo "[-] Extra QS tiles already present."
+        return
+    }
+    MISSING="${MISSING#,}"
+    if echo "$CURRENT" | grep -q ",edit"; then
+        UPDATED="$(echo "$CURRENT" | sed "s|,edit|,$MISSING,edit|")"
+    else
+        UPDATED="$CURRENT,$MISSING"
+    fi
+    settings put secure sysui_qs_tiles "$UPDATED"
+    echo "[-] Added unavailable QS tiles."
 }
 
 blur_choice() {
@@ -171,6 +177,31 @@ highend_choice() {
     fi
 }
 
+qs_choice() {
+    echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
+    echo
+    echo "[?] Do you want to add extra QS Tiles?"
+    echo "[.] Tiles like Mic/Camera Toggle, Extra Dim, GMS Toggle, etc. will be added."
+    echo "[-] VOL UP [+]: YES (default)"
+    echo "[-] VOL DN [-]: NO"
+    echo
+    if detect_key_press; then
+        add_qs_tiles
+    else
+        echo "[-] Skipped Extra QS tiles."
+    fi
+}
+
+write_props() {
+    local prop_file="$1"
+    local group="$2"
+    local source_file="${MODDIR}/all.prop"
+    
+    # extract lines between start and stop markers
+    awk "/#\\\$start_${group}/,/#\\\$end_${group}/" "$source_file" >> "$prop_file"
+    echo "[-] Written props '$group' to '$prop_file'"
+}
+
 define_props() {
     if [ ! -f "${MODDIR}/all.prop" ]; then
         echo $hyperos_key | $B6
@@ -192,82 +223,6 @@ define_props() {
 # ahem, required to bypass some restrictions
 hyperos_auth="YXV0aG9yPXVrcml1Cg=="
 hyperos_key="WyMjXSBQbGVhc2UgZG93bmxvYWQgSHlwZXJVbmxvY2tlZCBvbmx5IGZyb20gaHR0cHM6Ly9naXRodWIuY29tL3Vrcml1L0h5cGVyVW5sb2NrZWQK"
-
-update_desc() {
-    DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
-    if ls "${XML_DIR}"/*.xml &> /dev/null; then
-        xml=" ✅ XML "
-    else
-        xml=" ❌ XML "
-    fi
-  
-    if grep -q "highend" "${MODDIR}/system.prop"; then
-        high=" ✅ high-end mode "
-    else
-        high=" ❌ high-end mode "
-    fi
-    
-    if grep -q "bluron" "${MODDIR}/system.prop"; then
-        blur=" ✅ blurs "
-        blurs_en=1
-    elif grep -q "bluroff" "${MODDIR}/system.prop"; then
-        blur=" ❌ blurs "
-    else
-        blur=" ◻️ blurs "
-    fi
-    
-    NEW_DESC="[${DEVICE_CODENAME}][${xml}][${high}][${blur}] ${DEFAULT_DESC}"
-    sed "s/^description=.*/description=${NEW_DESC}/g" $MODDIR/module.prop > $MODDIR/module.prop.tmp
-    cat $MODDIR/module.prop.tmp > $MODDIR/module.prop
-    rm -f $MODDIR/module.prop.tmp
-}
-
-# this was required since adv textures sometimes broke ui for some devices
-# now that devices are not added manually, it might be better to disable
-# adv textures on all installs and promt the user to enable it manually
-warning() {
-    lagadv="gold iron beryl citrine amethyst"
-    noadv="malachite garnet sapphire sapphiren"
-    
-    for lagad in $lagadv; do
-        if [ "$DEVICE_CODENAME" = "$lagad" ]; then
-            if [ "$blurs_en" = "1" ]; then
-                echo "[-] Turn OFF \`Advanced Textures\` to help with lag!"
-            fi
-            return 0
-        fi
-    done
-    
-    for noad in $noadv; do
-        if [ "$DEVICE_CODENAME" = "$noad" ]; then
-            echo "[-] Turn OFF \`Advanced Textures\` to avoid visual glitches!"
-            settings put secure background_blur_enable 0
-            return 0
-        fi
-    done
-}
-
-qs_tiles() {
-    REQ="reduce_brightness,mictoggle,cameratoggle,custom(com.miui.securitycenter/com.miui.permcenter.settings.InvisibleModeTileService)"
-    CURRENT="$(settings get secure sysui_qs_tiles)"
-    UPDATED="$CURRENT"
-    MISSING=""
-    for T in ${REQ//,/ }; do
-        echo "$CURRENT" | grep -q "$T" || MISSING="$MISSING,$T"
-    done
-    [ -z "$MISSING" ] && {
-        echo "[-] Extra QS tiles already present."
-        return
-    }
-    MISSING="${MISSING#,}"
-    if echo "$CURRENT" | grep -q ",edit"; then
-        UPDATED="$(echo "$CURRENT" | sed "s|,edit|,$MISSING,edit|")"
-    else
-        UPDATED="$CURRENT,$MISSING"
-    fi
-    settings put secure sysui_qs_tiles "$UPDATED"
-    echo "[-] Added unavailable QS tiles."
-}
 
 xml_init() {
     # remove old xmls
@@ -379,6 +334,40 @@ set_fps() {
     changes=$((changes+1))
 }
 # passing default_indent to every func is a bit excessive so it might be better to not do that, will do later
+
+update_desc() {
+    DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
+    if ls "${XML_DIR}"/*.xml &> /dev/null; then
+        xml=" ✅ XML "
+    else
+        xml=" ❌ XML "
+    fi
+  
+    if grep -q "highend" "${MODDIR}/system.prop"; then
+        high=" ✅ high-end mode "
+    else
+        high=" ❌ high-end mode "
+    fi
+    
+    if grep -q "bluron" "${MODDIR}/system.prop"; then
+        blur=" ✅ blurs "
+        blurs_en=1
+    elif grep -q "bluroff" "${MODDIR}/system.prop"; then
+        blur=" ❌ blurs "
+    else
+        blur=" ◻️ blurs "
+    fi
+    
+    NEW_DESC="[${DEVICE_CODENAME}][${xml}][${high}][${blur}] ${DEFAULT_DESC}"
+    sed "s/^description=.*/description=${NEW_DESC}/g" $MODDIR/module.prop > $MODDIR/module.prop.tmp
+    cat $MODDIR/module.prop.tmp > $MODDIR/module.prop
+    rm -f $MODDIR/module.prop.tmp
+}
+
+warning() {
+    #settings put secure background_blur_enable 1
+    echo "[-] Turn OFF Advanced Textures to avoid visual glitches/lag (on some devices)."
+}
 
 credits() {
     echo "[-] HyperUnlocked by ukriu"

@@ -3,7 +3,6 @@
 # Read LICENSE_NOTICE.txt for further info.
 . ./utils.sh
 
-set_variables
 check_supported
 disable_incompatible_modules
 blur_choice

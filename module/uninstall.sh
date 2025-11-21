@@ -3,7 +3,6 @@
 # Read LICENSE_NOTICE.txt for further info.
 . ./utils.sh
 
-set_variables
 restore_deviceLevelList
 rm -r /data/adb/HyperUnlocked/xml
 settings put secure background_blur_enable 0

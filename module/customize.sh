@@ -11,8 +11,6 @@ fi
 export MODPATH
 . $MODPATH/utils.sh
 
-set_variables
-initalise
 check_supported
 disable_incompatible_modules
 save_deviceLevelList
