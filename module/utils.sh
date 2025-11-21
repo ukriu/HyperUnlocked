@@ -271,7 +271,7 @@ update_file() {
     
     if [ "$changes" -gt 0 ]; then
         busybox sed -i -f "$tmp_sed" "$xml_file"
-        echo "[-] $changes changes applied."
+        echo "[-] $changes new changes applied."
     else
         echo "[-] no XML changes needed."
     fi
@@ -312,25 +312,48 @@ set_fps() {
     tmp_sed="$2"
     fps_list="$3"
     default_indent="$4"
-    
-    # remove fpsList block
+
+    # find existing fpsList block
     start_line=$(busybox grep -n "<integer-array name=\"fpsList\">" "$xml_file" | busybox cut -d: -f1 | busybox head -n 1)
     if [ -n "$start_line" ]; then
         end_line=$(busybox grep -n "</integer-array>" "$xml_file" | busybox cut -d: -f1 | busybox awk -v s="$start_line" '$1 > s {print; exit}')
-        if [ -n "$end_line" ]; then
-            echo "${start_line},${end_line}d" >> "$tmp_sed"
-            #echo "[-] DEBUG: removed old fpsList"
-            changes=$((changes+1))
+    else
+        end_line=""
+    fi
+
+    # if block exists, extract existing fps and compare sets
+    if [ -n "$start_line" ] && [ -n "$end_line" ]; then
+        # extract fps list
+        existing_list=$(busybox sed -n "${start_line},${end_line}p" "$xml_file" | busybox awk -F'[<>]' '/<item>/{print $3}' | busybox tr -s '\n' ' ' | busybox sed 's/^ *//;s/ *$//')
+
+        #tmp function
+        normalize() {
+            # one value per line, sort numeric, uniq, join back to space-separated
+            echo "$1" | busybox tr ' ' '\n' | busybox awk 'NF' | busybox sort -n | busybox uniq | busybox tr '\n' ' ' | busybox sed 's/ $//'
+        }
+
+        existing_norm=$(normalize "$existing_list")
+        desired_norm=$(normalize "$fps_list")
+
+        if [ "$existing_norm" = "$desired_norm" ]; then
+            # no change required
+            return 0
         fi
     fi
-    
+
+    # if this happens then either block is missing or sets differ
+    # remove old fps list
+    if [ -n "$start_line" ] && [ -n "$end_line" ]; then
+        echo "${start_line},${end_line}d" >> "$tmp_sed"
+        changes=$((changes+1))
+    fi
+
     # make new fpsList block before features end
     echo "/<\/features>/i ${default_indent}<integer-array name=\"fpsList\">" >> "$tmp_sed"
     for fps in $fps_list; do
         echo "/<\/features>/i ${default_indent}${default_indent}<item>$fps</item>" >> "$tmp_sed"
     done
     echo "/<\/features>/i ${default_indent}</integer-array>" >> "$tmp_sed"
-    #echo "[-] DEBUG: added new fpsList: $fps_list"
     changes=$((changes+1))
 }
 # passing default_indent to every func is a bit excessive so it might be better to not do that, will do later
