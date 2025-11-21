@@ -8,11 +8,12 @@ disable_incompatible_modules
 blur_choice
 highend_choice
 define_props
-qs_tiles
+qs_choice
 xml_init
 update_desc
 warning
 credits
+
 echo
 echo "[!!] A reboot is required for changes to blur."
 echo

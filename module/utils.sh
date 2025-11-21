@@ -120,7 +120,7 @@ set_highend() {
 }
 
 add_qs_tiles() {
-    REQ="reduce_brightness,dark,saver,taplus_tile,custom_GMS,mictoggle,cameratoggle,custom(com.miui.securitycenter/com.miui.permcenter.settings.InvisibleModeTileService)"
+    REQ="reduce_brightness,saver,taplus_tile,custom_GMS,mictoggle,cameratoggle,custom(com.miui.securitycenter/com.miui.permcenter.settings.InvisibleModeTileService)"
     CURRENT="$(settings get secure sysui_qs_tiles)"
     UPDATED="$CURRENT"
     MISSING=""
