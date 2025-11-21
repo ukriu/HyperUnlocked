@@ -15,9 +15,9 @@ warning
 credits
 
 echo
-echo "[!!] A reboot is required for changes to blur."
+echo "[!!] A reboot is required for some changes."
 echo
-sleep 3 # let the masses read
+sleep 1 # let the masses read
 exit 0
 
 # EOF

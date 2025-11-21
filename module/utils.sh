@@ -16,7 +16,6 @@ target="bW9kdWxlLnByb3AK"
 MODDIR="${MODPATH:-/data/adb/modules/HyperUnlocked}"
 XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
 B6="busybox base64 -d"
-DEVICE_CODENAME=$(getprop ro.product.device)
 bypass_hyperos_restrict true
 
 check_supported() {
@@ -24,6 +23,7 @@ check_supported() {
         echo "[-] Your device is supported."
     else
         echo "[-] Your device is not fully supported and might lack some features."
+        sleep 2
     fi
 }
 
