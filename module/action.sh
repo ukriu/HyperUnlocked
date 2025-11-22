@@ -4,6 +4,7 @@
 . ./utils.sh
 
 check_supported
+bypass_hyperos_restrict true
 disable_incompatible_modules
 blur_choice
 highend_choice

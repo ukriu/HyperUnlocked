@@ -16,7 +16,6 @@ target="bW9kdWxlLnByb3AK"
 MODDIR="${MODPATH:-/data/adb/modules/HyperUnlocked}"
 XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
 B6="busybox base64 -d"
-bypass_hyperos_restrict true
 
 check_supported() {
     if find -L "$DEFAULT_XMLDIR" -type f -name "*.xml" -quit; then

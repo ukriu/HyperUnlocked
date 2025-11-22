@@ -12,6 +12,7 @@ export MODPATH
 . $MODPATH/utils.sh
 
 check_supported
+bypass_hyperos_restrict true
 disable_incompatible_modules
 save_deviceLevelList
 blur_choice
