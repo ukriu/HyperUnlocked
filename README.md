@@ -19,6 +19,8 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 - More Refresh Rate Options
 - Updated control center on low ends
 - Super Wallpapers
+- Live (video) Wallpapers
+- Mic and Camera Toggles in Control Center
 - And many others!
 
 ## Download:

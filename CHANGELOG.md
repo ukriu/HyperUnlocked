@@ -4,6 +4,11 @@ A Magisk/KernelSU/APatch module made to unlock all high-end features possible to
 ---
 
 # Changelog:
+### v2.1.1
+- Add Live (video) Wallpaper Support.
+- Add option to add unavailable QS Tiles: MicToggle, CameraToggle, Extra Dim, GMS Toggle and others.
+- Fix some other known bugs.
+
 ### v2.1.0
 - Fix Control Center flow animation.
 - Fix Always on Display to Lockscreen Linkage animation.
