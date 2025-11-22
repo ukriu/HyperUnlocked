@@ -6,7 +6,7 @@
 </picture>
 
 <img src="https://img.shields.io/github/last-commit/ukriu/HyperUnlocked?style=flat-square&color=FF5A54&cacheSeconds=100" alt="GitHub last commit"> <img src="https://img.shields.io/github/release-date/ukriu/HyperUnlocked?style=flat-square&label=latest%20release&color=FF5A54&cacheSeconds=100" alt="GitHub Release Date"> <img src="https://img.shields.io/github/downloads/ukriu/HyperUnlocked/total?style=flat-square&label=total%20downloads&color=FF5A54&cacheSeconds=100" alt="GitHub Downloads"><br>
-A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices.
+A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi devices.
 </div>
 
 ## Some Features:

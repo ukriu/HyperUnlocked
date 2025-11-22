@@ -29,7 +29,7 @@ jobs:
         id: setup
         run: |
           MODULE_NAME="HyperUnlocked"
-          MODULE_DESC="A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices."
+          MODULE_DESC="A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi devices."
           CHANGELOG_FILE="$(pwd)/CHANGELOG.md"
           MODULE_PATH=$(pwd)/module/
           

@@ -1,5 +1,5 @@
 ##  HyperUnlocked
-A Magisk/KernelSU/APatch module made to unlock all high-end features possible to be unlocked on low-end xiaomi devices.
+A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi devices.
 
 ---
 

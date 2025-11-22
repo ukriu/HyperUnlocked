@@ -358,7 +358,7 @@ set_fps() {
 # passing default_indent to every func is a bit excessive so it might be better to not do that, will do later
 
 update_desc() {
-    DEFAULT_DESC="Unlock high-end xiaomi features on all of your xiaomi devices!"
+    DEFAULT_DESC="Unlock high-end Xiaomi features on all of your Xiaomi devices!"
     if ls "${XML_DIR}"/*.xml &> /dev/null; then
         xml=" ✅ XML "
     else
