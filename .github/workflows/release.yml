@@ -82,17 +82,18 @@ jobs:
           sed -i "s/^\(version=\)\(.*\)/\1\2_${{ env.CURRENT_VERSION_CODE }}-${{ env.COMMIT_ID }}/" ./debug_module/module.prop
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ env.ZIP_NAME }}
           path: debug_module/**
+          compression-level: 9
 
       - name: Compressing files
         if: ${{ env.version_changed == 'true' || inputs.force_release }}
         run: |
           echo "Compressing files..."
           cd ${{ env.MODULE_PATH }}
-          zip -r ${{ env.ZIP_NAME }}.zip *
+          zip -r -9 ${{ env.ZIP_NAME }}.zip *
           echo "Created zip file: ${{ env.ZIP_NAME }}.zip"
           mv *.zip ../
 
