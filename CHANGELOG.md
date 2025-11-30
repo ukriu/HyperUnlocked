@@ -4,6 +4,10 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ---
 
 # Changelog:
+### v2.1.2
+- Support Call Recording for all devices on Mi Dialer.
+- Fix bootloops on HyperOS 3 by temporarily not unlocking full screen AOD.
+
 ### v2.1.1
 - Add Live (video) Wallpaper Support.
 - Add option to add unavailable QS Tiles: MicToggle, CameraToggle, Extra Dim, GMS Toggle and others.
