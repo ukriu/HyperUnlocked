@@ -2,7 +2,7 @@
 # Read LICENSE_NOTICE.txt for further info.
 
 #$start_basic
-persist.sys.advanced_visual_release=3
+persist.sys.advanced_visual_release=4
 persist.sys.power.default.powermode=1
 #persist.sys.textureview_optimization.enable=true
 ro.config.low_ram.middle.threshold_gb=0
