@@ -34,8 +34,8 @@ ro.surface_flinger.supports_background_blur=1
 #$end_bluron
 
 #$start_highend
-persist.sys.computility.gpulevel=4
-persist.sys.computility.cpulevel=4
+persist.sys.computility.gpulevel=5
+persist.sys.computility.cpulevel=5
 #$end_highend
 
 #$start_bluroff
