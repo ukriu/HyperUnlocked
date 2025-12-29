@@ -7,15 +7,23 @@ RESDIR=/data/adb/HyperUnlocked
 mkdir -p $RESDIR
 XML_SPACE="$RESDIR/xml"
 mkdir -p $XML_SPACE
-DEFAULT_XMLDIR=/system/product/etc/device_features
 DEVICE_CODENAME=$(getprop ro.product.device)
 CUR_DEVICE_LEVEL_LIST=$(su -c "settings get system deviceLevelList")
 SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
 HIGH_END="v:1,c:3,g:3"
 target="bW9kdWxlLnByb3AK"
 MODDIR="${MODPATH:-/data/adb/modules/HyperUnlocked}"
-XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
 B6="busybox base64 -d"
+
+if ls /system/product/etc/device_features/*.xml >/dev/null 2>&1; then
+    DEFAULT_XMLDIR=/system/product/etc/device_features
+elif ls /system/etc/device_features/*.xml >/dev/null 2>&1; then
+    DEFAULT_XMLDIR=/system/etc/device_features
+elif ls /system/system/etc/device_features/*.xml >/dev/null 2>&1; then
+    DEFAULT_XMLDIR=/system/system/etc/device_features
+fi
+
+XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
 
 check_supported() {
     if find -L "$DEFAULT_XMLDIR" -type f -name "*.xml" -quit; then
@@ -34,7 +42,7 @@ disable_incompatible_modules() {
         if [ -d "$dir" ]; then
             module_name=$(basename "$dir")
             [ "$module_name" = "HyperUnlocked" ] && continue
-            if [ -f "${dir}/system/product/etc/device_features/${DEVICE_CODENAME}.xml" ]; then
+            if [ -f "${dir}${DEFAULT_XMLDIR}/${DEVICE_CODENAME}.xml" ]; then
                 found_incompatible=true
                 echo "[-] Incompatible module: \`$module_name\`"
                 if touch "$dir/disable"; then
