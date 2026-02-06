@@ -4,6 +4,11 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ---
 
 # Changelog:
+### v2.1.3
+- Support older MIUI versions for XML changes.
+- Glassy Blur in HyperOS3
+Note: I still haven't recieved HOS3 for my device and am unable to test any fixes/new features, I really don't have any way to look for new features to add.
+
 ### v2.1.2
 - Support Call Recording for all devices on Mi Dialer.
 - Fix bootloops on HyperOS 3 by temporarily not unlocking full screen AOD.
