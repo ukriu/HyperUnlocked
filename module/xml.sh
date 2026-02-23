@@ -207,14 +207,14 @@ integer_1="support_inner_record support_widevine_l1"
 string_game_enhance_fisr="game_enhance_feature_name"
 
 # remove full screen aod for hos3 since it bootloops on some devices.
-case "$(getprop ro.build.fingerprint)" in
-  Xiaomi/*/*:*/*/OS3.*:user/release-keys | \
-  Redmi/*/*:*/*/OS3.*:user/release-keys | \
-  POCO/*/*:*/*/OS3.*:user/release-keys)
-    echo "[-] Device is in HyperOS 3. Full Screen AOD support will not be changed temporarily."
-    aod_bools_true="$(printf '%s\n' "$aod_bools_true" | awk '$0 != "support_aod_fullscreen"')"
-    ;;
-  *)
-    # nothing
-    ;;
-esac
+#case "$(getprop ro.build.fingerprint)" in
+#  Xiaomi/*/*:*/*/OS3.*:user/release-keys | \
+#  Redmi/*/*:*/*/OS3.*:user/release-keys | \
+#  POCO/*/*:*/*/OS3.*:user/release-keys)
+#    echo "[-] Device is in HyperOS 3. Full Screen AOD support will not be changed temporarily."
+#    aod_bools_true="$(printf '%s\n' "$aod_bools_true" | awk '$0 != "support_aod_fullscreen"')"
+#    ;;
+#  *)
+#    # nothing
+#    ;;
+#esac
