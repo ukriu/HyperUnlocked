@@ -5,7 +5,7 @@
 
 restore_deviceLevelList
 rm -r /data/adb/HyperUnlocked/xml
-settings put secure background_blur_enable 0
+#settings put secure background_blur_enable 0
 exit 0
 
 # EOF
