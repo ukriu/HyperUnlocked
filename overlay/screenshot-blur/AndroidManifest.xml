@@ -2,7 +2,7 @@
           package="com.ukriu.hyperunlocked.ssblur.overlay">
     <overlay 
         android:isStatic="true" 
-        android:priority="99999" 
+        android:priority="9999" 
         android:targetPackage="com.android.systemui"/>
     <application 
         android:extractNativeLibs="false" 

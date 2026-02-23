@@ -2,7 +2,7 @@
           package="com.ukriu.hyperunlocked.systemui.overlay">
     <overlay 
         android:isStatic="true" 
-        android:priority="9999" 
+        android:priority="9998" 
         android:targetPackage="com.android.systemui"/>
     <application 
         android:extractNativeLibs="false" 
