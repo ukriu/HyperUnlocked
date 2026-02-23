@@ -148,6 +148,19 @@ add_qs_tiles() {
     echo "[-] Added unavailable QS tiles."
 }
 
+remove_ssblur() {
+    if [ -f "$MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
+        cp $MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk $RESDIR/
+        rm $MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk
+    fi
+}
+
+add_ssblur() {
+    if [ ! -f "$MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
+        cp "$RESDIR/HyperUnlocked-screenshot-blur.apk" "$MODPATH/system/product/overlay/"
+    fi
+}
+
 blur_choice() {
     echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
     echo
@@ -181,6 +194,24 @@ highend_choice() {
         echo "[-] High-End mode removed."
         CHOICE_HE=false
         restore_deviceLevelList
+    fi
+}
+
+ssblur_choice() {
+    echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
+    echo
+    echo "[?] Do you want to enable Screenshot Blur?"
+    echo "[.] Screenshot Blur is more performant than live blur in CC/NS pannel."
+    echo "[.] This is recommended for devices which don't have much performance and still want smooth blurs."
+    echo "[-] VOL UP [+]: NO (default)"
+    echo "[-] VOL DN [-]: YES"
+    echo
+    if detect_key_press; then
+        remove_ssblur
+        echo "[-] Skipped Screenshot Blur."
+    else
+        add_ssblur
+        echo "[-] Screenshot Blur Enabled."
     fi
 }
 
@@ -386,6 +417,12 @@ update_desc() {
         blur=" ❌ blurs "
     else
         blur=" ◻️ blurs "
+    fi
+
+    if [ -f "$MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
+        ssblur=" ✅ ssblur "
+    else
+        ssblur=" ◻️ ssblur "
     fi
     
     NEW_DESC="[${DEVICE_CODENAME}][${xml}][${high}][${blur}] ${DEFAULT_DESC}"

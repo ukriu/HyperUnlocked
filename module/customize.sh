@@ -18,6 +18,7 @@ save_deviceLevelList
 blur_choice
 highend_choice
 define_props
+ssblur_choice
 qs_choice
 xml_init
 update_desc
