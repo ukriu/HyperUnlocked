@@ -159,6 +159,8 @@ add_ssblur() {
     if [ ! -f "$MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
         cp "$RESDIR/HyperUnlocked-screenshot-blur.apk" "$MODPATH/system/product/overlay/"
     fi
+    #turn off adv textures cause of a visual bug where the bg of objects disappears with ssblur
+    settings put secure background_blur_enable 0
 }
 
 blur_choice() {
