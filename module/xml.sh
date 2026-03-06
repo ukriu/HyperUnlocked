@@ -96,7 +96,6 @@ is_xiaomi
 is_xiaomi_device
 support_24bit_record
 support_AI_display
-support_ai_task
 support_android_flashlight
 support_app_hiding
 support_ar_core
@@ -117,7 +116,6 @@ support_displayfeature_gamemode_HDR
 support_dolby
 support_dolby_version_brighten
 support_erase_external_storage
-support_extreme_battery_saver
 support_feedback_level
 support_fm
 support_front_beauty_mfnr
