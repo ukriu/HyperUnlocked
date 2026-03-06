@@ -265,12 +265,22 @@ hyperos_auth="YXV0aG9yPXVrcml1Cg=="
 hyperos_key="WyMjXSBQbGVhc2UgZG93bmxvYWQgSHlwZXJVbmxvY2tlZCBvbmx5IGZyb20gaHR0cHM6Ly9naXRodWIuY29tL3Vrcml1L0h5cGVyVW5sb2NrZWQK"
 
 xml_init() {
-    # remove old xmls
+    #backup default xml files
+    if [ -d "$XML_SPACE" ]; then
+        mkdir -p $RESDIR/bakxml
+        su -c "cp -r ${DEFAULT_XMLDIR}/* $RESDIR/bakxml/"
+    fi
+    # remove old edited xmls
     rm -rf $XML_SPACE
     echo "[-] Creating custom XML"
     # not running this in a su subshell fails for some reason
     mkdir -p $XML_SPACE
-    su -c "cp -r ${DEFAULT_XMLDIR}/* $XML_SPACE/"
+    # use def xml for every new edit if available
+    if [ -d "$RESDIR/bakxml" ]; then
+        su -c "cp -r $RESDIR/bakxml/* $XML_SPACE/"
+    else
+        su -c "cp -r ${DEFAULT_XMLDIR}/* $XML_SPACE/"
+    fi
     . "$MODDIR/xml.sh"
     
     find "$XML_SPACE" -type f -name "*.xml" | while read -r xml_file; do
