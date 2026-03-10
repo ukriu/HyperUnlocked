@@ -28,14 +28,14 @@ ro.launcher.blur.appLaunch=1
 ro.miui.has_blur=1
 ro.miui.has_real_blur=1
 ro.sf.blurs_are_caro=0
-sf.blurs_are_expensive=1
-ro.sf.blurs_are_expensive=1
+sf.blurs_are_expensive=0
+ro.sf.blurs_are_expensive=0
 ro.surface_flinger.supports_background_blur=1
 #$end_bluron
 
 #$start_highend
-persist.sys.computility.gpulevel=5
-persist.sys.computility.cpulevel=5
+persist.sys.computility.gpulevel=6
+persist.sys.computility.cpulevel=6
 #$end_highend
 
 #$start_bluroff
@@ -52,9 +52,9 @@ persist.sys.sf.disable_blurs=true
 ro.launcher.blur.appLaunch=0
 ro.miui.has_blur=0
 ro.miui.has_real_blur=0
-ro.sf.blurs_are_caro=0
-sf.blurs_are_expensive=0
-ro.sf.blurs_are_expensive=0
+ro.sf.blurs_are_caro=1
+sf.blurs_are_expensive=1
+ro.sf.blurs_are_expensive=1
 ro.surface_flinger.supports_background_blur=0
 #$end_bluroff
 
