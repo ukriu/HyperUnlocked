@@ -4,6 +4,12 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ---
 
 # Changelog:
+### v2.1.4
+- Fix heavy blur for some devices.
+- Add back full screen aod for HyperOS 3. (Still disabled for some devices, if your device doesn't work with fullscreen aod then enter safemode and remove the module and create an issue and report it.)
+- Add a toggle to enable Screenshot Blur.
+Note: ssblur is not supported with advanced textures enabled and may break.
+
 ### v2.1.3
 - Support older MIUI versions for XML changes.
 - Glassy Blur in HyperOS3
