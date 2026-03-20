@@ -4,6 +4,11 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ---
 
 # Changelog:
+### v2.1.5
+- Fix Ultra Battery Saver and (physical) AI Button options.
+- Fix bootloops from `v2.1.4`.
+- ONLY allow fullscreen AOD on HyperOS 3 IF device is confimed to support it.
+
 ### v2.1.4
 - Fix heavy blur for some devices.
 - Add back full screen aod for HyperOS 3. (Still disabled for some devices, if your device doesn't work with fullscreen aod then enter safemode and remove the module and create an issue and report it.)
