@@ -1,0 +1,223 @@
+@import './theme.css';
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    background: var(--color-background);
+    color: var(--color-on-background);
+    padding-top: calc(var(--inset-top) + 12px);
+    padding-bottom: calc(var(--inset-bottom) + 18px);
+}
+
+main {
+    width: min(860px, 100%);
+    margin: 0 auto;
+    padding: 0 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.header {
+    background: var(--color-surface-container-high);
+    border-radius: 24px;
+    padding: 18px;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 8px 0 0;
+    color: var(--color-on-surface-variant);
+    font-size: 0.9rem;
+}
+
+.card {
+    background: var(--color-surface-container);
+    border: 1px solid color-mix(in srgb, var(--color-outline) 24%, transparent);
+    border-radius: 24px;
+    padding: 16px;
+}
+
+.card h2 {
+    margin: 0 0 12px;
+    font-size: 1rem;
+}
+
+.row {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-outline) 20%, transparent);
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.row-title {
+    font-weight: 600;
+}
+
+.row-description {
+    margin-top: 2px;
+    font-size: 0.82rem;
+    color: var(--color-on-surface-variant);
+}
+
+.switch {
+    appearance: none;
+    width: 46px;
+    height: 28px;
+    border-radius: 999px;
+    position: relative;
+    background: var(--color-surface-variant);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.switch::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-on-surface-variant);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.switch:checked {
+    background: color-mix(in srgb, var(--color-primary) 34%, var(--color-surface-variant));
+}
+
+.switch:checked::after {
+    transform: translateX(18px);
+    background: var(--color-primary);
+}
+
+.select {
+    min-width: 155px;
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1px solid color-mix(in srgb, var(--color-outline) 38%, transparent);
+    background: var(--color-surface-container-highest);
+    color: var(--color-on-surface);
+}
+
+.button-group {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 999px;
+    padding: 11px 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-tonal {
+    background: var(--color-secondary-container);
+    color: var(--color-on-secondary-container);
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.btn-danger {
+    background: color-mix(in srgb, var(--color-error) 25%, var(--color-surface-container-high));
+    color: var(--color-error);
+}
+
+.terminal {
+    background: var(--color-surface-container-highest);
+    border-radius: 16px;
+    border: 1px solid color-mix(in srgb, var(--color-outline) 24%, transparent);
+    padding: 12px;
+    min-height: 200px;
+    max-height: 320px;
+    overflow: auto;
+    margin-top: 10px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.terminal-line.error {
+    color: var(--color-error);
+}
+
+.terminal-line.command {
+    color: var(--color-tertiary);
+}
+
+.hint {
+    margin: 12px 0 0;
+    font-size: 0.8rem;
+    color: var(--color-on-surface-variant);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.warning-banner {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid color-mix(in srgb, var(--color-error) 40%, transparent);
+    background: color-mix(in srgb, var(--color-error) 14%, var(--color-surface-container-high));
+    color: var(--color-on-surface);
+    font-size: 0.82rem;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: color-mix(in srgb, #000 35%, transparent);
+}
+
+.modal {
+    width: min(460px, 100%);
+    border-radius: 20px;
+    padding: 16px;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.modal-description {
+    margin: 10px 0 0;
+    color: var(--color-on-surface-variant);
+    font-size: 0.88rem;
+}
+
+.modal-actions {
+    justify-content: flex-end;
+}

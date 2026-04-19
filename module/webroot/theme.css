@@ -1,0 +1,71 @@
+@import url('https://mui.kernelsu.org/internal/insets.css');
+@import url('https://mui.kernelsu.org/internal/colors.css');
+
+:root {
+    --inset-top: var(--window-inset-top, 0px);
+    --inset-bottom: var(--window-inset-bottom, 0px);
+
+    --color-primary: var(--primary, #6750A4);
+    --color-on-primary: var(--onPrimary, #FFFFFF);
+    --color-primary-container: var(--primaryContainer, #EADDFF);
+    --color-on-primary-container: var(--onPrimaryContainer, #21005D);
+
+    --color-secondary: var(--secondary, #625B71);
+    --color-on-secondary: var(--onSecondary, #FFFFFF);
+    --color-secondary-container: var(--secondaryContainer, #E8DEF8);
+    --color-on-secondary-container: var(--onSecondaryContainer, #1D192B);
+
+    --color-tertiary: var(--tertiary, #7D5260);
+    --color-on-tertiary: var(--onTertiary, #FFFFFF);
+    --color-tertiary-container: var(--tertiaryContainer, #FFD8E4);
+    --color-on-tertiary-container: var(--onTertiaryContainer, #31111D);
+
+    --color-error: var(--error, #B3261E);
+    --color-on-error: var(--onError, #FFFFFF);
+
+    --color-background: var(--background, #FEF7FF);
+    --color-on-background: var(--onBackground, #1D1B20);
+    --color-surface: var(--surface, #FEF7FF);
+    --color-on-surface: var(--onSurface, #1D1B20);
+    --color-surface-variant: var(--surfaceVariant, #E7E0EC);
+    --color-on-surface-variant: var(--onSurfaceVariant, #49454F);
+
+    --color-outline: var(--outline, #79747E);
+    --color-surface-container: var(--surfaceContainer, #F3EDF7);
+    --color-surface-container-high: var(--surfaceContainerHigh, #ECE6F0);
+    --color-surface-container-highest: var(--surfaceContainerHighest, #E6E0E9);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primary: var(--primary, #D0BCFF);
+        --color-on-primary: var(--onPrimary, #381E72);
+        --color-primary-container: var(--primaryContainer, #4F378B);
+        --color-on-primary-container: var(--onPrimaryContainer, #EADDFF);
+
+        --color-secondary: var(--secondary, #CCC2DC);
+        --color-on-secondary: var(--onSecondary, #332D41);
+        --color-secondary-container: var(--secondaryContainer, #4A4458);
+        --color-on-secondary-container: var(--onSecondaryContainer, #E8DEF8);
+
+        --color-tertiary: var(--tertiary, #EFB8C8);
+        --color-on-tertiary: var(--onTertiary, #492532);
+        --color-tertiary-container: var(--tertiaryContainer, #633B48);
+        --color-on-tertiary-container: var(--onTertiaryContainer, #FFD8E4);
+
+        --color-error: var(--error, #F2B8B5);
+        --color-on-error: var(--onError, #601410);
+
+        --color-background: var(--background, #141218);
+        --color-on-background: var(--onBackground, #E6E0E9);
+        --color-surface: var(--surface, #141218);
+        --color-on-surface: var(--onSurface, #E6E0E9);
+        --color-surface-variant: var(--surfaceVariant, #49454F);
+        --color-on-surface-variant: var(--onSurfaceVariant, #CAC4D0);
+
+        --color-outline: var(--outline, #938F99);
+        --color-surface-container: var(--surfaceContainer, #211F26);
+        --color-surface-container-high: var(--surfaceContainerHigh, #2B2930);
+        --color-surface-container-highest: var(--surfaceContainerHighest, #36343B);
+    }
+}
