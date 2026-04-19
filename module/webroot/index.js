@@ -314,7 +314,7 @@ function handleTitleClick() {
         titleClickCount = 0;
         showWarningModal({
             title: 'Hello there!',
-            description: 'Made by ukriu :3',
+            description: 'Made by ukriu :3\noh and webui also by dvop i guess',
         });
         return;
     }
