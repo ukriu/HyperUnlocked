@@ -23,11 +23,39 @@
 
             <div class="row">
                 <div>
+                    <div class="row-title">Device level list</div>
+                    <div class="row-description">Choose level from v:1,c:1,g:1 to v:1,c:3,g:3.</div>
+                </div>
+                <select id="deviceLevelSelect" class="select"
+                    onchange="executeShell('sh webui.sh set device_level ' + this.value, { source: this })">
+                    <option value="v:1,c:1,g:1">v:1,c:1,g:1</option>
+                    <option value="v:1,c:1,g:2">v:1,c:1,g:2</option>
+                    <option value="v:1,c:1,g:3">v:1,c:1,g:3</option>
+                    <option value="v:1,c:2,g:1">v:1,c:2,g:1</option>
+                    <option value="v:1,c:2,g:2">v:1,c:2,g:2</option>
+                    <option value="v:1,c:2,g:3">v:1,c:2,g:3</option>
+                    <option value="v:1,c:3,g:1">v:1,c:3,g:1</option>
+                    <option value="v:1,c:3,g:2">v:1,c:3,g:2</option>
+                    <option value="v:1,c:3,g:3">v:1,c:3,g:3</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div>
                     <div class="row-title">System blur</div>
                     <div class="row-description">Enable/disable blur related props.</div>
                 </div>
                 <input id="blurToggle" class="switch" type="checkbox"
                     onchange="executeShell(this.checked ? 'sh webui.sh set blur true' : 'sh webui.sh set blur false', { source: this })">
+            </div>
+
+            <div class="row">
+                <div>
+                    <div class="row-title">High-End mode props</div>
+                    <div class="row-description">Enable/disable high-end related props.</div>
+                </div>
+                <input id="highendToggle" class="switch" type="checkbox"
+                    onchange="executeShell(this.checked ? 'sh webui.sh set highend true' : 'sh webui.sh set highend false', { source: this })">
             </div>
 
             <div class="row">
@@ -46,25 +74,6 @@
                 </div>
                 <input id="leicaToggle" class="switch" type="checkbox"
                     onchange="executeShell(this.checked ? 'sh webui.sh set leica true' : 'sh webui.sh set leica false', { source: this })">
-            </div>
-
-            <div class="row">
-                <div>
-                    <div class="row-title">Device level list</div>
-                    <div class="row-description">Choose level from v:1,c:1,g:1 to v:1,c:3,g:3.</div>
-                </div>
-                <select id="deviceLevelSelect" class="select"
-                    onchange="executeShell('sh webui.sh set device_level ' + this.value, { source: this })">
-                    <option value="v:1,c:1,g:1">v:1,c:1,g:1</option>
-                    <option value="v:1,c:1,g:2">v:1,c:1,g:2</option>
-                    <option value="v:1,c:1,g:3">v:1,c:1,g:3</option>
-                    <option value="v:1,c:2,g:1">v:1,c:2,g:1</option>
-                    <option value="v:1,c:2,g:2">v:1,c:2,g:2</option>
-                    <option value="v:1,c:2,g:3">v:1,c:2,g:3</option>
-                    <option value="v:1,c:3,g:1">v:1,c:3,g:1</option>
-                    <option value="v:1,c:3,g:2">v:1,c:3,g:2</option>
-                    <option value="v:1,c:3,g:3">v:1,c:3,g:3</option>
-                </select>
             </div>
 
             <div class="button-group">

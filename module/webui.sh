@@ -89,6 +89,14 @@ detect_current_blur() {
     fi
 }
 
+detect_current_highend() {
+    if [ -f "$MODDIR/system.prop" ] && grep -q "\$start_highend" "$MODDIR/system.prop"; then
+        echo "true"
+    else
+        echo "false"
+    fi
+}
+
 detect_current_ssblur() {
     if [ -f "$MODDIR/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
         echo "true"
@@ -126,7 +134,7 @@ set_value_cmd() {
     fi
 
     case "$setting" in
-        blur|screenshot_blur|extra_tiles|leica)
+        blur|screenshot_blur|extra_tiles|leica|highend)
             if ! is_bool "$value"; then
                 warn "Invalid value '$value' for '$setting'. Use true/false."
                 return 1
@@ -162,9 +170,10 @@ apply_cmd() {
         return 0
     fi
 
-    current_blur="$(detect_current_blur)"
-    current_ssblur="$(detect_current_ssblur)"
     current_level="$(detect_current_device_level)"
+    current_blur="$(detect_current_blur)"
+    current_highend="$(detect_current_highend)"
+    current_ssblur="$(detect_current_ssblur)"
     current_leica="$(detect_current_leica)"
     leica="$(get_config_entry leica "$current_leica")"
     if ! is_bool "$leica"; then
@@ -174,6 +183,11 @@ apply_cmd() {
     blur="$(get_config_entry blur "$current_blur")"
     if ! is_bool "$blur"; then
         warn "Invalid staged blur value."
+        return 1
+    fi
+    highend="$(get_config_entry highend "$current_highend")"
+    if ! is_bool "$blur"; then
+        warn "Invalid staged highend value."
         return 1
     fi
     ssblur="$(get_config_entry screenshot_blur "$current_ssblur")"
@@ -198,6 +212,14 @@ apply_cmd() {
     else
         CHOICE_BLUR=false
         log "Blurs: disabled"
+    fi
+
+    if [ "$highend" = "true" ]; then
+        CHOICE_HE=true
+        log "High-end props: enabled"
+    else
+        CHOICE_HE=false
+        log "High-end props: disabled"
     fi
 
     if [ "$device_level" = "default" ]; then
