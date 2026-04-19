@@ -272,16 +272,20 @@ status_cmd() {
     module_version="$(read_module_prop version 2>/dev/null)"
     module_version_code="$(read_module_prop versionCode 2>/dev/null)"
 
-    current_blur="$(detect_current_blur)"
-    current_ssblur="$(detect_current_ssblur)"
     current_level="$(detect_current_device_level)"
+    current_blur="$(detect_current_blur)"
+    current_highend="$(detect_current_highend)"
+    current_ssblur="$(detect_current_ssblur)"
+    current_leica="$(detect_current_leica)"
 
     # coulf be that user running script outside the module maybe
     [ -n "$module_version" ] && echo "version=$module_version"
     [ -n "$module_version_code" ] && echo "versionCode=$module_version_code"
-    echo "current.blur=$current_blur"
-    echo "current.screenshot_blur=$current_ssblur"
     echo "current.device_level=$current_level"
+    echo "current.blur=$current_blur"
+    echo "current.highend=$current_highend"
+    echo "current.screenshot_blur=$current_ssblur"
+    echo "current.leica=$current_leica"
 
     if [ -f "$CONFIG_FILE" ] && [ -s "$CONFIG_FILE" ]; then
         echo "pending.config=true"
