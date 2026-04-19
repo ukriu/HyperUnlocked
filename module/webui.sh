@@ -73,6 +73,14 @@ get_config_entry() {
     fi
 }
 
+detect_current_leica() {
+    if [ -f "$MODDIR/system.prop" ] && grep -q "\$start_leica" "$MODDIR/system.prop"; then
+        echo "true"
+    else
+        echo "false"
+    fi
+}
+
 detect_current_blur() {
     if [ -f "$MODDIR/system.prop" ] && grep -q "\$start_bluroff" "$MODDIR/system.prop"; then
         echo "false"
@@ -157,6 +165,12 @@ apply_cmd() {
     current_blur="$(detect_current_blur)"
     current_ssblur="$(detect_current_ssblur)"
     current_level="$(detect_current_device_level)"
+    current_leica="$(detect_current_leica)"
+    leica="$(get_config_entry leica "$current_leica")"
+    if ! is_bool "$leica"; then
+        warn "Invalid staged leica value."
+        return 1
+    fi
     blur="$(get_config_entry blur "$current_blur")"
     if ! is_bool "$blur"; then
         warn "Invalid staged blur value."
@@ -196,6 +210,14 @@ apply_cmd() {
             return 1
         fi
         log "Device level: $device_level"
+    fi
+
+    if [ "$leica" = "true" ]; then
+        CHOICE_LEICA=true
+        log "Leica Spoof: enabled"
+    else
+        CHOICE_LEICA=false
+        log "Leica Spoof: disabled"
     fi
 
     if ! define_props; then

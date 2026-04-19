@@ -63,3 +63,9 @@ ro.surface_flinger.supports_background_blur=0
 is.hyper.ukriu.supported=1
 #persist.device_config.runtime_native.usap_pool_enabled=true
 #$end_experimental
+
+#$start_leica
+ro.theme_customize=LCC
+ro.theme_leica=true
+camera.debug.safe.check.disable=true
+#$end_leica

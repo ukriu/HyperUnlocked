@@ -261,6 +261,10 @@ define_props() {
     else
         write_props "${MODDIR}/system.prop" "bluroff"
     fi
+    if [ "$CHOICE_LEICA" = true ]; then
+        write_props "${MODDIR}/system.prop" "leica"
+        pm clear com.android.camera
+    fi
 }
 
 # ahem, required to bypass some restrictions

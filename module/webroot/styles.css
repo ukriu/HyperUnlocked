@@ -221,3 +221,7 @@ button {
 .modal-actions {
     justify-content: flex-end;
 }
+
+#warningModalDescription {
+  white-space: pre-line;
+}

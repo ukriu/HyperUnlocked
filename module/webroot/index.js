@@ -9,7 +9,7 @@ const COMMAND_WARNINGS = [
     {
         pattern: /^sh\s+webui\.sh\s+set\s+leica\s+true$/,
         title: 'Warning',
-        description: 'LEICA Camera Spoof only works if your camera is the latest version. This feature has only been tested on Xiaomi 17 Series. Continue?',
+        description: 'LEICA Camera Spoof only works if your camera is the latest version.\nThis feature has only been tested on Xiaomi 17 Series and WILL clear camera app data.\nContinue?',
     },
 ];
 
