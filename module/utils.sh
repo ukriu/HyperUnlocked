@@ -29,7 +29,7 @@ log() {
     echo "[-] $*"
 }
 warn() {
-    echo "[!] $*" >&2
+    echo "[!] $*"
 }
 
 check_supported() {
