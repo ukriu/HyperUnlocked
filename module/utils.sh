@@ -25,17 +25,24 @@ fi
 
 XML_DIR="${MODDIR}${DEFAULT_XMLDIR}"
 
+log() {
+    echo "[-] $*"
+}
+warn() {
+    echo "[!] $*" >&2
+}
+
 check_supported() {
     if find -L "$DEFAULT_XMLDIR" -type f -name "*.xml" -quit; then
-        echo "[-] Your device is supported."
+        log "Your device is supported."
     else
-        echo "[-] Your device is not fully supported and might lack some features."
+        log "Your device is not fully supported and might lack some features."
         sleep 2
     fi
 }
 
 disable_incompatible_modules() {
-    echo "[-] Checking for incompatible modules..."
+    log "Checking for incompatible modules..."
     found_incompatible=false
     
     for dir in /data/adb/modules/*; do
@@ -44,12 +51,12 @@ disable_incompatible_modules() {
             [ "$module_name" = "HyperUnlocked" ] && continue
             if [ -f "${dir}${DEFAULT_XMLDIR}/${DEVICE_CODENAME}.xml" ]; then
                 found_incompatible=true
-                echo "[-] Incompatible module: \`$module_name\`"
+                log "Incompatible module: \`$module_name\`"
                 if touch "$dir/disable"; then
-                    echo "[-] Disabled: \`$module_name\`"
+                    log "Disabled: \`$module_name\`"
                 else
-                    echo "[-] Failed to disable \`$module_name\`"
-                    echo "[-] Please uninstall the module to prevent issues."
+                    log "Failed to disable \`$module_name\`"
+                    log "Please uninstall the module to prevent issues."
                     sleep 0.3
                 fi
             fi
@@ -57,24 +64,24 @@ disable_incompatible_modules() {
     done
     
     if [ "$found_incompatible" = false ]; then
-        echo "[-] No incompatible modules found."
+        log "No incompatible modules found."
     else
-        echo "[-] Please uninstall the disabled modules later!"
+        log "Please uninstall the disabled modules later!"
     fi
 }
 
 save_deviceLevelList() {
     if [ -s "$RESDIR/default_deviceLevelList.txt" ]; then
-        echo "[-] The deviceLevelList backup already exists. ($(cat $RESDIR/default_deviceLevelList.txt))"
+        log "The deviceLevelList backup already exists. ($(cat $RESDIR/default_deviceLevelList.txt))"
         return
     fi
     
     if [ -z "$CUR_DEVICE_LEVEL_LIST" ] || [ "$CUR_DEVICE_LEVEL_LIST" = "null" ]; then
-        echo "[-] Failed to retrieve deviceLevelList."
-        echo "[-] Continuing without backup value."
+        log "Failed to retrieve deviceLevelList."
+        log "Continuing without backup value."
     else
         echo "$CUR_DEVICE_LEVEL_LIST" > "$RESDIR/default_deviceLevelList.txt"
-        echo "[-] Default deviceLevelList: $(cat "$RESDIR/default_deviceLevelList.txt")"
+        log "Default deviceLevelList: $(cat "$RESDIR/default_deviceLevelList.txt")"
     fi
 }
 
@@ -85,12 +92,12 @@ hyperos_cert2="WyMjXSBETyBOT1QgVFJVU1QgUkVUQVJERUQgUEVPUExFIFNURUFMSU5HIEFORCBLQ
 restore_deviceLevelList() {
     if [ -f "$RESDIR/default_deviceLevelList.txt" ]; then
         if su -c "settings put system deviceLevelList $SAV_DEVICE_LEVEL_LIST"; then
-            echo "[-] Restored deviceLevelList: $SAV_DEVICE_LEVEL_LIST"
+            log "Restored deviceLevelList: $SAV_DEVICE_LEVEL_LIST"
         else
-            echo "[-] Failed to restore deviceLevelList."
+            log "Failed to restore deviceLevelList."
         fi
     else
-        echo "[-] No deviceLevelList backup found."
+        log "No deviceLevelList backup found."
     fi
 }
 
@@ -101,7 +108,7 @@ detect_key_press() {
     case "$line" in
         *KEY_VOLUMEUP*)   return 0 ;; # YES
         *KEY_VOLUMEDOWN*) return 1 ;; # NO
-        *) echo "[-] No key pressed within $timeout_seconds seconds. Choosing default.."
+        *) log "No key pressed within $timeout_seconds seconds. Choosing default.."
            return 0 ;;
     esac
 }
@@ -118,11 +125,11 @@ bypass_hyperos_restrict() {
 }
 
 set_highend() {
-    echo "[-] New deviceLevelList value: $HIGH_END"
+    log "New deviceLevelList value: $HIGH_END"
     if su -c "settings put system deviceLevelList $HIGH_END"; then
-        echo "[-] Spoofed as high-end device."
+        log "Spoofed as high-end device."
     else
-        echo "[-] Failed to spoof as a high-end device."
+        log "Failed to spoof as a high-end device."
     fi
 }
 
@@ -135,7 +142,7 @@ add_qs_tiles() {
         echo "$CURRENT" | grep -q "$T" || MISSING="$MISSING,$T"
     done
     [ -z "$MISSING" ] && {
-        echo "[-] Extra QS tiles already present."
+        log "Extra QS tiles already present."
         return
     }
     MISSING="${MISSING#,}"
@@ -145,7 +152,7 @@ add_qs_tiles() {
         UPDATED="$CURRENT,$MISSING"
     fi
     settings put secure sysui_qs_tiles "$UPDATED"
-    echo "[-] Added unavailable QS tiles."
+    log "Added unavailable QS tiles."
 }
 
 remove_ssblur() {
@@ -164,71 +171,71 @@ add_ssblur() {
 }
 
 blur_choice() {
-    echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
+    warn "(default) option will be selected if no key presses are found in 10 seconds."
     echo
     echo "[?] Do you want to blurs across the system?"
     echo "[.] Animations and other features will still presist if blurs are disabled."
-    echo "[-] VOL UP [+]: YES (default)"
-    echo "[-] VOL DN [-]: NO"
+    log "VOL UP [+]: YES (default)"
+    log "VOL DN [-]: NO"
     echo
     if detect_key_press; then
-        echo "[-] Blurs selected."
+        log "Blurs selected."
         CHOICE_BLUR=true
     else
-        echo "[-] Blurs removed."
+        log "Blurs removed."
         CHOICE_BLUR=false
     fi
 }
 
 highend_choice() {
-    echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
+    warn "(default) option will be selected if no key presses are found in 10 seconds."
     echo
     echo "[?] Do you want enable high-end mode?"
     echo "[.] Animations and other resource intensive features will be affected."
-    echo "[-] VOL UP [+]: YES (default)"
-    echo "[-] VOL DN [-]: NO"
+    log "VOL UP [+]: YES (default)"
+    log "VOL DN [-]: NO"
     echo
     if detect_key_press; then
-        echo "[-] High-End mode selected."
+        log "High-End mode selected."
         CHOICE_HE=true
         set_highend
     else
-        echo "[-] High-End mode removed."
+        log "High-End mode removed."
         CHOICE_HE=false
         restore_deviceLevelList
     fi
 }
 
 ssblur_choice() {
-    echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
+    warn "(default) option will be selected if no key presses are found in 10 seconds."
     echo
     echo "[?] Do you want to enable Screenshot Blur?"
     echo "[.] Screenshot Blur is more performant than live blur in CC/NS pannel."
     echo "[.] This is recommended for devices which don't have much performance and still want smooth blurs."
-    echo "[-] VOL UP [+]: NO (default)"
-    echo "[-] VOL DN [-]: YES"
+    log "VOL UP [+]: NO (default)"
+    log "VOL DN [-]: YES"
     echo
     if detect_key_press; then
         remove_ssblur
-        echo "[-] Skipped Screenshot Blur."
+        log "Skipped Screenshot Blur."
     else
         add_ssblur
-        echo "[-] Screenshot Blur Enabled."
+        log "Screenshot Blur Enabled."
     fi
 }
 
 qs_choice() {
-    echo "[!] (default) option will be selected if no key presses are found in 10 seconds."
+    warn "(default) option will be selected if no key presses are found in 10 seconds."
     echo
     echo "[?] Do you want to add extra QS Tiles?"
     echo "[.] Tiles like Mic/Camera Toggle, Extra Dim, GMS Toggle, etc. will be added."
-    echo "[-] VOL UP [+]: YES (default)"
-    echo "[-] VOL DN [-]: NO"
+    log "VOL UP [+]: YES (default)"
+    log "VOL DN [-]: NO"
     echo
     if detect_key_press; then
         add_qs_tiles
     else
-        echo "[-] Skipped Extra QS tiles."
+        log "Skipped Extra QS tiles."
     fi
 }
 
@@ -239,14 +246,10 @@ write_props() {
     
     # extract lines between start and stop markers
     awk "/#\\\$start_${group}/,/#\\\$end_${group}/" "$source_file" >> "$prop_file"
-    echo "[-] Written props '$group' to '$prop_file'"
+    log "Written props '$group' to '$prop_file'"
 }
 
 define_props() {
-    if [ ! -f "${MODDIR}/all.prop" ]; then
-        echo $hyperos_key | $B6
-        exit 1
-    fi
     head -n 3 ${MODDIR}/all.prop > ${MODDIR}/system.prop
     write_props "${MODDIR}/system.prop" "basic"
     write_props "${MODDIR}/system.prop" "experimental"
@@ -272,7 +275,7 @@ xml_init() {
     fi
     # remove old edited xmls
     rm -rf $XML_SPACE
-    echo "[-] Creating custom XML"
+    log "Creating custom XML"
     # not running this in a su subshell fails for some reason
     mkdir -p $XML_SPACE
     # use def xml for every new edit if available
@@ -295,7 +298,7 @@ xml_init() {
 
 update_file() {
     xml_file="$1"
-    echo "[!] editing: $xml_file"
+    warn "editing: $xml_file"
     touch $RESDIR/tmpsed.txt
     tmp_sed="$RESDIR/tmpsed.txt"
     changes=0
@@ -321,9 +324,9 @@ update_file() {
     
     if [ "$changes" -gt 0 ]; then
         busybox sed -i -f "$tmp_sed" "$xml_file"
-        echo "[-] $changes new changes applied."
+        log "$changes new changes applied."
     else
-        echo "[-] no XML changes needed."
+        log "no XML changes needed."
     fi
     
     rm -f "$tmp_sed"
@@ -344,15 +347,15 @@ process_prop_list() {
             if [ "$current_val" != "$value" ]; then
                 echo "s|^[[:space:]]*<$value_type[[:space:]]\{1,\}name=['\"]$prop['\"][^>]*>.*</$value_type>|${default_indent}<$value_type name=\"$prop\">$value</$value_type>|" >> "$tmp_sed"
                 changes=$((changes+1))
-            #    echo "[-] DEBUG: set $prop to $value"
+            #    log "DEBUG: set $prop to $value"
             #else
-            #    echo "[-] DEBUG: $prop already $value"
+            #    log "DEBUG: $prop already $value"
             fi
         else
             # add missing prop before features
             echo "/<\/features>/i $default_indent<$value_type name=\"$prop\">$value</$value_type>" >> "$tmp_sed"
             changes=$((changes+1))
-            #echo "[-] DEBUG: added $prop as $value"
+            #log "DEBUG: added $prop as $value"
         fi
     done
 }
@@ -445,13 +448,13 @@ update_desc() {
 
 warning() {
     #settings put secure background_blur_enable 1
-    echo "[-] Turn OFF Advanced Textures to avoid visual glitches/lag (on some devices)."
+    log "Turn OFF Advanced Textures to avoid visual glitches/lag (on some devices)."
 }
 
 credits() {
-    echo "[-] HyperUnlocked by ukriu"
-    echo "[-] Check me out at \`ukriu.com\`!"
-    echo "[-] Ɛ: Thank you for using HyperUnlocked! :3"
+    log "HyperUnlocked by ukriu"
+    log "Check me out at \`ukriu.com\`!"
+    log "Ɛ: Thank you for using HyperUnlocked! :3"
 }
 
 # EOF
