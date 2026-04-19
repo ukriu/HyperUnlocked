@@ -156,11 +156,13 @@ function resolveDeviceLevelValue(status, defaultLevels) {
 
 function syncControlsFromStatus(status) {
     const blurToggle = document.getElementById('blurToggle');
+    const highendToggle = document.getElementById('highendToggle');
     const screenshotBlurToggle = document.getElementById('screenshotBlurToggle');
     const leicaToggle = document.getElementById('leicaToggle');
     const deviceLevelSelect = document.getElementById('deviceLevelSelect');
 
     if (blurToggle) blurToggle.checked = isTrue(getEffectiveStatusValue(status, 'blur'));
+    if (highendToggle) highendToggle.checked = isTrue(getEffectiveStatusValue(status, 'highend'));
     if (screenshotBlurToggle) screenshotBlurToggle.checked = isTrue(getEffectiveStatusValue(status, 'screenshot_blur'));
     if (leicaToggle) leicaToggle.checked = isTrue(getEffectiveStatusValue(status, 'leica'));
 
