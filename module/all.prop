@@ -11,6 +11,7 @@ ro.miui.has_handy_mode_sf=1
 is.hyper.unlck=1
 vendor.perf.framepacing.enable=true
 persist.sys.sf_charge_anim_supported=true
+ro.product.camera.livephoto.support=3
 #$end_basic
 
 #$start_bluron
