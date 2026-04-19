@@ -11,6 +11,11 @@ const COMMAND_WARNINGS = [
         title: 'Warning',
         description: 'LEICA Camera Spoof only works if your camera is the latest version.\nThis feature has only been tested on Xiaomi 17 Series and WILL clear camera app data.\nContinue?',
     },
+    {
+        pattern: /^reboot$/,
+        title: 'Warning',
+        description: 'Your device WILL reboot.',
+    }
 ];
 
 const state = {
@@ -157,7 +162,7 @@ function resolveDeviceLevelValue(status, defaultLevels) {
 function syncControlsFromStatus(status) {
     const blurToggle = document.getElementById('blurToggle');
     const highendToggle = document.getElementById('highendToggle');
-    const screenshotBlurToggle = document.getElementById('screenshotBlurToggle');
+    const screeshotBlurToggle = document.getElementById('screenshotBlurToggle');
     const leicaToggle = document.getElementById('leicaToggle');
     const deviceLevelSelect = document.getElementById('deviceLevelSelect');
 
@@ -215,8 +220,13 @@ function ensureWarningModalClosed() {
     if (modal) modal.classList.add('hidden');
 }
 
+function setMainBlur(enabled) {
+    document.querySelector('main')?.classList.toggle('blurred', enabled);
+}
+
 function closeWarningModal(confirmed) {
     ensureWarningModalClosed();
+    setMainBlur(false);
 
     const resolver = state.warningResolver;
     state.warningResolver = null;
@@ -240,6 +250,7 @@ function showWarningModal({ title, description }) {
     modalTitle.textContent = title;
     modalDescription.textContent = description;
     modal.classList.remove('hidden');
+    setMainBlur(true);
 
     return new Promise((resolve) => {
         state.warningResolver = resolve;

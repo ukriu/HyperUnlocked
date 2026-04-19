@@ -222,6 +222,11 @@ button {
     justify-content: flex-end;
 }
 
+main.blurred {
+    filter: blur(4px);
+    transition: filter 0.2s ease;
+}
+
 #warningModalDescription {
   white-space: pre-line;
 }
