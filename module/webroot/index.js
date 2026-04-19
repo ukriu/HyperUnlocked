@@ -292,6 +292,29 @@ async function initWebUI() {
     await refreshStatus({ silent: false });
 }
 
+let titleClickCount = 0;
+let titleClickTimer = null;
+
+function handleTitleClick() {
+    titleClickCount++;
+    clearTimeout(titleClickTimer);
+
+    if (titleClickCount >= 4) {
+        titleClickCount = 0;
+        showWarningModal({
+            title: 'Hello there!',
+            description: 'Made by ukriu :3',
+        });
+        return;
+    }
+
+    titleClickTimer = setTimeout(() => {
+        titleClickCount = 0;
+    }, 1000);
+}
+
+window.handleTitleClick = handleTitleClick;
+
 window.executeShell = executeShell;
 window.clearTerminal = clearTerminal;
 window.initWebUI = initWebUI;
