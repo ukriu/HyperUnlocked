@@ -77,7 +77,6 @@
             </div>
 
             <div class="button-group">
-                <button class="btn-tonal" onclick="executeShell('sh webui.sh set extra_tiles true')">Queue additional QS tiles</button>
                 <button class="btn-primary" onclick="executeShell('sh webui.sh apply')">Apply staged settings</button>
                 <button class="btn-danger" onclick="executeShell('sh webui.sh clear')">Clear staged settings</button>
             </div>
@@ -95,6 +94,19 @@
                 <button class="btn-tonal" onclick="executeShell('sh webui.sh status')">Show current status</button>
                 <button class="btn-danger" onclick="clearTerminal()">Clear terminal view</button>
             </div>
+        </section>
+
+        <section class="card">
+            <h2>Extra</h2>
+            <div class="button-group">
+                <button class="btn-danger" onclick="executeShell('sh webui.sh extra_tiles all')">Add ALL additional QS tiles</button>
+                <button class="btn-tonal" onclick="executeShell('sh webui.sh extra_tiles custom mictoggle')">Add Mic Toggle tile</button>
+                <button class="btn-tonal" onclick="executeShell('sh webui.sh extra_tiles custom cameratoggle')">Add Camera Toggle tile</button>
+                <button class="btn-tonal" onclick="executeShell('sh webui.sh extra_tiles custom reduce_brightness')">Add Extra Dim tile</button>
+                <button class="btn-tonal" onclick="executeShell('sh webui.sh extra_tiles custom saver')">Add Data Saver tile</button>
+                <button class="btn-tonal" onclick="executeShell('sh webui.sh extra_tiles custom taplus_tile')">Add taplus tile</button>
+            </div>
+            <p class="hint">Some of these will only work in global versions, CN needs testing.</p>
         </section>
     </main>
 

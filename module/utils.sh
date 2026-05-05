@@ -134,7 +134,21 @@ set_highend() {
 }
 
 add_qs_tiles() {
-    REQ="reduce_brightness,saver,taplus_tile,custom_GMS,mictoggle,cameratoggle,custom(com.miui.securitycenter/com.miui.permcenter.settings.InvisibleModeTileService)"
+    case "$1" in
+        all)
+            REQ="reduce_brightness,saver,taplus_tile,custom_GMS,mictoggle,cameratoggle,custom(com.miui.securitycenter/com.miui.permcenter.settings.InvisibleModeTileService)"
+            ;;
+        "")
+            REQ="reduce_brightness,saver,taplus_tile,custom_GMS,mictoggle,cameratoggle,custom(com.miui.securitycenter/com.miui.permcenter.settings.InvisibleModeTileService)"
+            ;;
+        custom)
+            REQ="$2"
+            ;;
+        *)
+            log "use the func correctly"
+            return 1
+            ;;
+    esac
     CURRENT="$(settings get secure sysui_qs_tiles)"
     UPDATED="$CURRENT"
     MISSING=""

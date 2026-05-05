@@ -16,7 +16,9 @@ Usage:
 Settings:
   blur true|false
   screenshot_blur true|false
-  extra_tiles true|false
+  highend true|false
+  leica true|false
+  extra_tiles all|custom (key)
   device_level v:1,c:1,g:1 .. v:1,c:3,g:3 (or default)
 EOF
 }
@@ -134,7 +136,7 @@ set_value_cmd() {
     fi
 
     case "$setting" in
-        blur|screenshot_blur|extra_tiles|leica|highend)
+        blur|screenshot_blur|leica|highend)
             if ! is_bool "$value"; then
                 warn "Invalid value '$value' for '$setting'. Use true/false."
                 return 1
@@ -195,11 +197,6 @@ apply_cmd() {
         warn "Invalid staged screenshot_blur value."
         return 1
     fi
-    extra_tiles="$(get_config_entry extra_tiles false)"
-    if ! is_bool "$extra_tiles"; then
-        warn "Invalid staged extra_tiles value."
-        return 1
-    fi
     device_level="$(get_config_entry device_level "$current_level")"
     if ! is_device_level "$device_level"; then
         warn "Invalid staged device_level value."
@@ -253,10 +250,6 @@ apply_cmd() {
     else
         remove_ssblur
         log "Screenshot blur: disabled"
-    fi
-
-    if [ "$extra_tiles" = "true" ]; then
-        add_qs_tiles
     fi
 
     update_desc
@@ -313,6 +306,9 @@ shift 2>/dev/null
 case "$command" in
     set)
         set_value_cmd "$1" "$2"
+        ;;
+    extra_tiles)
+        add_qs_tiles "$1" "$2"
         ;;
     apply)
         apply_cmd
