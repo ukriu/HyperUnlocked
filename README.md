@@ -26,6 +26,12 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ## Download:
 - [github.com/ukriu/HyperUnlocked/releases/latest](https://github.com/ukriu/HyperUnlocked/releases/latest)
 
+## WebUI:
+- You need KernelSU or a KernelSU fork to use WebUI.
+- If you are not on KSU then you can download any of these apps to use WebUI:  
+  • [WebUI X](https://github.com/MMRLApp/WebUI-X-Portable)  
+  • [MMRL](https://github.com/MMRLApp/MMRL)
+
 ## Notes:
 - It is possible to use this module on all MIUI/HyperOS devices, but some may not support all the unlockable features!
 - Follow the device specific instructions given while installing the module to assure a good experience.
