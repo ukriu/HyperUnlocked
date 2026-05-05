@@ -52,5 +52,5 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
     
-    Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
+    Copyright (C) 2025-2026 ukriu (Contact: contact@ukriu.com).
 ```

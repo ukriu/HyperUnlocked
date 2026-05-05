@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
+# Copyright (C) 2025-2026 ukriu (Contact: contact@ukriu.com)
 # Read LICENSE_NOTICE.txt for further info.
 
 supported_fps="$(dumpsys display | grep -oE "fps=[0-9.]+" | cut -d= -f2 | awk -F. '{print $1}' | sort -nu | xargs)"

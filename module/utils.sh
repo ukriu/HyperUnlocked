@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
+# Copyright (C) 2025-2026 ukriu (Contact: contact@ukriu.com)
 # Read LICENSE_NOTICE.txt for further info.
 
 PATH=/data/adb/ap/bin:/data/adb/ksu/bin:/data/adb/magisk:$PATH

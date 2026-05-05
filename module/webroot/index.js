@@ -1,3 +1,6 @@
+//# Copyright (C) 2025-2026 ukriu (Contact: contact@ukriu.com)
+//# Read LICENSE_NOTICE.txt for further info.
+
 import { exec, toast } from './assets/kernelsu.js';
 
 const MODULE_DIR = '/data/adb/modules/HyperUnlocked';

@@ -11,4 +11,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-Copyright (C) 2025 ukriu (Contact: contact@ukriu.com)
+Copyright (C) 2025-2026 ukriu (Contact: contact@ukriu.com).
+
+--
+
+This project also uses some Material Icons from Google.
+Material Icons are licensed under the Apache License 2.0.
+https://www.apache.org/licenses/LICENSE-2.0
