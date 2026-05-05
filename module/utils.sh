@@ -287,7 +287,7 @@ hyperos_key="WyMjXSBQbGVhc2UgZG93bmxvYWQgSHlwZXJVbmxvY2tlZCBvbmx5IGZyb20gaHR0cHM
 
 xml_init() {
     #backup default xml files
-    if [ -d "$XML_SPACE" ]; then
+    if [ ! -d "$XML_SPACE" ]; then
         mkdir -p $RESDIR/bakxml
         su -c "cp -r ${DEFAULT_XMLDIR}/* $RESDIR/bakxml/"
     fi
