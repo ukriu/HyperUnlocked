@@ -7,8 +7,9 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ### v2.2.0
 - Add a WebUI for more configuration.
 - Add LEICA Camera Spoof for some devices. (Check WebUI)
-- Add themed icons for Mic, Cam, Extra Dim, Data Saver toggles.
-Note: Use KSU for WebUI, if not possible, download WebUI-X App.
+- Add themed icons for Mic, Cam, Extra Dim, Data Saver toggles.  
+
+**Note:** Use KSU for WebUI, if not possible, download WebUI-X App.
 
 ### v2.1.5
 - Fix Ultra Battery Saver and (physical) AI Button options.
