@@ -170,15 +170,15 @@ add_qs_tiles() {
 }
 
 remove_ssblur() {
-    if [ -f "$MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
-        cp $MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk $RESDIR/
-        rm $MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk
+    if [ -f "$MODDIR/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
+        cp $MODDIR/system/product/overlay/HyperUnlocked-screenshot-blur.apk $RESDIR/
+        rm $MODDIR/system/product/overlay/HyperUnlocked-screenshot-blur.apk
     fi
 }
 
 add_ssblur() {
-    if [ ! -f "$MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
-        cp "$RESDIR/HyperUnlocked-screenshot-blur.apk" "$MODPATH/system/product/overlay/"
+    if [ ! -f "$MODDIR/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
+        cp "$RESDIR/HyperUnlocked-screenshot-blur.apk" "$MODDIR/system/product/overlay/"
     fi
     #turn off adv textures cause of a visual bug where the bg of objects disappears with ssblur
     settings put secure background_blur_enable 0
@@ -452,7 +452,7 @@ update_desc() {
         blur=" ◻️ blurs "
     fi
 
-    if [ -f "$MODPATH/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
+    if [ -f "$MODDIR/system/product/overlay/HyperUnlocked-screenshot-blur.apk" ]; then
         ssblur=" ✅ ssblur "
     else
         ssblur=" ◻️ ssblur "
