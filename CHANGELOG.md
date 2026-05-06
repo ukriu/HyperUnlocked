@@ -4,6 +4,12 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ---
 
 # Changelog:
+### v2.2.1
+- Fix Screenshot Blur toggle in WebUI.
+- Fix Module XML Backup.
+- Add a clear requirements in README.
+**Note**: A metamodule is required for HyperUnlocked to function properly on any KSU. It is recommended to install a magicmount enabled metamodule.
+
 ### v2.2.0
 - Add a WebUI for more configuration.
 - Add LEICA Camera Spoof for some devices. (Check WebUI)
