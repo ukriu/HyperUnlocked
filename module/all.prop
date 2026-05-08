@@ -37,6 +37,8 @@ ro.surface_flinger.supports_background_blur=1
 #$start_highend
 persist.sys.computility.gpulevel=6
 persist.sys.computility.cpulevel=6
+persist.sys.computility.version=2026
+persist.sys.enable_parallel_sweep=true
 #$end_highend
 
 #$start_bluroff
@@ -63,6 +65,8 @@ ro.surface_flinger.supports_background_blur=0
 #persist.sys.usap_pool_enabled=true
 is.hyper.ukriu.supported=1
 #persist.device_config.runtime_native.usap_pool_enabled=true
+persist.sys.launch_response_optimization.enable=true
+persist.sys.support_ai_wakeup_effect=true
 #$end_experimental
 
 #$start_leica
