@@ -12,6 +12,10 @@ is.hyper.unlck=1
 vendor.perf.framepacing.enable=true
 persist.sys.sf_charge_anim_supported=true
 ro.product.camera.livephoto.support=3
+
+ro.surface_flinger.has_HDR_display=true
+ro.surface_flinger.has_wide_color_display=true
+ro.surface_flinger.wcg_composition_dataspace=143261696
 #$end_basic
 
 #$start_bluron
