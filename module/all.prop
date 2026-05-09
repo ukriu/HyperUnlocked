@@ -3,19 +3,22 @@
 
 #$start_basic
 persist.sys.advanced_visual_release=4
-persist.sys.power.default.powermode=1
-#persist.sys.textureview_optimization.enable=true
 ro.config.low_ram.middle.threshold_gb=0
 ro.config.low_ram.threshold_gb=0
 ro.miui.has_handy_mode_sf=1
+ro.support_one_handed_mode=true
+ro.miui.shell_anim_enable_fcb=true
+persist.hyper.barfollow_anim=true
 is.hyper.unlck=1
-vendor.perf.framepacing.enable=true
-persist.sys.sf_charge_anim_supported=true
 ro.product.camera.livephoto.support=3
+ro.camera.sound.forced=0
 #$end_basic
 
 #$start_bluron
 persist.sys.mi_shadow_supported=true
+persist.sys.support_window_mishadow=true
+persist.sys.support_view_mishadow=true
+ro.multiwin.fulldecor_support=true
 persist.sys.support_view_smoothcorner=true
 persist.sys.support_window_smoothcorner=true
 ro.miui.backdrop_sampling_enabled=true
@@ -32,13 +35,22 @@ ro.sf.blurs_are_caro=0
 sf.blurs_are_expensive=0
 ro.sf.blurs_are_expensive=0
 ro.surface_flinger.supports_background_blur=1
+persist.sys.background_blur_setting=3
+persist.sys.launcher_blur_supported=true
 #$end_bluron
 
 #$start_highend
 persist.sys.computility.gpulevel=6
 persist.sys.computility.cpulevel=6
-persist.sys.computility.version=2026
+persist.sys.computility.version=2025
+persist.sys.computilityV2.cpulevel=3
+persist.sys.computilityV2.devicelevel=3
+persist.sys.computilityV2.gpulevel=3
+persist.sys.computilityV2.version=2026
 persist.sys.enable_parallel_sweep=true
+persist.sys.hyper_transition=true
+persist.sys.hyper_transition_v=3
+persist.sys.element_transition_supported=true
 #$end_highend
 
 #$start_bluroff
@@ -62,11 +74,15 @@ ro.surface_flinger.supports_background_blur=0
 #$end_bluroff
 
 #$start_experimental
+#persist.sys.textureview_optimization.enable=true
+#persist.sys.hwui.enable_texture_optimize=true
 #persist.sys.usap_pool_enabled=true
-is.hyper.ukriu.supported=1
 #persist.device_config.runtime_native.usap_pool_enabled=true
+is.hyper.ukriu.supported=1
 persist.sys.launch_response_optimization.enable=true
 persist.sys.support_ai_wakeup_effect=true
+persist.sys.power.default.powermode=1
+persist.sys.sf_charge_anim_supported=true
 #$end_experimental
 
 #$start_leica
