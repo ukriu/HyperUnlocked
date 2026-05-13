@@ -12,6 +12,8 @@ persist.hyper.barfollow_anim=true
 is.hyper.unlck=1
 ro.product.camera.livephoto.support=3
 ro.camera.sound.forced=0
+persist.sys.feature.island=true
+persist.sys.feature.island.animation=true
 #$end_basic
 
 #$start_bluron
@@ -35,7 +37,7 @@ ro.sf.blurs_are_caro=0
 sf.blurs_are_expensive=0
 ro.sf.blurs_are_expensive=0
 ro.surface_flinger.supports_background_blur=1
-persist.sys.background_blur_setting=3
+persist.sys.background_blur_setting=1
 persist.sys.launcher_blur_supported=true
 #$end_bluron
 
@@ -51,6 +53,7 @@ persist.sys.enable_parallel_sweep=true
 persist.sys.hyper_transition=true
 persist.sys.hyper_transition_v=3
 persist.sys.element_transition_supported=true
+persist.sys.multi_task.mask_blur_enable=true
 #$end_highend
 
 #$start_bluroff
