@@ -16,6 +16,7 @@ persist.sys.feature.island=true
 persist.sys.feature.island.animation=true
 persist.sys.translate.state.supportAiSubtitles=true
 persist.sys.translate.state.supportVoiceTrans=true
+persist.sys.partial.screenshot.support=true
 #$end_basic
 
 #$start_bluron
@@ -87,7 +88,9 @@ ro.surface_flinger.supports_background_blur=0
 is.hyper.ukriu.supported=1
 persist.sys.launch_response_optimization.enable=true
 persist.sys.support_ai_wakeup_effect=true
-persist.sys.power.default.powermode=1
+persist.sys.power.default.powermode=enhance
+persist.sys.power_meter_enhanced=true
+persist.sys.power_mode_support=true
 persist.sys.sf_charge_anim_supported=true
 #$end_experimental
 
