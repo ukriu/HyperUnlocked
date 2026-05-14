@@ -17,7 +17,7 @@ disable_incompatible_modules
 save_deviceLevelList
 blur_choice
 highend_choice
-remove_ssblur
+ssblur_choice
 define_props
 qs_choice
 xml_init
