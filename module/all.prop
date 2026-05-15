@@ -12,8 +12,6 @@ persist.hyper.barfollow_anim=true
 is.hyper.unlck=1
 ro.product.camera.livephoto.support=3
 ro.camera.sound.forced=0
-persist.sys.feature.island=true
-persist.sys.feature.island.animation=true
 persist.sys.translate.state.supportAiSubtitles=true
 persist.sys.translate.state.supportVoiceTrans=true
 persist.sys.partial.screenshot.support=true
@@ -57,7 +55,6 @@ persist.sys.hyper_transition=true
 persist.sys.hyper_transition_v=3
 persist.sys.element_transition_supported=true
 persist.sys.multi_task.mask_blur_enable=true
-persist.sys.feature.island.shader=true
 #$end_highend
 
 #$start_bluroff
@@ -99,3 +96,9 @@ ro.theme_customize=LCC
 ro.theme_leica=true
 camera.debug.safe.check.disable=true
 #$end_leica
+
+#$start_island
+persist.sys.feature.island=true
+persist.sys.feature.island.animation=true
+persist.sys.feature.island.shader=true
+#$end_island

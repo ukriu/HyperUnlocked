@@ -80,6 +80,15 @@
                     onchange="executeShell(this.checked ? 'sh webui.sh set leica true' : 'sh webui.sh set leica false', { source: this })">
             </div>
 
+            <div class="row">
+                <div>
+                    <div class="row-title">Enable Dynamic Island</div>
+                    <div class="row-description">Enables Dynamic Island. (Requires HyperOS 3+)</div>
+                </div>
+                <input id="islandToggle" class="switch" type="checkbox"
+                    onchange="executeShell(this.checked ? 'sh webui.sh set island true' : 'sh webui.sh set island false', { source: this })">
+            </div>
+
             <div class="button-group">
                 <button class="btn-primary" onclick="executeShell('sh webui.sh apply')">Apply staged settings</button>
                 <button class="btn-danger" onclick="executeShell('sh webui.sh clear')">Clear staged settings</button>

@@ -18,6 +18,7 @@ Settings:
   screenshot_blur true|false
   highend true|false
   leica true|false
+  island true|false
   extra_tiles all|custom (key)
   device_level v:1,c:1,g:1 .. v:1,c:3,g:3 (or default)
 EOF
@@ -72,6 +73,14 @@ get_config_entry() {
         echo "$value"
     else
         echo "$default_value"
+    fi
+}
+
+detect_current_island() {
+    if [ -f "$MODDIR/system.prop" ] && grep -q "\$start_island" "$MODDIR/system.prop"; then
+        echo "true"
+    else
+        echo "false"
     fi
 }
 
@@ -136,7 +145,7 @@ set_value_cmd() {
     fi
 
     case "$setting" in
-        blur|screenshot_blur|leica|highend)
+        blur|screenshot_blur|leica|highend|island)
             if ! is_bool "$value"; then
                 warn "Invalid value '$value' for '$setting'. Use true/false."
                 return 1
@@ -177,6 +186,12 @@ apply_cmd() {
     current_highend="$(detect_current_highend)"
     current_ssblur="$(detect_current_ssblur)"
     current_leica="$(detect_current_leica)"
+    current_island="$(detect_current_island)"
+    island="$(get_config_entry island "$current_island")"
+    if ! is_bool "$island"; then
+        warn "Invalid staged island value."
+        return 1
+    fi
     leica="$(get_config_entry leica "$current_leica")"
     if ! is_bool "$leica"; then
         warn "Invalid staged leica value."
@@ -239,6 +254,14 @@ apply_cmd() {
         log "Leica Spoof: disabled"
     fi
 
+    if [ "$island" = "true" ]; then
+        CHOICE_ISLAND=true
+        log "Dynamic Island: enabled"
+    else
+        CHOICE_ISLAND=false
+        log "Dynamic Island: disabled"
+    fi
+
     if ! define_props; then
         warn "Failed generating system.prop."
         return 1
@@ -270,6 +293,7 @@ status_cmd() {
     current_highend="$(detect_current_highend)"
     current_ssblur="$(detect_current_ssblur)"
     current_leica="$(detect_current_leica)"
+    current_island="$(detect_current_island)"
 
     # coulf be that user running script outside the module maybe
     [ -n "$module_version" ] && echo "version=$module_version"
@@ -279,6 +303,7 @@ status_cmd() {
     echo "current.highend=$current_highend"
     echo "current.screenshot_blur=$current_ssblur"
     echo "current.leica=$current_leica"
+    echo "current.island=$current_island"
 
     if [ -f "$CONFIG_FILE" ] && [ -s "$CONFIG_FILE" ]; then
         echo "pending.config=true"

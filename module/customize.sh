@@ -18,6 +18,8 @@ save_deviceLevelList
 blur_choice
 highend_choice
 ssblur_choice
+# force add island props in initial install
+CHOICE_ISLAND=true
 define_props
 qs_choice
 xml_init
