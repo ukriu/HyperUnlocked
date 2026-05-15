@@ -281,7 +281,10 @@ apply_cmd() {
 
     rm -f "$CONFIG_FILE"
     log "Applied successfully."
-    log "Reboot is required for some changes."
+    log "Applying props for this runtime session.."
+    apply_props
+    log "Do a Soft Reboot to see the prop changes!"
+    log "A full reboot is still required for some changes."
     return 0
 }
 

@@ -263,6 +263,20 @@ write_props() {
     log "Written props '$group' to '$prop_file'"
 }
 
+apply_props() {
+    PROPFILE="${1:-$MODDIR/system.prop}"
+    [ -f "$PROPFILE" ] || return 1
+
+    while IFS= read -r line || [ -n "$line" ]; do
+        case "$line" in
+            ""|\#*)
+                continue
+                ;;
+        esac
+        resetprop -n -p "${line%%=*}" "${line#*=}"
+    done < "$PROPFILE"
+}
+
 define_props() {
     head -n 3 ${MODDIR}/all.prop > ${MODDIR}/system.prop
     write_props "${MODDIR}/system.prop" "basic"
