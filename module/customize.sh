@@ -18,8 +18,17 @@ save_deviceLevelList
 blur_choice
 highend_choice
 ssblur_choice
-# force add island props in initial install
-CHOICE_ISLAND=true
+
+# only add island props on initial install if already enabled
+case "$(getprop persist.sys.feature.island)" in
+    ""|0|false)
+        CHOICE_ISLAND=false
+        ;;
+    *)
+        CHOICE_ISLAND=true
+        ;;
+esac
+
 define_props
 qs_choice
 xml_init
