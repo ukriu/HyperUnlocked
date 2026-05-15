@@ -78,7 +78,7 @@ get_config_entry() {
 }
 
 detect_current_island() {
-    if [ -f "$MODDIR/system.prop" ] && grep -q "\$start_island" "$MODDIR/system.prop"; then
+    if [ -f "$MODDIR/system.prop" ] && grep -q "\$start_islandon" "$MODDIR/system.prop"; then
         echo "true"
     else
         echo "false"

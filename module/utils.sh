@@ -294,7 +294,9 @@ define_props() {
         pm clear com.android.camera
     fi
     if [ "$CHOICE_ISLAND" = true ]; then
-        write_props "${MODDIR}/system.prop" "island"
+        write_props "${MODDIR}/system.prop" "islandon"
+    else
+        write_props "${MODDIR}/system.prop" "islandoff"
     fi
 }
 

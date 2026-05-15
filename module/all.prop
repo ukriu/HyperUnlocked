@@ -97,8 +97,14 @@ ro.theme_leica=true
 camera.debug.safe.check.disable=true
 #$end_leica
 
-#$start_island
+#$start_islandon
 persist.sys.feature.island=true
 persist.sys.feature.island.animation=true
 persist.sys.feature.island.shader=true
-#$end_island
+#$end_islandon
+
+#$start_islandoff
+persist.sys.feature.island=false
+persist.sys.feature.island.animation=false
+persist.sys.feature.island.shader=false
+#$end_islandoff
