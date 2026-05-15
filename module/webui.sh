@@ -204,7 +204,7 @@ apply_cmd() {
         return 1
     fi
     highend="$(get_config_entry highend "$current_highend")"
-    if ! is_bool "$blur"; then
+    if ! is_bool "$highend"; then
         warn "Invalid staged highend value."
         return 1
     fi

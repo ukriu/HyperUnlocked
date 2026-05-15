@@ -293,7 +293,7 @@ define_props() {
         write_props "${MODDIR}/system.prop" "leica"
         pm clear com.android.camera
     fi
-    if [ "$CHOICE_ISLAND" = true]; then
+    if [ "$CHOICE_ISLAND" = true ]; then
         write_props "${MODDIR}/system.prop" "island"
     fi
 }
