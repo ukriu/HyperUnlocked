@@ -18,6 +18,11 @@ const COMMAND_WARNINGS = [
         pattern: /^reboot$/,
         title: 'Warning',
         description: 'Your device WILL reboot.',
+    },
+    {
+        pattern: /^sh\s+webui\.sh\s+soft_restart$/,
+        title: 'Info',
+        description: 'This will restart all apps which are modified with system props, hence avoiding a full device restart.',
     }
 ];
 

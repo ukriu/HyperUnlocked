@@ -9,9 +9,11 @@ usage() {
     cat <<EOF
 Usage:
   sh webui.sh set <setting> <value>
+  sh webui.sh extra_tiles all|custom (key)
   sh webui.sh apply
   sh webui.sh status
   sh webui.sh clear
+  sh webui.sh soft_restart
 
 Settings:
   blur true|false
@@ -19,7 +21,6 @@ Settings:
   highend true|false
   leica true|false
   island true|false
-  extra_tiles all|custom (key)
   device_level v:1,c:1,g:1 .. v:1,c:3,g:3 (or default)
 EOF
 }
@@ -325,6 +326,17 @@ clear_cmd() {
     return 1
 }
 
+soft_restart_cmd() {
+    packages="com.android.systemui com.miui.home com.xiaomi.misettings com.android.settings com.miui.securitycenter com.miui.powerkeeper com.android.camera"
+    for pkg in $packages; do
+        if killall "$pkg" 2>/dev/null; then
+            log "Killed $pkg"
+        else
+            warn "$pkg not running"
+        fi
+    done
+}
+
 command="$1"
 shift 2>/dev/null
 
@@ -343,6 +355,9 @@ case "$command" in
         ;;
     clear)
         clear_cmd
+        ;;
+    soft_restart)
+        soft_restart_cmd
         ;;
     *)
         usage
