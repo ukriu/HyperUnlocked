@@ -44,7 +44,7 @@ check_supported() {
 disable_incompatible_modules() {
     log "Checking for incompatible modules..."
     found_incompatible=false
-    
+
     for dir in /data/adb/modules/*; do
         if [ -d "$dir" ]; then
             module_name=$(basename "$dir")
@@ -62,7 +62,7 @@ disable_incompatible_modules() {
             fi
         fi
     done
-    
+
     if [ "$found_incompatible" = false ]; then
         log "No incompatible modules found."
     else
@@ -75,7 +75,7 @@ save_deviceLevelList() {
         log "The deviceLevelList backup already exists. ($(cat $RESDIR/default_deviceLevelList.txt))"
         return
     fi
-    
+
     if [ -z "$CUR_DEVICE_LEVEL_LIST" ] || [ "$CUR_DEVICE_LEVEL_LIST" = "null" ]; then
         log "Failed to retrieve deviceLevelList."
         log "Continuing without backup value."
@@ -104,7 +104,7 @@ restore_deviceLevelList() {
 detect_key_press() {
     timeout_seconds=10
     line="$(timeout $timeout_seconds getevent -ql 2>/dev/null | grep -m1 -E "KEY_VOLUME(UP|DOWN)")"
-    
+
     case "$line" in
         *KEY_VOLUMEUP*)   return 0 ;; # YES
         *KEY_VOLUMEDOWN*) return 1 ;; # NO
@@ -257,7 +257,7 @@ write_props() {
     local prop_file="$1"
     local group="$2"
     local source_file="${MODDIR}/all.prop"
-    
+
     # extract lines between start and stop markers
     awk "/#\\\$start_${group}/,/#\\\$end_${group}/" "$source_file" >> "$prop_file"
     log "Written props '$group' to '$prop_file'"
@@ -322,13 +322,13 @@ xml_init() {
         su -c "cp -r ${DEFAULT_XMLDIR}/* $XML_SPACE/"
     fi
     . "$MODDIR/xml.sh"
-    
+
     find "$XML_SPACE" -type f -name "*.xml" | while read -r xml_file; do
         # remove comments and empty lines
         busybox sed -i -e '/\$<!--/d' -e '/-->\$/d' -e '/<!--.*-->/d' -e '/^[[:space:]]*$/d' $xml_file
         update_file "$xml_file"
     done
-    
+
     mkdir -p $XML_DIR/
     su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
 }
@@ -339,13 +339,13 @@ update_file() {
     touch $RESDIR/tmpsed.txt
     tmp_sed="$RESDIR/tmpsed.txt"
     changes=0
-    
+
     # get default indent for adding new props
     default_indent=$(busybox grep -E "^[[:space:]]*<bool[[:space:]]" "$xml_file" | busybox sed -E 's/^([[:space:]]*).*/\1/' | head -n 1)
     [ -z "$default_indent" ] && default_indent="    "
     # escape for sed insert
     default_indent=$(printf '%s' "$default_indent" | busybox sed 's/ /\\ /g; s/\t/\\t/g')
-    
+
     # this is a janky implememtation but its the best we can do without over-complicating it
     process_prop_list "$xml_file" "$tmp_sed" "true"  "$bools_true"  "$default_indent" "bool"
     process_prop_list "$xml_file" "$tmp_sed" "true" "$aod_bools_true" "$default_indent" "bool"
@@ -358,14 +358,14 @@ update_file() {
     process_prop_list "$xml_file" "$tmp_sed" "1" "$integer_1" "$default_indent" "integer"
     process_prop_list "$xml_file" "$tmp_sed" "game_enhance_fisr" "$string_game_enhance_fisr" "$default_indent" "string"
     set_fps "$xml_file" "$tmp_sed" "$supported_fps" "$default_indent"
-    
+
     if [ "$changes" -gt 0 ]; then
         busybox sed -i -f "$tmp_sed" "$xml_file"
         log "$changes new changes applied."
     else
         log "no XML changes needed."
     fi
-    
+
     rm -f "$tmp_sed"
 }
 
@@ -376,11 +376,10 @@ process_prop_list() {
     props="$4"
     default_indent="$5"
     value_type="$6"
-    
+
     for prop in $props; do
         if busybox grep -Eq "^[[:space:]]*<$value_type[[:space:]]+name=['\"]$prop['\"][^>]*>" "$xml_file"; then
             current_val=$(busybox grep -E "^[[:space:]]*<$value_type[[:space:]]+name=['\"]$prop['\"][^>]*>" "$xml_file" | busybox sed -E "s/.*>([[:space:]]*[a-zA-Z0-9_]+[[:space:]]*)<\/[[:space:]]*$value_type>.*/\1/" | busybox tr -d '[:space:]')
-            
             if [ "$current_val" != "$value" ]; then
                 echo "s|^[[:space:]]*<$value_type[[:space:]]\{1,\}name=['\"]$prop['\"][^>]*>.*</$value_type>|${default_indent}<$value_type name=\"$prop\">$value</$value_type>|" >> "$tmp_sed"
                 changes=$((changes+1))
@@ -455,13 +454,13 @@ update_desc() {
     else
         xml=" ❌ XML "
     fi
-  
+
     if grep -q "highend" "${MODDIR}/system.prop"; then
         high=" ✅ high-end mode "
     else
         high=" ❌ high-end mode "
     fi
-    
+
     if grep -q "bluron" "${MODDIR}/system.prop"; then
         blur=" ✅ blurs "
         blurs_en=1
@@ -476,7 +475,7 @@ update_desc() {
     else
         ssblur=" ◻️ ssblur "
     fi
-    
+
     NEW_DESC="[${DEVICE_CODENAME}][${xml}][${high}][${blur}] ${DEFAULT_DESC}"
     sed "s/^description=.*/description=${NEW_DESC}/g" $MODDIR/module.prop > $MODDIR/module.prop.tmp
     cat $MODDIR/module.prop.tmp > $MODDIR/module.prop
