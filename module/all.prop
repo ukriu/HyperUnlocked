@@ -98,13 +98,15 @@ camera.debug.safe.check.disable=true
 #$end_leica
 
 #$start_islandon
-persist.sys.feature.island=true
+feature.island.debug=true
+persist.sys.feature.island=1
 persist.sys.feature.island.animation=true
 persist.sys.feature.island.shader=true
 #$end_islandon
 
 #$start_islandoff
-persist.sys.feature.island=false
+feature.island.debug=false
+persist.sys.feature.island=0
 persist.sys.feature.island.animation=false
 persist.sys.feature.island.shader=false
 #$end_islandoff
