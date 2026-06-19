@@ -4,6 +4,20 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ---
 
 # Changelog:
+### v2.2.2
+- Add blur to freeform window switching.
+- Add a toggle for Dynamic Island (`HyperOS 3+`).
+- Force enable Xiaomi Partial Screenshots for all devices.
+- Force enable Mi One-Handed mode for all devices.
+- Force enable a few more animations.
+- Update high-end props for HyperOS 3 and (upcoming) 4.
+- Update high-end powermode props.
+- Enable Dynamic Island Shader blur (unsupported on most phones).
+- Enable props for AiSubtitle and VoiceTranslate service. (Needs working system apps..)
+- Add back the toggle for ssblur while installation for OverlayFS users. (Please select NO, if you don't know what it is.)
+- Add the ability to refresh system (`Soft Restart`) from the WebUI without needing to reboot. (Only valid for prop changes.)
+- **Note**: It is highly recommended that you choose to use Magic Mount with this module or ssblur toggle in WebUI will not work.
+
 ### v2.2.1
 - Fix Screenshot Blur toggle in WebUI.
 - Fix Module XML Backup.

@@ -30,6 +30,7 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 - A Xiaomi Android Device running MIUI or HyperOS and rooted with [Magisk](https://github.com/topjohnwu/Magisk), [KernelSU](https://github.com/tiann/KernelSU), Apatch or similar.
 - A [Metamodule](https://kernelsu.org/guide/metamodule.html) if using KernelSU or any of its forks.  
   • A `magicmount` Metamodule is recommened. Some minor things might be broken on `overlayfs`.
+- Disabled `Umount modules by default`.
 
 ## WebUI:
 - You need KernelSU or a KernelSU fork to use WebUI.
@@ -54,6 +55,6 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
-    
+
     Copyright (C) 2025-2026 ukriu (Contact: contact@ukriu.com).
 ```
