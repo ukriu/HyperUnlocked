@@ -33,10 +33,20 @@ warn() {
 }
 
 check_supported() {
+    #Check for ximi rom
+    if [ -n "$(getprop ro.mi.os.version.name)" ]; then
+        log "Mi ROM identified."
+    else
+        warn "This ROM is not supported. Please use an OS made by Xiaomi (HyperOS/MIUI)."
+        warn "If you think this is a mistake.. then create an issue at:"
+        warn "https://github.com/ukriu/HyperUnlocked"
+        exit 1
+    fi
+
     if find -L "$DEFAULT_XMLDIR" -type f -name "*.xml" -quit; then
         log "Your device is supported."
     else
-        log "Your device is not fully supported and might lack some features."
+        warn "Your device is not fully supported and might lack some features."
         sleep 2
     fi
 }
