@@ -205,7 +205,7 @@ integer_1="support_inner_record support_widevine_l1"
 string_game_enhance_fisr="game_enhance_feature_name"
 
 # remove full screen aod for hos3 since it bootloops on some devices.
-supported="gold houji"
+supported="gold houji peridot"
 case "$(getprop ro.build.fingerprint)" in
   Xiaomi/*/*:*/*/OS3.*:user/release-keys | \
   Redmi/*/*:*/*/OS3.*:user/release-keys | \
