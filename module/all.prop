@@ -15,6 +15,7 @@ ro.camera.sound.forced=0
 persist.sys.translate.state.supportAiSubtitles=true
 persist.sys.translate.state.supportVoiceTrans=true
 persist.sys.partial.screenshot.support=true
+ro.multiwin.fulldecor_support=true
 #$end_basic
 
 #$start_bluron
@@ -89,6 +90,7 @@ persist.sys.power.default.powermode=enhance
 persist.sys.power_meter_enhanced=true
 persist.sys.power_mode_support=true
 persist.sys.sf_charge_anim_supported=true
+ro.miui.ui.font.animation=enable
 #$end_experimental
 
 #$start_leica
