@@ -3,6 +3,7 @@
 # Read LICENSE_NOTICE.txt for further info.
 
 supported_fps="$(dumpsys display | grep -oE "fps=[0-9.]+" | cut -d= -f2 | awk -F. '{print $1}' | sort -nu | xargs)"
+screen_width="$(wm size | sed -n 's/Physical size: \([0-9]*\)x.*/\1/p')"
 
 cam_bools_true="
 camera_adjust_picture_size_enabled

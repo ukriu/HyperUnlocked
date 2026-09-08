@@ -368,6 +368,7 @@ update_file() {
     process_prop_list "$xml_file" "$tmp_sed" "1" "$integer_1" "$default_indent" "integer"
     process_prop_list "$xml_file" "$tmp_sed" "game_enhance_fisr" "$string_game_enhance_fisr" "$default_indent" "string"
     set_fps "$xml_file" "$tmp_sed" "$supported_fps" "$default_indent"
+    set_screen_resolution "$xml_file" "$tmp_sed" "$screen_width" "$default_indent"
 
     if [ "$changes" -gt 0 ]; then
         busybox sed -i -f "$tmp_sed" "$xml_file"
@@ -404,6 +405,50 @@ process_prop_list() {
             #log "DEBUG: added $prop as $value"
         fi
     done
+}
+
+set_screen_resolution() {
+    xml_file="$1"
+    tmp_sed="$2"
+    screen_width="$3"
+    default_indent="$4"
+
+    # find existing screen_resolution_supported
+    start_line=$(busybox grep -n '<integer-array name="screen_resolution_supported">' "$xml_file" | busybox cut -d: -f1 | busybox head -n 1)
+    if [ -n "$start_line" ]; then
+        end_line=$(busybox grep -n '</integer-array>' "$xml_file" | busybox cut -d: -f1 | busybox awk -v s="$start_line" '$1 > s {print; exit}')
+    else
+        end_line=""
+    fi
+
+    # keep existing values if it already has 2 or more values
+    if [ -n "$start_line" ] && [ -n "$end_line" ]; then
+        item_count=$(busybox sed -n "${start_line},${end_line}p" "$xml_file" | busybox grep -c '<item>')
+        if [ "$item_count" -ge 2 ]; then
+            return 0
+        fi
+    fi
+
+    if [ "$screen_width" -gt 1080 ]; then
+        resolution_list="$screen_width 1080"
+    elif [ "$screen_width" -gt 720 ]; then
+        resolution_list="1080 720"
+    else
+        return 0
+    fi
+
+    # remove existing array if it has 0 or 1 values
+    if [ -n "$start_line" ] && [ -n "$end_line" ]; then
+        echo "${start_line},${end_line}d" >> "$tmp_sed"
+    fi
+
+    # add new array
+    echo "/<\/features>/i ${default_indent}<integer-array name=\"screen_resolution_supported\">" >> "$tmp_sed"
+    for resolution in $resolution_list; do
+        echo "/<\/features>/i ${default_indent}${default_indent}<item>$resolution</item>" >> "$tmp_sed"
+    done
+    echo "/<\/features>/i ${default_indent}</integer-array>" >> "$tmp_sed"
+    changes=$((changes+1))
 }
 
 set_fps() {
