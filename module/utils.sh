@@ -339,6 +339,10 @@ xml_init() {
         update_file "$xml_file"
     done
 
+    # only change auto change screen res setting for people without that option by default
+    if [ "$screen_compat" != "true" ]; then
+        settings put system miui_screen_compat 0
+    fi
     mkdir -p $XML_DIR/
     su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
 }
@@ -425,6 +429,7 @@ set_screen_resolution() {
     if [ -n "$start_line" ] && [ -n "$end_line" ]; then
         item_count=$(busybox sed -n "${start_line},${end_line}p" "$xml_file" | busybox grep -c '<item>')
         if [ "$item_count" -ge 2 ]; then
+            screen_compat=true
             return 0
         fi
     fi
