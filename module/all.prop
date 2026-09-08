@@ -91,6 +91,11 @@ persist.sys.power_meter_enhanced=true
 persist.sys.power_mode_support=true
 persist.sys.sf_charge_anim_supported=true
 ro.miui.ui.font.animation=enable
+persist.vendor.night.charge=true
+ro.vendor.audio.voice.change.support=true
+persist.vendor.battery.ai.predict=true
+persist.vendor.smartchg=true
+#persist.vendor.extreme.mode.V2=true
 #$end_experimental
 
 #$start_leica
