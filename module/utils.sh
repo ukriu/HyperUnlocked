@@ -5,8 +5,6 @@
 PATH=/data/adb/ap/bin:/data/adb/ksu/bin:/data/adb/magisk:$PATH
 RESDIR=/data/adb/HyperUnlocked
 mkdir -p $RESDIR
-XML_SPACE="$RESDIR/xml"
-mkdir -p $XML_SPACE
 DEVICE_CODENAME=$(getprop ro.product.device)
 CUR_DEVICE_LEVEL_LIST=$(su -c "settings get system deviceLevelList")
 SAV_DEVICE_LEVEL_LIST=$(cat "$RESDIR/default_deviceLevelList.txt")
@@ -316,24 +314,23 @@ hyperos_key="WyMjXSBQbGVhc2UgZG93bmxvYWQgSHlwZXJVbmxvY2tlZCBvbmx5IGZyb20gaHR0cHM
 
 xml_init() {
     #backup default xml files
-    if [ ! -d "$XML_SPACE" ]; then
+    if [ ! -d "$RESDIR/xml" ]; then
         mkdir -p $RESDIR/bakxml
         su -c "cp -r ${DEFAULT_XMLDIR}/* $RESDIR/bakxml/"
     fi
     # remove old edited xmls
-    rm -rf $XML_SPACE
+    rm -rf $RESDIR/xml
     log "Creating custom XML"
-    # not running this in a su subshell fails for some reason
-    mkdir -p $XML_SPACE
+    mkdir -p $RESDIR/xml
     # use def xml for every new edit if available
     if [ -d "$RESDIR/bakxml" ]; then
-        su -c "cp -r $RESDIR/bakxml/* $XML_SPACE/"
+        su -c "cp -r $RESDIR/bakxml/* $RESDIR/xml/"
     else
-        su -c "cp -r ${DEFAULT_XMLDIR}/* $XML_SPACE/"
+        su -c "cp -r ${DEFAULT_XMLDIR}/* $RESDIR/xml/"
     fi
     . "$MODDIR/xml.sh"
 
-    find "$XML_SPACE" -type f -name "*.xml" | while read -r xml_file; do
+    find "$RESDIR/xml" -type f -name "*.xml" | while read -r xml_file; do
         # remove comments and empty lines
         busybox sed -i -e '/\$<!--/d' -e '/-->\$/d' -e '/<!--.*-->/d' -e '/^[[:space:]]*$/d' $xml_file
         update_file "$xml_file"
@@ -344,7 +341,7 @@ xml_init() {
         settings put system miui_screen_compat 0
     fi
     mkdir -p $XML_DIR/
-    su -c "cp -r ${XML_SPACE}/* ${XML_DIR}/"
+    su -c "cp -r ${RESDIR}/xml/* ${XML_DIR}/"
 }
 
 update_file() {
