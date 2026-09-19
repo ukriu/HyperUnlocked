@@ -4,6 +4,15 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ---
 
 # Changelog:
+### v2.3.0
+- Add `houji` and `peridot` to HOS3+ fullscreen AOD whitelist.
+- Add checks to abort installation if not using MIUI or HyperOS.
+- Add blur to MI Freeform Decor.
+- Enable MI Font Anim, More Charging Options under "Battery Protection", Voice Changer in GameTurbo.
+- Add support for `HyperOS 4` Devices.
+- Add support for Customisable Screen Resolution under Display Settings.
+- **Note**: Changing the screen res might break some UI elements, if that happens just change back.
+
 ### v2.2.2
 - Add blur to freeform window switching.
 - Add a toggle for Dynamic Island (`HyperOS 3+`).
