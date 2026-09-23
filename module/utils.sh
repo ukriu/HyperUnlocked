@@ -32,7 +32,7 @@ warn() {
 
 check_supported() {
     #Check for ximi rom
-    if [ -n "$(getprop ro.mi.os.version.name)" ]; then
+    if [ -n "$(getprop ro.mi.os.version.name)" ] || [ -n "$(getprop ro.miui.ui.version.code)" ]; then
         log "Mi ROM identified."
     else
         warn "This ROM is not supported. Please use an OS made by Xiaomi (HyperOS/MIUI)."
