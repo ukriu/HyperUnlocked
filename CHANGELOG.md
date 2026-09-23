@@ -4,6 +4,10 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ---
 
 # Changelog:
+### v2.3.1
+- Fix installing module in `MIUI`
+- Fix "Battery Protection" charging mode
+
 ### v2.3.0
 - Add `houji` and `peridot` to HOS3+ fullscreen AOD whitelist.
 - Add checks to abort installation if not using MIUI or HyperOS.
