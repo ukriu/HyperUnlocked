@@ -94,7 +94,6 @@ ro.miui.ui.font.animation=enable
 persist.vendor.night.charge=true
 ro.vendor.audio.voice.change.support=true
 persist.vendor.battery.ai.predict=true
-persist.vendor.smartchg=true
 #persist.vendor.extreme.mode.V2=true
 #$end_experimental
 
