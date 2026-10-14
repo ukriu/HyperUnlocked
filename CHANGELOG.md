@@ -4,6 +4,10 @@ A Magisk/KernelSU/APatch module to unlock high-end features on all Xiaomi device
 ---
 
 # Changelog:
+### v2.3.2
+- Fix Stacked Recents.
+- Might Fix other features too.
+
 ### v2.3.1
 - Fix installing module in `MIUI`
 - Fix "Battery Protection" charging mode
