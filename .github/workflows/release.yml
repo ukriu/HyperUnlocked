@@ -25,6 +25,9 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Validate high-end properties
+        run: sh tests/highend-props.sh
+
       - name: Set variables
         id: setup
         run: |
