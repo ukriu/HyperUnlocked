@@ -1,0 +1,14 @@
+schemaVersion: 1
+id: HyperUnlocked
+name: HyperUnlocked
+summary: Unlock high-end Xiaomi features on all of your Xiaomi devices!
+description: README.md
+license: GPL-3.0
+support: https://github.com/ukriu/HyperUnlocked/issues
+
+authors:
+  - name: ukriu
+    url: https://github.com/ukriu
+
+release:
+  assetPattern: "HyperUnlocked*.zip"
